@@ -92,6 +92,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-md-3 control-label">角色</label>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="role" value="管理员" checked>管理员
+                                        <input type="radio" name="role" value="领养人">领养人
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-md-3 control-label">住址:</label>
                                     <div class="col-md-8">
                                         <input type="text" name="address" class="form-control"/>
