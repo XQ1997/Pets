@@ -32,7 +32,7 @@ public class Account implements Serializable {
     /**
      * …Ì∑›÷§∫≈
      */
-    private Integer cardnum;
+    private String cardnum;
 
     private String job;
 
@@ -59,6 +59,23 @@ public class Account implements Serializable {
 
     private Date updateTime;
 
+    public Account() {}
+    
+    public Account(String role,String username,Integer age,String sex,String address,String cardnum,String job,String password,String userPhoto,String cardInPhoto,String cardOutPhoto,String mobile) {
+    	this.role = role;
+    	this.username = username;
+    	this.age = age;
+    	this.sex = sex;
+    	this.address = address;
+    	this.cardnum = cardnum;
+    	this.job = job;
+    	this.password = password;
+    	this.userPhoto = userPhoto;
+    	this.cardInPhoto = cardInPhoto;
+    	this.cardOutPhoto = cardOutPhoto;
+    	this.mobile = mobile;
+    }
+    
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -109,11 +126,11 @@ public class Account implements Serializable {
         this.address = address;
     }
 
-    public Integer getCardnum() {
+    public String getCardnum() {
         return cardnum;
     }
 
-    public void setCardnum(Integer cardnum) {
+    public void setCardnum(String cardnum) {
         this.cardnum = cardnum;
     }
 

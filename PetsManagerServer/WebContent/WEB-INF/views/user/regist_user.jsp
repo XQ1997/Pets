@@ -133,6 +133,7 @@
                 </div>
                 <div class="box-footer">
                     <button class="btn btn-primary pull-right" id="saveBtn">注册</button>
+                     
                 </div>
             </div>
         </section>
@@ -143,7 +144,86 @@
 <script src="/static/plugins/uploader/webuploader.min.js"></script>
 <script>
     $(function () {
-        //初始化客户一寸照片
+    	$("#saveBtn").click(function () {
+            $("#saveForm").submit();
+        });
+         $("#saveForm").validate({
+ 			errorClass : 'text-danger',
+			errorElement : 'span',
+			rules : {
+				username :{
+					"required" : true
+				},
+				password :{
+					"required" : true
+				},
+				mobile :{
+					"required" : true
+				},
+				age :{
+					"required" : true
+				},
+				address :{
+					"required" : true
+				},
+				job :{
+					"required" : true
+				},
+				cardnum :{
+					"required" : true
+				}
+			},
+			messages :{
+				username :{
+					"required" : "请输入用户姓名"
+				},
+				password : {
+					"required" : "请输入用户登录密码"
+				},
+				mobile :{
+					"required" : "请输入用户联系电话"
+				},
+				age :{
+					"required" : "请输入用户年龄"
+				},
+				address :{
+					"required" : "请输入用户住址"
+				},
+				job :{
+					"required" : "请输入用户工作类型"
+				},
+				cardnum :{
+					"required" : "请输入用户身份证号"
+				}
+			},
+			submitHandler : function(form){
+				$.ajax({
+					url:'/user/regist',
+					type:'post',
+					data:$("#saveForm").serialize(),
+					beforeSend : function(){
+						$("#saveBtn").text("注册中...").attr("disabled","disabled");
+					},
+					success : function(result){					 
+						if(result.state == 'success') {
+							layer.alert("注册成功");
+							window.history.go(0);
+                        } else {
+                            layer.alert(result.message);
+                        }
+					},
+					error : function(){
+						alert("系统异常");
+					},
+					complete : function(){
+						$("#saveBtn").text("注册").removeAttr("disabled");
+					}
+				}); 
+			}
+ 		
+ 		}); 
+    	
+    	//初始化客户一寸照片
         var uploader = WebUploader.create({
             //选完文件之后，是否自动上传
             auto:true,
@@ -252,7 +332,7 @@
             //选完文件之后，是否自动上传
             auto:true,
             // swf文件路径
-            swf:'${pageContext.request.contextPath}/static/plugins/uploader/Uploader.swf',
+            swf:'/static/plugins/uploader/Uploader.swf',
 
             // 文件接收服务端。
             server: 'http://upload-z1.qiniup.com',
@@ -297,11 +377,7 @@
         });
         uploader.on( 'uploadComplete', function( file ) {
             layer.close(index);
-        });
-
-        $("#saveBtn").click(function () {
-            $("#saveForm").submit();
-        });
+        }); 
     })
 </script>
 </body>
