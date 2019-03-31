@@ -34,5 +34,15 @@ public class AccountDao {
 		String sql = "insert into t_account (role,username,age,sex,address,cardnum,job,password,user_photo,card_in_photo,card_out_photo,mobile,update_time) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		DbHelp.executeUpdate(sql, account.getRole(),account.getUsername(),account.getAge(),account.getSex(),account.getAddress(),account.getCardnum(),account.getJob(),account.getPassword(),account.getUserPhoto(),account.getCardInPhoto(),account.getCardOutPhoto(),account.getMobile(),account.getUpdateTime());		
 	}
+
+	/**修改密码
+	 * @param account
+	 * @author fdy
+	 * @date 2019年3月31日	
+	 */
+	public void repass(Account account) {
+		String sql = "update t_account set password = ?";
+		DbHelp.executeUpdate(sql, account.getPassword());		
+	}
 	
 }

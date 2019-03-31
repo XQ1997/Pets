@@ -5,6 +5,11 @@
 	id="WebApp_ID" version="3.1">
   <display-name>PetsManagerServer</display-name>
   
+    <!--设置session的过期时间，默认没有活动时15分钟过期，tomcat默认是30分钟，修改为-1或0不限制session过期  -->
+  	<session-config> 
+		<session-timeout>0</session-timeout> 
+	</session-config> 
+  
   <!-- 字符集过滤器 -->
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
@@ -34,7 +39,7 @@
 		<filter-name>LoginFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-  
+ 
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

@@ -52,5 +52,23 @@ public class AccountService {
 		
         accDao.saveAccount(account); 		
 	}
+
+	/**修改密码
+	 * @param oldpass
+	 * @param newpass
+	 * @author fdy
+	 * @param account 
+	 * @date 2019年3月31日	
+	 */
+	public void repass(Account account, String oldpass, String newpass) throws ServiceException{
+		if(!(DigestUtils.md5Hex(oldpass + Config.get("user.password.salt"))).equals(account.getPassword())) {
+			 throw new ServiceException("原始密码错误");
+		 }
+		 if(oldpass.equals(newpass)) {
+			 throw new ServiceException("新密码不能和原始密码相同");
+		 }
+		 account.setPassword(DigestUtils.md5Hex(newpass + Config.get("user.password.salt")));
+		 accDao.repass(account);
+	}
 	
 }
