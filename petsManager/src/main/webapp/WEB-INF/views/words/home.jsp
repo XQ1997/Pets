@@ -22,7 +22,7 @@
 <div class="wrapper">
   <%@ include file="../include/header.jsp"%>
   <jsp:include page="../include/sider.jsp">
-    <jsp:param value="home" name="param"/>
+    <jsp:param name="menu" value="words"/>
   </jsp:include>
 
   <!-- 右侧内容部分 -->

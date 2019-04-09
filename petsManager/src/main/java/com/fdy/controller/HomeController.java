@@ -1,9 +1,13 @@
 package com.fdy.controller;
 
 import com.fdy.entity.Account;
+import com.fdy.entity.Notice;
+import com.fdy.entity.Pets;
 import com.fdy.exception.ServiceException;
 import com.fdy.service.AccountService;
+import com.fdy.service.PetsService;
 import com.fdy.util.ShiroUtil;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -17,10 +21,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**用户的登录登出控制器
  * @author fdy
@@ -33,6 +41,8 @@ public class HomeController {
     private AccountService accountService;
     @Autowired
     private ShiroUtil shiroUtil;
+    @Autowired
+    private PetsService petsService;
 
     /**登录页面
      * @return 跳转到登录页面
@@ -96,10 +106,19 @@ public class HomeController {
      * @return
      */
     @GetMapping("/home")
-    public String home(Model model){
-        Account account = shiroUtil.getCurrAcc();
-        String role = account.getRole();
-        model.addAttribute("role",role);
+    public String home(@RequestParam(name = "pageNo",required = false,defaultValue = "1") Integer pageNo,
+                       @RequestParam(required = false)String title,
+                       @RequestParam(required = false)String createTime,Model model){
+        Map<String,Object> selectMap = new HashMap<>();
+        selectMap.put("title",title);
+        selectMap.put("createTime",createTime);
+
+        PageInfo<Notice> pageInfo = accountService.findAllNoticeByMapandPageNo(pageNo,selectMap);
+
+        List<Pets> petsList = petsService.findAllByState();
+        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
+        model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("petsList",petsList);
         return "home";
     }
 

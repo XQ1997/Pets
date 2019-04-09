@@ -16,7 +16,7 @@
 <div class="wrapper">
     <jsp:include page="../include/header.jsp"/>
     <jsp:include page="../include/sider.jsp">
-        <jsp:param name="menu" value="ticket_store"/>
+        <jsp:param name="menu" value="state"/>
     </jsp:include>
     <div class="content-wrapper">
         <section class="content">

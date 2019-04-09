@@ -83,7 +83,6 @@
     <jsp:include page="../include/footer.jsp"/>
 </div>
 <jsp:include page="../include/js.jsp"/>
-<script src="/static/plugins/jquery.twbsPagination.js"></script>
 <script>
     $(function(){
         console.log(${pageInfo.pages});

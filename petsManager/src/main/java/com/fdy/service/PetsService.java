@@ -133,4 +133,13 @@ public class PetsService {
         cliam.setUpdateTime(new Date());
         cliamMapper.updateByPrimaryKeySelective(cliam);
     }
+
+    /**获取所有状态为【未认领】的流浪宠物
+     * @return
+     */
+    public List<Pets> findAllByState() {
+        PetsExample petsExample = new PetsExample();
+        petsExample.createCriteria().andStateEqualTo(Pets.STATE_NO);
+        return petsMapper.selectByExample(petsExample);
+    }
 }

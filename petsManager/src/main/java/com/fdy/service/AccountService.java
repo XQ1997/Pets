@@ -4,6 +4,7 @@ import com.fdy.entity.*;
 import com.fdy.exception.ServiceException;
 import com.fdy.mapper.AccountMapper;
 import com.fdy.mapper.CliamMapper;
+import com.fdy.mapper.NoticeMapper;
 import com.fdy.mapper.WordsMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -13,7 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +32,8 @@ public class AccountService {
     private CliamMapper cliamMapper;
     @Autowired
     private WordsMapper wordsMapper;
+    @Autowired
+    private NoticeMapper noticeMapper;
 
     /**
      * 根据电话获得用户对象
@@ -237,9 +243,61 @@ public class AccountService {
      * @param words 留言信息
      * @param account 当前用户
      */
+    @Transactional(rollbackFor = RuntimeException.class)
     public void savewords(Words words, Account account) {
         words.setUsername(account.getUsername());
         wordsMapper.insertSelective(words);
         logger.info("{}留言{}成功",account,words);
+        //保存公告
+         Notice notice = new Notice();
+         notice.setTitle(words.getTitle() + "留言");
+         notice.setContent(words.getContent());
+         noticeMapper.insertSelective(notice);
+         logger.info("{}公告新增成功");
+    }
+
+    /**查询所有的公告，在查询前先查询所有的留言，并封装到公告里面，然后再根据搜索条件和页码搜索
+     * @param pageNo
+     * @param selectMap
+     * @return
+     */
+    public PageInfo<Notice> findAllNoticeByMapandPageNo(Integer pageNo, Map<String, Object> selectMap) {
+        //查询所有的留言，并进行封装到公告里
+        List<Words> wordsList = wordsMapper.selectByExample(new WordsExample());
+        if(wordsList != null && !wordsList.isEmpty()){
+            for(Words words : wordsList){
+                Notice notice = new Notice();
+                notice.setTitle(words.getTitle() + "留言");
+                notice.setContent(words.getContent());
+                noticeMapper.insertSelective(notice);
+            }
+        }
+
+        //因为是单表查询，所以使用Example类中的方法也可以实现过滤查询
+        PageHelper.startPage(pageNo,5);
+
+        //接收传过来的搜索条件值
+        String title = (String)selectMap.get("title");
+        String createTime = (String)selectMap.get("createTime");
+
+        NoticeExample noticeExample = new NoticeExample();
+        //Criteria是Example类的内部类----这种形式只限于单表查询
+        NoticeExample.Criteria  criteria = noticeExample.createCriteria();
+        if(StringUtils.isNotEmpty(title)){
+            criteria.andTitleLike("%" + title + "%");
+        }
+        if(StringUtils.isNotEmpty(createTime)){
+            try {
+                criteria.andCreateTimeEqualTo(new SimpleDateFormat("yyyy-MM-dd").parse(createTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //设置降序
+        noticeExample.setOrderByClause("id desc");
+
+        List<Notice> noticeList = noticeMapper.selectByExample(noticeExample);
+        return new PageInfo<>(noticeList);
     }
 }
