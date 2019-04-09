@@ -3,15 +3,23 @@ package com.fdy.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/** 留言板实体类
+/**留言信息实体类
  * @author 
  */
 public class Words implements Serializable {
     private Integer id;
 
+    /**
+     * 留言主题
+     */
+    private String title;
+
     private String content;
 
-    private Integer userid;
+    /**
+     * 留言者
+     */
+    private String username;
 
     private Date createTime;
 
@@ -27,6 +35,14 @@ public class Words implements Serializable {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getContent() {
         return content;
     }
@@ -35,12 +51,12 @@ public class Words implements Serializable {
         this.content = content;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Date getCreateTime() {

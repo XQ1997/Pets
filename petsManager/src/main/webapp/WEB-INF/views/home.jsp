@@ -19,7 +19,7 @@
   	</jsp:include>
 
   <!-- 右侧内容部分 -->
-  <div class="content-wrapper"> 
+  <div class="content-wrapper">
     <!-- Main content -->
     <section class="content">
 
@@ -35,9 +35,9 @@
               <i class="fa fa-times"></i></button>
           </div>
         </div>
-        <div class="box-body"> 
+        <div class="box-body"> ee
         </div> 
-      </div> 
+      </div>
     </section> 
   </div> 
   <%@ include file="include/footer.jsp"%> 

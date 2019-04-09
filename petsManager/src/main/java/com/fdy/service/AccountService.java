@@ -1,12 +1,10 @@
 package com.fdy.service;
 
-import com.fdy.entity.Account;
-import com.fdy.entity.AccountExample;
-import com.fdy.entity.Cliam;
-import com.fdy.entity.CliamExample;
+import com.fdy.entity.*;
 import com.fdy.exception.ServiceException;
 import com.fdy.mapper.AccountMapper;
 import com.fdy.mapper.CliamMapper;
+import com.fdy.mapper.WordsMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -28,6 +26,8 @@ public class AccountService {
     private AccountMapper accountMapper;
     @Autowired
     private CliamMapper cliamMapper;
+    @Autowired
+    private WordsMapper wordsMapper;
 
     /**
      * 根据电话获得用户对象
@@ -231,5 +231,15 @@ public class AccountService {
             throw new ServiceException("该宠物未被申请认领！");
         }
 
+    }
+
+    /**保存留言信息
+     * @param words 留言信息
+     * @param account 当前用户
+     */
+    public void savewords(Words words, Account account) {
+        words.setUsername(account.getUsername());
+        wordsMapper.insertSelective(words);
+        logger.info("{}留言{}成功",account,words);
     }
 }
