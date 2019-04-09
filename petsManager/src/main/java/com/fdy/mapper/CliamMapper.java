@@ -1,0 +1,31 @@
+package com.fdy.mapper;
+
+import com.fdy.entity.Cliam;
+import com.fdy.entity.CliamExample;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface CliamMapper {
+    long countByExample(CliamExample example);
+
+    int deleteByExample(CliamExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Cliam record);
+
+    int insertSelective(Cliam record);
+
+    List<Cliam> selectByExample(CliamExample example);
+
+    Cliam selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Cliam record, @Param("example") CliamExample example);
+
+    int updateByExample(@Param("record") Cliam record, @Param("example") CliamExample example);
+
+    int updateByPrimaryKeySelective(Cliam record);
+
+    int updateByPrimaryKey(Cliam record);
+}
