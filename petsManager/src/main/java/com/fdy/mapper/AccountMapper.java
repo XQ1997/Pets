@@ -2,9 +2,8 @@ package com.fdy.mapper;
 
 import com.fdy.entity.Account;
 import com.fdy.entity.AccountExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface AccountMapper {
     long countByExample(AccountExample example);

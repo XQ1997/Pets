@@ -6,6 +6,7 @@ import com.fdy.entity.Pets;
 import com.fdy.exception.ServiceException;
 import com.fdy.service.AccountService;
 import com.fdy.service.PetsService;
+import com.fdy.util.AjaxResponseData;
 import com.fdy.util.ShiroUtil;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -19,9 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -115,22 +114,8 @@ public class HomeController {
 
         PageInfo<Notice> pageInfo = accountService.findAllNoticeByMapandPageNo(pageNo,selectMap);
 
-        List<Pets> petsList = petsService.findAllByState();
-        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
         model.addAttribute("pageInfo",pageInfo);
-        model.addAttribute("petsList",petsList);
         return "home";
-    }
-
-    /**跳转到权限不足页面
-     * @return
-     */
-    @GetMapping("/401")
-    public String error(Model model){
-        Account account = shiroUtil.getCurrAcc();
-        String role = account.getRole();
-        model.addAttribute("role",role);
-        return "/error/401";
     }
 
     /**注销操作-退出系统
@@ -151,9 +136,6 @@ public class HomeController {
      */
     @GetMapping("/repassword")
     public String repassword(Model model){
-        Account account = shiroUtil.getCurrAcc();
-        String role = account.getRole();
-        model.addAttribute("role",role);
         return "repassword";
     }
 
@@ -175,5 +157,62 @@ public class HomeController {
             redirectAttributes.addFlashAttribute("message",e.getMessage());
             return "redirect:/repassword";
         }
+    }
+
+    /**跳转到公告编辑页
+     * @return
+     */
+    @GetMapping("/notice/{id:\\d+}/edit")
+    public String editnotice(@PathVariable Integer id, Model model){
+        Notice notice = accountService.findNoticeByid(id);
+
+        model.addAttribute("notice",notice);
+        return "notice/edit";
+    }
+
+    /** 保存更新后的公告
+     * @return
+     */
+    @PostMapping("/notice/{id:\\d+}/edit")
+    public String updatenotice(Notice notice,RedirectAttributes redirectAttributes){
+        try{
+            accountService.updateNotice(notice);
+            redirectAttributes.addFlashAttribute("message","修改成功");
+        }catch (ServiceException e){
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
+        }
+        return "redirect:/home";
+    }
+
+    /**删除公告
+     * @return
+     */
+    @GetMapping("/notice/{id:\\d+}/del")
+    @ResponseBody
+    public AjaxResponseData del(@PathVariable Integer id){
+        try{
+            accountService.delNotice(id);
+            return AjaxResponseData.success();
+        }catch (ServiceException e){
+            return AjaxResponseData.error(e.getMessage());
+        }
+    }
+
+    /**跳转到新增公告页面
+     * @return
+     */
+    @GetMapping("/notice/new")
+    public String newNOtice(){
+        return "notice/new";
+    }
+
+    /**保存新增公告
+     * @return
+     */
+    @PostMapping("/notice/new")
+    public String saveNotice(Notice notice,RedirectAttributes redirectAttributes){
+        accountService.saveNotice(notice);
+        redirectAttributes.addFlashAttribute("message", "新增公告成功");
+        return "redirect:/home";
     }
 }

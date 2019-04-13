@@ -7,8 +7,12 @@
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="num" jdbcType="VARCHAR" property="num" />
+    <result column="video" jdbcType="VARCHAR" property="video" />
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="accname" jdbcType="VARCHAR" property="accname" />
     <result column="userid" jdbcType="INTEGER" property="userid" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -72,7 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, petname, state, age, content, image, place, userid, create_time, update_time
+    id, petname, state, age, content, num, video, image, place, type, accname, userid, 
+    create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.fdy.entity.PetsExample" resultMap="BaseResultMap">
     select
@@ -106,13 +111,15 @@
   </delete>
   <insert id="insert" parameterType="com.fdy.entity.Pets">
     insert into t_pets (id, petname, state, 
-      age, content, image, 
-      place, userid, create_time, 
-      update_time)
+      age, content, num, 
+      video, image, place, 
+      type, accname, userid, 
+      create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{petname,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
-      #{place,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{age,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR}, 
+      #{video,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{accname,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.fdy.entity.Pets">
     insert into t_pets
@@ -132,11 +139,23 @@
       <if test="content != null">
         content,
       </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="video != null">
+        video,
+      </if>
       <if test="image != null">
         image,
       </if>
       <if test="place != null">
         place,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="accname != null">
+        accname,
       </if>
       <if test="userid != null">
         userid,
@@ -164,11 +183,23 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="video != null">
+        #{video,jdbcType=VARCHAR},
+      </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
       </if>
       <if test="place != null">
         #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="accname != null">
+        #{accname,jdbcType=VARCHAR},
       </if>
       <if test="userid != null">
         #{userid,jdbcType=INTEGER},
@@ -205,11 +236,23 @@
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
       </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=VARCHAR},
+      </if>
+      <if test="record.video != null">
+        video = #{record.video,jdbcType=VARCHAR},
+      </if>
       <if test="record.image != null">
         image = #{record.image,jdbcType=VARCHAR},
       </if>
       <if test="record.place != null">
         place = #{record.place,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accname != null">
+        accname = #{record.accname,jdbcType=VARCHAR},
       </if>
       <if test="record.userid != null">
         userid = #{record.userid,jdbcType=INTEGER},
@@ -232,8 +275,12 @@
       state = #{record.state,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
       content = #{record.content,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=VARCHAR},
+      video = #{record.video,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR},
       place = #{record.place,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      accname = #{record.accname,jdbcType=VARCHAR},
       userid = #{record.userid,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -256,11 +303,23 @@
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
+      <if test="num != null">
+        num = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="video != null">
+        video = #{video,jdbcType=VARCHAR},
+      </if>
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
       </if>
       <if test="place != null">
         place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="accname != null">
+        accname = #{accname,jdbcType=VARCHAR},
       </if>
       <if test="userid != null">
         userid = #{userid,jdbcType=INTEGER},
@@ -280,8 +339,12 @@
       state = #{state,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
+      num = #{num,jdbcType=VARCHAR},
+      video = #{video,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       place = #{place,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      accname = #{accname,jdbcType=VARCHAR},
       userid = #{userid,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

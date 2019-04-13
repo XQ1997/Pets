@@ -37,17 +37,15 @@ public class PetController {
     @GetMapping
     public String petManager(@RequestParam(name = "pageNo",required = false,defaultValue = "1") Integer pageNo,
                              @RequestParam(required = false)String petname,
-                             @RequestParam(required = false)String state,
-                             @RequestParam(required = false)String age,Model model){
+                             @RequestParam(required = false)String type,
+                             @RequestParam(required = false)String state,Model model){
 
         Map<String,Object> selectMap = new HashMap<>();
         selectMap.put("petname",petname);
+        selectMap.put("type",type);
         selectMap.put("state",state);
-        selectMap.put("age",age);
 
         PageInfo<Pets> pageInfo = petsService.findAllByMapandPageNo(pageNo,selectMap);
-
-        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
         model.addAttribute("pageInfo",pageInfo);
         return "pet/home";
     }
@@ -61,7 +59,6 @@ public class PetController {
 
         String token = qiniustore.getUploadToken();
         model.addAttribute("token",token);
-        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
         return "pet/new";
     }
 
@@ -72,7 +69,7 @@ public class PetController {
     public String savepets(Pets pets,RedirectAttributes redirectAttributes){
         try {
             petsService.savepets(pets);
-            redirectAttributes.addFlashAttribute("message", "新增售票点成功");
+            redirectAttributes.addFlashAttribute("message", "新增流浪宠物成功");
         }catch (ServiceException e){
             redirectAttributes.addFlashAttribute("message",e.getMessage());
         }
@@ -88,7 +85,6 @@ public class PetController {
 
         model.addAttribute("pets",pets);
         model.addAttribute("token",qiniustore.getUploadToken());
-        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
         return "pet/edit";
     }
 
@@ -131,7 +127,6 @@ public class PetController {
             throw new NotFoundException();
         }
         model.addAttribute("pets",pets);
-        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
         return "pet/look";
     }
 }

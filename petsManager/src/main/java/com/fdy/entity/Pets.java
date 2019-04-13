@@ -3,13 +3,13 @@ package com.fdy.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/** 流浪宠物实体类
- * @author 
+/**
+ * @author
  */
 public class Pets implements Serializable {
+
     public static final String STATE_CLIAM = "已认领";
     public static final String STATE_NO = "未认领";
-
     private Integer id;
 
     /**
@@ -33,6 +33,16 @@ public class Pets implements Serializable {
     private String content;
 
     /**
+     * 宠物编号
+     */
+    private String num;
+
+    /**
+     * 宠物视频
+     */
+    private String video;
+
+    /**
      * 宠物照片
      */
     private String image;
@@ -41,6 +51,16 @@ public class Pets implements Serializable {
      * 救助该宠物的地点
      */
     private String place;
+
+    /**
+     * 对应的种类
+     */
+    private String type;
+
+    /**
+     * 领养人
+     */
+    private String accname;
 
     /**
      * 认领该宠物的主人
@@ -93,6 +113,22 @@ public class Pets implements Serializable {
         this.content = content;
     }
 
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
     public String getImage() {
         return image;
     }
@@ -107,6 +143,22 @@ public class Pets implements Serializable {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getAccname() {
+        return accname;
+    }
+
+    public void setAccname(String accname) {
+        this.accname = accname;
     }
 
     public Integer getUserid() {

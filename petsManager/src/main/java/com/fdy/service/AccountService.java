@@ -2,10 +2,7 @@ package com.fdy.service;
 
 import com.fdy.entity.*;
 import com.fdy.exception.ServiceException;
-import com.fdy.mapper.AccountMapper;
-import com.fdy.mapper.CliamMapper;
-import com.fdy.mapper.NoticeMapper;
-import com.fdy.mapper.WordsMapper;
+import com.fdy.mapper.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -34,6 +31,8 @@ public class AccountService {
     private WordsMapper wordsMapper;
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private ReplyMapper replyMapper;
 
     /**
      * 根据电话获得用户对象
@@ -74,12 +73,22 @@ public class AccountService {
         if(oldAcc != null){
             throw new ServiceException("该电话号码已注册过，请检查！");
         }
+        int num ;
+        //根据注册角色查询已注册该角色的用户数量
+        AccountExample accountExample = new AccountExample();
+        accountExample.createCriteria().andRoleEqualTo(account.getRole());
+        List<Account> accountList = accountMapper.selectByExample(accountExample);
+
+        if(accountList == null){
+            num = 1;
+        }
+        num = accountList.size();
+        account.setNumber(account.getRole() + num + "号");
         accountMapper.insertSelective(account);
         logger.info("{}注册成功",account);
     }
 
     /**保存新的宠物认领申请记录
-     *
      * @param account
      * @param cliam　宠物认领申请记录对象
      * @throws ServiceException　错误原因通过异常抛出
@@ -88,6 +97,13 @@ public class AccountService {
         Account oldAcc = findByMobile(cliam.getMobile());
         if(oldAcc == null){
             throw new ServiceException("该用户未注册，请注册后再申请宠物认领");
+        }
+        //根据申请记录中是否有该宠物的申请并且该申请的状态为未通过，如果有则提交失败，没有则提交成功
+        CliamExample cliamExample = new CliamExample();
+        cliamExample.createCriteria().andCliamNameEqualTo(cliam.getPetname()).andStateEqualTo(Cliam.STATE_PASS);
+        List<Cliam> cliamList = cliamMapper.selectByExample(cliamExample);
+        if(cliamList != null && !cliamList.isEmpty()){
+            throw new ServiceException("该宠物已经被认领，请重新选择宠物！");
         }
         cliam.setUsername(account.getUsername());
         cliam.setState(Cliam.STATE_IN);
@@ -256,23 +272,12 @@ public class AccountService {
          logger.info("{}公告新增成功");
     }
 
-    /**查询所有的公告，在查询前先查询所有的留言，并封装到公告里面，然后再根据搜索条件和页码搜索
+    /**查询所有的公告 根据搜索条件和页码搜索
      * @param pageNo
      * @param selectMap
      * @return
      */
     public PageInfo<Notice> findAllNoticeByMapandPageNo(Integer pageNo, Map<String, Object> selectMap) {
-        //查询所有的留言，并进行封装到公告里
-        List<Words> wordsList = wordsMapper.selectByExample(new WordsExample());
-        if(wordsList != null && !wordsList.isEmpty()){
-            for(Words words : wordsList){
-                Notice notice = new Notice();
-                notice.setTitle(words.getTitle() + "留言");
-                notice.setContent(words.getContent());
-                noticeMapper.insertSelective(notice);
-            }
-        }
-
         //因为是单表查询，所以使用Example类中的方法也可以实现过滤查询
         PageHelper.startPage(pageNo,5);
 
@@ -299,5 +304,118 @@ public class AccountService {
 
         List<Notice> noticeList = noticeMapper.selectByExample(noticeExample);
         return new PageInfo<>(noticeList);
+    }
+
+    /**保存新增公告
+     * @param notice
+     */
+    public void saveNotice(Notice notice) {
+        noticeMapper.insertSelective(notice);
+        logger.info("新增公告{}",notice);
+    }
+
+    /**删除公告
+     * @param id
+     */
+    public void delNotice(Integer id)throws ServiceException {
+        Notice notice = noticeMapper.selectByPrimaryKey(id);
+        if(notice != null){
+            noticeMapper.deleteByPrimaryKey(id);
+        }else{
+          throw new ServiceException("该用户不存在，删除失败！");
+        }
+    }
+
+    /**根据id查询对应的notice公告
+     * @param id
+     * @return
+     */
+    public Notice findNoticeByid(Integer id) {
+        return noticeMapper.selectByPrimaryKey(id);
+    }
+
+    /**保存更新后的公告信息
+     * @param notice
+     */
+    public void updateNotice(Notice notice) {
+        noticeMapper.updateByPrimaryKeySelective(notice);
+    }
+
+    /**查询所有的留言记录根据搜索条件和页数
+     * @param pageNo 页数
+     * @param selectMap 搜索条件
+     * @return
+     */
+    public PageInfo<Words> findAllWordsByMapandPageNo(Integer pageNo, Map<String, Object> selectMap) {
+        //因为是单表查询，所以使用Example类中的方法也可以实现过滤查询
+        PageHelper.startPage(pageNo,5);
+
+        //接收传过来的搜索条件值
+        String title = (String)selectMap.get("title");
+        String createTime = (String)selectMap.get("createTime");
+
+        WordsExample wordsExample = new WordsExample();
+        //Criteria是Example类的内部类----这种形式只限于单表查询
+        WordsExample.Criteria  criteria = wordsExample.createCriteria();
+        if(StringUtils.isNotEmpty(title)){
+            criteria.andTitleLike("%" + title + "%");
+        }
+        if(StringUtils.isNotEmpty(createTime)){
+            try {
+                criteria.andCreateTimeEqualTo(new SimpleDateFormat("yyyy-MM-dd").parse(createTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //设置降序
+        wordsExample.setOrderByClause("id desc");
+
+        List<Words> wordsList = wordsMapper.selectByExample(wordsExample);
+        return new PageInfo<>(wordsList);
+    }
+
+    /** 保存回复消息
+     * @param reply
+     * @param id
+     */
+    public void saveReply(Reply reply, Integer id) {
+        Words words = wordsMapper.selectByPrimaryKey(id);
+        if(words != null){
+            reply.setWordname(words.getUsername());
+            replyMapper.insertSelective(reply);
+            logger.info("{}回复成功",reply);
+        }
+    }
+
+    /**删除留言
+     * @param id
+     */
+    public void delWords(Integer id) throws ServiceException{
+        Words words = wordsMapper.selectByPrimaryKey(id);
+        if(words != null){
+            wordsMapper.deleteByPrimaryKey(id);
+        }else{
+            throw new ServiceException("该留言不存在，删除失败！");
+        }
+    }
+
+    /**根据id查询对应的留言记录
+     * @param id
+     * @return
+     */
+    public Words findWordsById(Integer id) {
+        return wordsMapper.selectByPrimaryKey(id);
+    }
+
+    /**根据留言中的留言人姓名作为回复中的留言人查询所有回复内容
+     * @param username
+     * @return
+     */
+    public List<Reply> findALLReply(String username) {
+        ReplyExample replyExample = new ReplyExample();
+        replyExample.createCriteria().andWordnameEqualTo(username);
+        List<Reply> replyList = replyMapper.selectByExample(replyExample);
+        return replyList;
     }
 }

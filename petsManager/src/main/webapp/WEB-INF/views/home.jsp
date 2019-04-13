@@ -36,6 +36,7 @@
         <div class="box-header with-border">
           <h3 class="box-title">公告展示</h3>
           <div class="box-tools pull-right">
+            <a href="/notice/new" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新增公告</a>
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
               <i class="fa fa-minus"></i></button>
@@ -43,6 +44,9 @@
               <i class="fa fa-times"></i></button>
           </div>
         </div>
+        <c:if test="${not empty message}">
+          <div class="alert alert-success text-center">${message}</div>
+        </c:if>
         <div class="box-body">
           <table class="table">
             <thead>
@@ -50,6 +54,7 @@
               <th class="text-center">公告主题</th>
               <th class="text-center">公告内容</th>
               <th class="text-center">发布时间</th>
+              <th class="text-center">#</th>
             </tr>
             </thead>
             <tbody>
@@ -58,13 +63,10 @@
                 <td class="text-center"><strong>${notice.title}</strong></td>
                 <td class="text-center"><strong>${notice.content}</strong></td>
                 <td class="text-center"><strong><fmt:formatDate value="${notice.createTime}"  pattern='yyyy年MM月dd日'/></strong></td>
-              </tr>
-            </c:forEach>
-            <c:forEach items="${petsList}" var="pets">
-              <tr>
-                <td class="text-center"><strong><a href="/pet/${pets.id}">${pets.petname}</a></strong></td>
-                <td class="text-center"><strong>${pets.state}</strong></td>
-                <td class="text-center"><strong><fmt:formatDate value="${pets.createTime}"  pattern='yyyy年MM月dd日'/></strong></td>
+                <td class="text-center">
+                  <a href="/notice/${notice.id}/edit"><i class="fa fa-edit"></i></a>
+                  <a href="javascript:;" rel="${notice.id}" class="del"><i class="fa fa-trash"></i></a>
+                </td>
               </tr>
             </c:forEach>
             </tbody>
@@ -102,6 +104,26 @@
             language: "zh-CN",
             autoclose: true,//为true时，选择完时间，弹框消失，反之，不消失
             todayHighlight: true,//常量显示
+        });
+        $(".del").click(function () {
+            var id = $(this).attr("rel");
+            layer.confirm("确定要删除该公告吗？",function (index) {
+                layer.close(index);
+                $.ajax({
+                    url:'/notice/'+id+'/del',
+                    type:'get',
+                    success:function (result) {
+                        if(result.state == 'success') {
+                            window.history.go(0);
+                        } else {
+                            layer.msg(result.message);
+                        }
+                    },
+                    error:function () {
+                        layer.msg("服务器忙");
+                    }
+                });
+            })
         });
     })
 </script>

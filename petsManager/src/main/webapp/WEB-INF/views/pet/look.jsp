@@ -48,6 +48,12 @@
                                 <td>${pets.place}</td>
                             </tr>
                             <tr>
+                                <td class="text-muted text-center"><i>宠物种类:</i></td>
+                                <td>${pets.type}</td>
+                                <td class="text-muted text-center"><i>宠物编号:</i></td>
+                                <td>${pets.num}</td>
+                            </tr>
+                            <tr>
                                 <td class="text-muted text-center"><i>年龄:</i></td>
                                 <td>${pets.age}</td>
                                 <td colspan="2"></td>
@@ -68,9 +74,14 @@
                 </div>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-offset-4">
+                        <div class="col-md-6">
                             <div class="photo">
                                 <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-preview" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="photo">
+                                <embed width="320" height="240" src="http://pmupn7ccj.bkt.clouddn.com/${pets.video}" />
                             </div>
                         </div>
                     </div>

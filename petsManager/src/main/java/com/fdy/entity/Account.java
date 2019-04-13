@@ -3,11 +3,10 @@ package com.fdy.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/** 用户实体类
- * @author 
+/**
+ * @author
  */
 public class Account implements Serializable {
-
     public static final String TYPE_ADMIN = "管理员";
     public static final String TYPE_USER = "领养人";
 
@@ -52,6 +51,11 @@ public class Account implements Serializable {
      * 身份证背面照
      */
     private String cardOutPhoto;
+
+    /**
+     * 用户编号
+     */
+    private String number;
 
     private String mobile;
 
@@ -155,6 +159,14 @@ public class Account implements Serializable {
 
     public void setCardOutPhoto(String cardOutPhoto) {
         this.cardOutPhoto = cardOutPhoto;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getMobile() {

@@ -24,7 +24,18 @@
                 <div class="box-body">
                     <form class="form-inline">
                         <input type="text" name="petname" placeholder="流浪宠物名称" class="form-control" value="${param.petname}">
-                        <input type="text" name="age" placeholder="宠物年龄" class="form-control" value="${param.age}">
+                        <select name="type" class="form-control">
+                            <option value="哺乳动物类" ${param.type == "哺乳动物类" ? 'selected' : ''}>哺乳动物类</option>
+                            <option value="鸟类"${param.type == "鸟类" ? 'selected' : ''}>鸟类</option>
+                            <option value="爬行动物类" ${param.type == "爬行动物类" ? 'selected' : ''}>爬行动物类</option>
+                            <option value="两栖动物类" ${param.type == "两栖动物类" ? 'selected' : ''}>两栖动物类</option>
+                            <option value="鱼类" ${param.type == "鱼类" ? 'selected' : ''}>鱼类</option>
+                            <option value="昆虫动物类"${param.type == "昆虫动物类" ? 'selected' : ''}>昆虫动物类</option>
+                            <option value="植物宠物类" ${param.type == "植物宠物类" ? 'selected' : ''}>植物宠物类</option>
+                            <option value="茶宠宠物" ${param.type == "茶宠宠物" ? 'selected' : ''}>茶宠宠物</option>
+                            <option value="另类宠物" ${param.type == "另类宠物" ? 'selected' : ''}>另类宠物</option>
+                            <option value="其他" ${param.type == "其他" ? 'selected' : ''}>其他</option>
+                        </select>
                         <select name="state" class="form-control">
                             <option value="">全部</option>
                             <option value="未认领" ${param.state == "未认领" ? 'selected' : ''}>未认领</option>
@@ -55,6 +66,8 @@
                          <thead>
                              <tr>
                                  <th class="text-center">宠物名称</th>
+                                 <th class="text-center">宠物编号</th>
+                                 <th class="text-center">类别</th>
                                  <th class="text-center">当前状态</th>
                                  <th class="text-center">年龄</th>
                                  <th class="text-center">救助地点</th>
@@ -66,6 +79,8 @@
                             <c:forEach items="${pageInfo.list}" var="pets">
                                 <tr>
                                     <td class="text-center"><strong><a href="/pet/${pets.id}">${pets.petname}</a></strong></td>
+                                    <td class="text-center"><strong>${pets.num}</strong></td>
+                                    <td class="text-center"><strong>${pets.type}</strong></td>
                                     <td class="text-center"><strong>${pets.state}</strong></td>
                                     <td class="text-center"><strong>${pets.age}</strong></td>
                                     <td class="text-center"><strong>${pets.place}</strong></td>
@@ -99,7 +114,7 @@
             prev:'上一页',
             next:'下一页',
             href:"?petname="+encodeURIComponent('${param.petname}')+
-            "&age="+encodeURIComponent('${param.age}')+
+            "&type="+encodeURIComponent('${param.type}')+
             "&state="+encodeURIComponent('${param.state}')+
             "&pageNo={{number}}"
         });

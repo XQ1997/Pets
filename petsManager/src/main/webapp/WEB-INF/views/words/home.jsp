@@ -1,94 +1,130 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>流浪宠物救助系统|留言板</title>
+  <title>流浪宠物救助系统|留言管理</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <%@ include file="../include/css.jsp"%>
-  <style>
-    .box1{
-      width: 400px;
-      height: 100%;
-    }
-  </style>
+  <link rel="stylesheet" href="/static/plugins/datepicker/datepicker3.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
-  <%@ include file="../include/header.jsp"%>
-  <jsp:include page="../include/sider.jsp">
-    <jsp:param name="menu" value="words"/>
-  </jsp:include>
-
-  <!-- 右侧内容部分 -->
+	<%@ include file="../include/header.jsp"%>
+  	<jsp:include page="../include/sider.jsp">
+  		<jsp:param value="words" name="param"/>
+  	</jsp:include>
   <div class="content-wrapper">
     <section class="content">
+      <%--搜索表单--%>
+      <div class="box no-border">
+        <div class="box-body">
+          <form class="form-inline">
+            <input type="text" name="title" placeholder="留言主题" class="form-control" value="${param.petname}">
+            <input type="text" name="createTime" placeholder="发布时间" id="datepicker" class="form-control" value="${param.age}">
+            <button class="btn btn-flat"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </div>
       <div class="box">
-        <c:if test="${not empty message}">
-          <div class="alert alert-success text-center">${message}</div>
-        </c:if>
         <div class="box-header with-border">
-          <h3 class="box-title">欢迎访问留言板</h3>
+          <h3 class="box-title">留言展示</h3>
           <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
               <i class="fa fa-minus"></i></button>
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
           </div>
         </div>
+        <c:if test="${not empty message}">
+          <div class="alert alert-success text-center">${message}</div>
+        </c:if>
         <div class="box-body">
-          <form method="post" id="saveword" class="form-horizontal center-block">
-            <div class="form-group">
-              <label class="col-md-4 control-label">主题:</label>
-              <div class="col-md-8">
-                <input type="text" name="title" size=30 autofocus/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-4 control-label">留言:</label>
-              <div class="col-md-8">
-                <textarea name="content" rows=7 cols=30></textarea>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="box-footer">
-          <button class="btn btn-primary center-block" id="saveBtn">留言</button>
-        </div>
-      </div>
-      <c:if test="${not empty message}">
-        <div class="box1 center-block">
           <table class="table">
+            <thead>
+            <tr>
+              <th class="text-center">留言主题</th>
+              <th class="text-center">留言人</th>
+              <th class="text-center">留言内容</th>
+              <th class="text-center">发布时间</th>
+              <th class="text-center">#</th>
+            </tr>
+            </thead>
             <tbody>
-            <tr>
-              <td class="text-muted text-center"><i>留言人:</i></td>
-              <td><shiro:principal property="username"/></td>
-            <tr>
-              <td class="text-muted text-center"><i>留言主题:</i></td>
-              <td>${words.title}</td>
-            </tr>
-            <tr>
-              <td class="text-muted text-center"><i>留言内容:</i></td>
-              <td><textarea disabled>${words.content}</textarea></td>
-            </tr>
+            <c:forEach items="${pageInfo.list}" var="words">
+              <tr>
+                <td class="text-center"><strong><a href="/words/${words.id}">${words.title}</a></strong></td>
+                <td class="text-center"><strong>${words.username}</strong></td>
+                <td class="text-center"><strong>${words.content}</strong></td>
+                <td class="text-center"><strong><fmt:formatDate value="${words.createTime}"  pattern='yyyy年MM月dd日'/></strong></td>
+                <td class="text-center">
+                  <a href="/words/${words.id}/reply"><i class="fa fa-reply"></i></a>
+                  <a href="javascript:;" rel="${words.id}" class="del"><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
+            </c:forEach>
             </tbody>
           </table>
+          <c:if test="${pageInfo.pages > 1}">
+            <ul id="pagination-demo" class="pagination pull-right"></ul>
+         </c:if>
         </div>
-      </c:if>
+      </div>
     </section>
-  </div>
+  </div> 
   <%@ include file="../include/footer.jsp"%>
-</div>
+</div> 
 <%@ include file="../include/js.jsp"%>
+<script src="/static/plugins/jquery.twbsPagination.js"></script>
+<script src="/static/plugins/moment/moment.js"></script>
+<script src="/static/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="/static/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
 <script>
     $(function(){
-        $("#saveBtn").click(function(){
-            $("#saveword").submit();
+        $('#pagination-demo').twbsPagination({
+            totalPages: ${pageInfo.pages},
+            visiblePage:5,
+            first:'首页',
+            last:'末页',
+            prev:'上一页',
+            next:'下一页',
+            href:"?title="+encodeURIComponent('${param.title}')+
+            "&createTime="+encodeURIComponent('${param.createTime}')+
+            "&pageNo={{number}}"
+        });
+        //datatime显示时间弹框
+        var picker = $('#datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+            autoclose: true,//为true时，选择完时间，弹框消失，反之，不消失
+            todayHighlight: true,//常量显示
+        });
+        $(".del").click(function () {
+            var id = $(this).attr("rel");
+            layer.confirm("确定要删除该留言吗？",function (index) {
+                layer.close(index);
+                $.ajax({
+                    url:'/words/'+id+'/del',
+                    type:'get',
+                    success:function (result) {
+                        if(result.state == 'success') {
+                            window.history.go(0);
+                        } else {
+                            layer.msg(result.message);
+                        }
+                    },
+                    error:function () {
+                        layer.msg("服务器忙");
+                    }
+                });
+            })
         });
     })
 </script>

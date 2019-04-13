@@ -69,14 +69,14 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
-                <div class="col-xs-8">
+                <div class="col-xs-6">
                     <div class="checkbox icheck">
                         <label>
                             <input type="checkbox" name="rememberMe" <c:if test="${not empty mobile}">  checked</c:if>> 记住我
                         </label>
                     </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
                 </div>
             </div>

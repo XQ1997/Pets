@@ -52,6 +52,23 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-md-3 control-label">宠物类别:</label>
+                                    <div class="col-md-8">
+                                        <select name="type" class="form-control">
+                                            <option value="哺乳动物类" ${pets.type == "哺乳动物类" ? 'selected' : ''}>哺乳动物类</option>
+                                            <option value="鸟类"${pets.type == "鸟类" ? 'selected' : ''}>鸟类</option>
+                                            <option value="爬行动物类" ${pets.type == "爬行动物类" ? 'selected' : ''}>爬行动物类</option>
+                                            <option value="两栖动物类" ${pets.type == "两栖动物类" ? 'selected' : ''}>两栖动物类</option>
+                                            <option value="鱼类" ${pets.type == "鱼类" ? 'selected' : ''}>鱼类</option>
+                                            <option value="昆虫动物类"${pets.type == "昆虫动物类" ? 'selected' : ''}>昆虫动物类</option>
+                                            <option value="植物宠物类" ${pets.type == "植物宠物类" ? 'selected' : ''}>植物宠物类</option>
+                                            <option value="茶宠宠物" ${pets.type == "茶宠宠物" ? 'selected' : ''}>茶宠宠物</option>
+                                            <option value="另类宠物" ${pets.type == "另类宠物" ? 'selected' : ''}>另类宠物</option>
+                                            <option value="其他" ${pets.type == "其他" ? 'selected' : ''}>其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-md-3 control-label">年龄:</label>
                                     <div class="col-md-8">
                                         <input type="text" name="age" class="form-control" value="${pets.age}"/>
@@ -66,7 +83,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">宠物描述:</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="content" class="form-control" value="${pets.content}"/>
+                                        <textarea name="content" rows=7 cols=30>${pets.content}</textarea>
                                     </div>
                                 </div>
                             </div>

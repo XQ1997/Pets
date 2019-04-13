@@ -47,8 +47,6 @@ public class AuditingController {
         selectMap.put("age",age);
 
         PageInfo<Pets> pageInfo = petsService.findAllByMapandPageNo(pageNo,selectMap);
-
-        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
         model.addAttribute("pageInfo",pageInfo);
         return "auditing/home";
     }
@@ -63,7 +61,6 @@ public class AuditingController {
         if(pets == null){
             throw new NotFoundException();
         }
-        model.addAttribute("role", shiroUtil.getCurrAcc().getRole());
         try {
             Cliam cliam = accountService.findCliamByPets(pets.getPetname());
             Account account = accountService.findAccByMobile(cliam.getMobile());
@@ -79,9 +76,10 @@ public class AuditingController {
 
     @GetMapping("/{id:\\d+}/auditing")
     @ResponseBody
-    public AjaxResponseData changeState(@PathVariable Integer id, String cliamId){
+    public AjaxResponseData changeState(@PathVariable Integer id, String cliamId,String state){
         try{
-            petsService.auditing(id,cliamId);
+            Account account = shiroUtil.getCurrAcc();
+            petsService.auditing(id,cliamId,account,state);
             return AjaxResponseData.success();
         }catch (ServiceException e){
             return AjaxResponseData.error(e.getMessage());

@@ -37,8 +37,9 @@
                     <h3 class="box-title">流浪宠物信息</h3>
                     <div class="box-tools pull-right">
                         <a href="/auditing" class="btn btn-success btn-sm"><i class="fa fa-backward"></i>返回</a>
-                        <c:if test="${cliam != null}">
-                            <a href="javascript:;" rel="${pets.id}" acc="${cliam.id}" class="btn btn-danger btn-sm state">审核</a>
+                        <c:if test="${cliam.state == '已提交'}">
+                            <a href="javascript:;" rel="${pets.id}" acc="${cliam.id}" class="btn btn-danger btn-sm state"><i class="fa fa-ban"></i> 审核通过</a>
+                            <a href="javascript:;" rel="${pets.id}" acc="${cliam.id}" state="true" class="btn btn-danger btn-sm state"><i class="fa fa-ban"></i> 审核不通过</a>
                         </c:if>
                     </div>
                 </div>
@@ -184,9 +185,9 @@
         $(".state").click(function() {
             var id = $(this).attr("rel");
             var cliamid = $(this).attr("acc");
-
+            var state = $(this).attr("state");
             $.ajax({
-                url: '/auditing/' + id + '/auditing?cliamId='+ cliamid,
+                url: '/auditing/' + id + '/auditing?cliamId='+ cliamid + '&state='+ state,
                 type: "GET",
                 success: function (data) {
                     if (data.state == "success") {

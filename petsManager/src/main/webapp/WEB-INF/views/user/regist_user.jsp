@@ -32,7 +32,7 @@
 <div class="wrapper">
     <jsp:include page="../include/header.jsp"/>
     <jsp:include page="../include/sider.jsp">
-        <jsp:param name="menu" value="regist"/>
+        <jsp:param name="menu" value="user"/>
     </jsp:include>
     <div class="content-wrapper"> 
         <section class="content"> 
@@ -75,7 +75,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">联系电话:</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="mobile" class="form-control"/>
+                                        <input type="text" name="mobile" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -115,7 +115,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">身份证号:</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="cardnum" class="form-control"/>
+                                        <input type="text" name="cardnum" class="form-control" required/>
                                     </div>
                                 </div>
                             </div>
@@ -150,6 +150,7 @@
 </div>
 <jsp:include page="../include/js.jsp"></jsp:include>
 <script src="/static/plugins/uploader/webuploader.min.js"></script>
+<script src="/static/dist/js/jquery.validate.min.js"></script>
 <script>
     $(function () {
         //初始化客户一寸照片
@@ -310,6 +311,31 @@
 
         $("#saveBtn").click(function () {
             $("#saveForm").submit();
+        });
+        //表单校验
+        $("#saveForm").validate({
+            errorClass : 'text-danger',
+            errorElement : 'span',
+            rules : {
+                mobile :{
+                    "required" : true,
+                    "minlength": 11
+                },
+                cardnum : {
+                    "required" : true,
+                    "minlength": 18
+                }
+            },
+            messages :{
+                mobile :{
+                    "required" : "请输入联系电话",
+                    "minlength": "用户名长度不得少于11位"
+                },
+                cardnum : {
+                    "required" : "请输入身份证号",
+                    "minlength": "身份证号长度不得少于18位"
+                }
+            }
         });
     })
 </script>

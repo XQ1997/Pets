@@ -14,6 +14,7 @@
     <result column="user_photo" jdbcType="VARCHAR" property="userPhoto" />
     <result column="card_in_photo" jdbcType="VARCHAR" property="cardInPhoto" />
     <result column="card_out_photo" jdbcType="VARCHAR" property="cardOutPhoto" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -78,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, role, username, age, sex, address, cardnum, job, password, user_photo, card_in_photo, 
-    card_out_photo, mobile, create_time, update_time
+    card_out_photo, number, mobile, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.fdy.entity.AccountExample" resultMap="BaseResultMap">
     select
@@ -115,14 +116,14 @@
       age, sex, address, 
       cardnum, job, password, 
       user_photo, card_in_photo, card_out_photo, 
-      mobile, create_time, update_time
-      )
+      number, mobile, create_time, 
+      update_time)
     values (#{id,jdbcType=INTEGER}, #{role,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{cardnum,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{userPhoto,jdbcType=VARCHAR}, #{cardInPhoto,jdbcType=VARCHAR}, #{cardOutPhoto,jdbcType=VARCHAR}, 
-      #{mobile,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{number,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.fdy.entity.Account">
     insert into t_account
@@ -162,6 +163,9 @@
       </if>
       <if test="cardOutPhoto != null">
         card_out_photo,
+      </if>
+      <if test="number != null">
+        number,
       </if>
       <if test="mobile != null">
         mobile,
@@ -209,6 +213,9 @@
       </if>
       <if test="cardOutPhoto != null">
         #{cardOutPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
       </if>
       <if test="mobile != null">
         #{mobile,jdbcType=VARCHAR},
@@ -266,6 +273,9 @@
       <if test="record.cardOutPhoto != null">
         card_out_photo = #{record.cardOutPhoto,jdbcType=VARCHAR},
       </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
       <if test="record.mobile != null">
         mobile = #{record.mobile,jdbcType=VARCHAR},
       </if>
@@ -294,6 +304,7 @@
       user_photo = #{record.userPhoto,jdbcType=VARCHAR},
       card_in_photo = #{record.cardInPhoto,jdbcType=VARCHAR},
       card_out_photo = #{record.cardOutPhoto,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -337,6 +348,9 @@
       <if test="cardOutPhoto != null">
         card_out_photo = #{cardOutPhoto,jdbcType=VARCHAR},
       </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
       <if test="mobile != null">
         mobile = #{mobile,jdbcType=VARCHAR},
       </if>
@@ -362,6 +376,7 @@
       user_photo = #{userPhoto,jdbcType=VARCHAR},
       card_in_photo = #{cardInPhoto,jdbcType=VARCHAR},
       card_out_photo = #{cardOutPhoto,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

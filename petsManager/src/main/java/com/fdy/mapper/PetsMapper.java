@@ -2,9 +2,8 @@ package com.fdy.mapper;
 
 import com.fdy.entity.Pets;
 import com.fdy.entity.PetsExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface PetsMapper {
     long countByExample(PetsExample example);

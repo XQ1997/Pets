@@ -45,7 +45,6 @@ public class CliamController {
 
         PageInfo<Cliam> pageInfo = accountService.findAllCLiamsByMapandPageNo(pageNo,selectMap);
 
-        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
         model.addAttribute("pageInfo",pageInfo);
         return "cliam/home";
     }
@@ -63,7 +62,6 @@ public class CliamController {
         Account account = accountService.findAccByMobile(cliam.getMobile());
         model.addAttribute("account",account);
         model.addAttribute("cliam",cliam);
-        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
         return "cliam/look";
     }
 }

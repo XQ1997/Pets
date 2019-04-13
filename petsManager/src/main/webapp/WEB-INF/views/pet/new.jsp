@@ -45,6 +45,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <input type="hidden" name="image" id="petphoto">
+                                <input type="hidden" name="video" id="petvideo">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">宠物名称:</label>
                                     <div class="col-md-8">
@@ -64,9 +65,26 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-md-3 control-label">宠物类别:</label>
+                                    <div class="col-md-8">
+                                        <select name="type" class="form-control">
+                                            <option value="哺乳动物类">哺乳动物类</option>
+                                            <option value="鸟类">鸟类</option>
+                                            <option value="爬行动物类">爬行动物类</option>
+                                            <option value="两栖动物类">两栖动物类</option>
+                                            <option value="鱼类">鱼类</option>
+                                            <option value="昆虫动物类">昆虫动物类</option>
+                                            <option value="植物宠物类">植物宠物类</option>
+                                            <option value="茶宠宠物">茶宠宠物</option>
+                                            <option value="另类宠物">另类宠物</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-md-3 control-label">宠物描述:</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="content" class="form-control"/>
+                                        <textarea name="content" rows=7 cols=30>${pets.content}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -74,6 +92,10 @@
                                 <div class="col-md-6">
                                     <div id="picker">宠物照片</div>
                                     <div class="petphoto" id="photo"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="picker1">上传视频</div>
+                                    <div class="petphoto" id="video"></div>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +115,7 @@
 <script src="/static/plugins/jquery.twbsPagination.js"></script>
 <script>
     $(function(){
-        //初始化webuploader组件
+        //初始化webuploader组件 上传图片
         var uploader = WebUploader.create({
             //选完文件之后，是否自动上传
             auto:true,
@@ -135,6 +157,58 @@
 
             //将key存放进隐藏域中
             $("#petphoto").val(fileName);
+
+            layer.msg("上传成功");
+        });
+        uploader.on( 'uploadError', function( file ) {
+            layer.msg("服务器异常");
+        });
+        uploader.on( 'uploadComplete', function( file ) {
+            layer.close(index);
+        });
+
+        //初始化webuploader组件 上传视频
+        var uploader = WebUploader.create({
+            //选完文件之后，是否自动上传
+            auto:true,
+            // swf文件路径
+            swf:'/static/plugins/uploader/Uploader.swf',
+
+            // 文件接收服务端。
+            server: 'http://upload-z1.qiniup.com',
+            //文件上传域的name
+            fileVal:'file',
+            //文件上传请求的参数表，每次发送都会发送发送此对象中的参数
+            formData:{
+                "token":"${token}"
+            },
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#picker1',
+            //只允许接收图片文件
+            accept:{
+                title:'Images',
+                extensions:'gif,jpg,jpeg,bmp,png',
+                mineTypes:'image/*'
+            }
+        });
+        var index = -1;
+        //文件成功。失败处理
+        uploader.on( 'uploadStart', function( file ) {
+            index = layer.load(1);
+        });
+        uploader.on( 'uploadSuccess', function( file,response ) {
+            //先清空内容
+            $("#video").html("");
+
+            //获取七牛上图片名称
+            var fileName = response.key;
+            //动态添加从七牛请求的图像
+            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-preview");
+            $img.appendTo($("#video"));
+
+            //将key存放进隐藏域中
+            $("#petvideo").val(fileName);
 
             layer.msg("上传成功");
         });

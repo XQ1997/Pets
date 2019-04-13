@@ -102,11 +102,8 @@ public class UserController {
      */
     @GetMapping("/regist")
     public String userRigst(Model model){
-        Account account = shiroUtil.getCurrAcc();
-        String role = account.getRole();
         String token = qiniustore.getUploadToken();
         model.addAttribute("token",token);
-        model.addAttribute("role",role);
         return "user/regist_user";
     }
 
@@ -121,7 +118,7 @@ public class UserController {
         }catch (ServiceException e){
             redirectAttributes.addFlashAttribute("message",e.getMessage());
         }
-        return "redirect:/user/regist";
+        return "redirect:/user";
     }
 
     /**跳转到宠物申请认领页面
@@ -130,9 +127,6 @@ public class UserController {
      */
     @GetMapping("/cliam")
     public String cliamPets(Model model){
-        Account account = shiroUtil.getCurrAcc();
-        String role = account.getRole();
-        model.addAttribute("role",role);
         return "user/cliam";
     }
 
@@ -161,8 +155,6 @@ public class UserController {
     @GetMapping("/state")
     public String state(Model model){
         Account account = shiroUtil.getCurrAcc();
-        String role = account.getRole();
-        model.addAttribute("role",role);
         //根据当前登录账户的电话获取申请记录对象
         List<Cliam> cliamList = accountService.findCliamBymobile(account.getMobile());
         model.addAttribute("cliamList",cliamList);

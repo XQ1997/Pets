@@ -42,6 +42,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">用户信息</h3>
                     <div class="box-tools pull-right">
+                        <a href="/user/regist" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新增用户</a>
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                                 title="Collapse">
                             <i class="fa fa-minus"></i></button>
@@ -61,6 +62,7 @@
                                  <th class="text-center">工作</th>
                                  <th class="text-center">身份证号</th>
                                  <th class="text-center">联系电话</th>
+                                 <th class="text-center">用户编号</th>
                                  <th class="text-center">#</th>
                              </tr>
                          </thead>
@@ -75,6 +77,7 @@
                                     <td class="text-center"><strong>${account.job}</strong></td>
                                     <td class="text-center"><strong>${account.cardnum}</strong></td>
                                     <td class="text-center"><strong>${account.mobile}</strong></td>
+                                    <td class="text-center"><strong>${account.number}</strong></td>
                                     <td class="text-center">
                                         <a href="/user/${account.id}/edit"><i class="fa fa-edit"></i></a>
                                         <a href="javascript:;" rel="${account.id}" class="del"><i class="fa fa-trash"></i></a>
