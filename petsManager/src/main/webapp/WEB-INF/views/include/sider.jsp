@@ -18,7 +18,8 @@
 	        <li class="${param.menu == 'user' ? 'active' : ''}"><a href="/user"><i class="fa fa-calendar-plus-o"></i> <span>用户管理</span></a></li>
 	        <li class="${param.menu == 'cliam' ? 'active' : ''}"><a href="/cliam"><i class="fa fa-circle-o"></i> <span>认领申请管理</span></a></li>
 	        <li class="${param.menu == 'auditing' ? 'active' : ''}"><a href="/auditing"><i class="fa fa-circle-o"></i> <span>宠物认领审核</span></a></li>
-          <li class="${param.menu == 'words' ? 'active' : ''}"><a href="/words"><i class="fa fa-circle-o"></i> <span>留言板</span></a></li>
+            <li class="${param.menu == 'fodder' ? 'active' : ''}"><a href="/fodder"><i class="fa fa-circle-o"></i> <span>宠物饲料管理</span></a></li>
+            <li class="${param.menu == 'words' ? 'active' : ''}"><a href="/words"><i class="fa fa-circle-o"></i> <span>留言板</span></a></li>
         </ul>
     </section>
   </aside>

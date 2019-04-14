@@ -2,10 +2,7 @@ package com.fdy.service;
 
 import com.fdy.entity.*;
 import com.fdy.exception.ServiceException;
-import com.fdy.mapper.AccountMapper;
-import com.fdy.mapper.CliamMapper;
-import com.fdy.mapper.NoticeMapper;
-import com.fdy.mapper.PetsMapper;
+import com.fdy.mapper.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +31,8 @@ public class PetsService {
     private NoticeMapper noticeMapper;
     @Autowired
     private AccountMapper accountMapper;
+    @Autowired
+    private FodderMapper fodderMapper;
 
     /**根据页码和搜索条件查询符合条件的流浪宠物
      * @param pageNo
@@ -178,6 +179,73 @@ public class PetsService {
             notice.setTitle("领养成功");
             notice.setContent(acc.getUsername() + "成功领养" + pets.getPetname());
             noticeMapper.insertSelective(notice);
+        }
+    }
+
+    /**查找所有的饲料使用情况
+     * @return
+     */
+    public List<Fodder> findAllFooder() {
+        return fodderMapper.selectByExample(new FodderExample());
+    }
+
+    /**对类型和所对应所花费总价进行一对一对应并进行封装
+     * @return
+     */
+    public List<Map<String, Object>> couunt() {
+        return fodderMapper.countByType();
+    }
+
+    /**保存新增的饲料使用情况
+     * @param fodder
+     */
+    public void saveFodder(Fodder fodder) {
+
+        Integer number = Integer.valueOf(fodder.getNumber());
+        Double price = fodder.getPrice();
+        Double totalnum = number * price;
+
+        fodder.setNumber(number);
+        fodder.setPrice(price);
+        fodder.setTotalnum(totalnum);
+        fodderMapper.insertSelective(fodder);
+        logger.info("新增饲料使用情况成功{}",fodder);
+    }
+
+    /**
+     * 饲料使用数量增加1，
+     * @param id
+     * @param val
+     */
+    public void addFodder(Integer id, String val) {
+        Fodder fodder = fodderMapper.selectByPrimaryKey(id);
+        if(fodder != null){
+            Integer num = Integer.valueOf(val);
+            Integer number = fodder.getNumber() + num;
+            Double totalnum = number * fodder.getPrice();
+            fodder.setNumber(number);
+            fodder.setTotalnum(totalnum);
+            fodderMapper.updateByPrimaryKeySelective(fodder);
+        }
+    }
+
+    /**
+     * 饲料使用数量减少1
+     * @param id
+     * @param val
+     */
+    public void reduceFodder(Integer id, String val) throws ServiceException{
+        Fodder fodder = fodderMapper.selectByPrimaryKey(id);
+        if(fodder != null){
+            Integer num = Integer.valueOf(val);
+            Integer number = fodder.getNumber() - Integer.valueOf(val);
+            Double totalnum = number * fodder.getPrice();
+            if(number < 0){
+                throw new ServiceException("减少数量大于库存数量，操作失败！");
+            }
+            fodder.setNumber(number);
+            fodder.setTotalnum(totalnum);
+            fodderMapper.updateByPrimaryKeySelective(fodder);
         }
     }
 }

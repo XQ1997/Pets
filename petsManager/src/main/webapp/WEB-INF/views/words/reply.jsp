@@ -44,13 +44,13 @@
             <div class="form-group">
               <label class="col-md-4 control-label">回复人:</label>
               <div class="col-md-8">
-                <input type="text" name="replyname" size=30 value="<shiro:principal property="username"/>"/>
+                <input type="text" name="replyname" size=80 value="<shiro:principal property="username"/>"/>
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-4 control-label">回复内容:</label>
               <div class="col-md-8">
-                <textarea name="content" rows=7 cols=30 autofocus></textarea>
+                <textarea name="content" rows=7 cols=80 autofocus></textarea>
               </div>
             </div>
           </form>

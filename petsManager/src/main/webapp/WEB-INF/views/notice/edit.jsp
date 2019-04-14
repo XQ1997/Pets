@@ -43,13 +43,13 @@
             <div class="form-group">
               <label class="col-md-4 control-label">公告主题:</label>
               <div class="col-md-8">
-                <input type="text" name="title" size=30 value="${notice.title}" autofocus/>
+                <input type="text" name="title" size=80 value="${notice.title}" autofocus/>
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-4 control-label">公告内容:</label>
               <div class="col-md-8">
-                <textarea name="content" rows=7 cols=30>${notice.content}</textarea>
+                <textarea name="content" rows=7 cols=80>${notice.content}</textarea>
               </div>
             </div>
           </form>

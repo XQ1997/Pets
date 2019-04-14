@@ -84,7 +84,7 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">宠物描述:</label>
                                     <div class="col-md-8">
-                                        <textarea name="content" rows=7 cols=30>${pets.content}</textarea>
+                                        <textarea name="content" rows=7 cols=75>${pets.content}</textarea>
                                     </div>
                                 </div>
                             </div>
