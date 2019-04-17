@@ -182,4 +182,16 @@ public class AccountService {
         account.setUpdateTime(new Date());
         accountMapper.updateByPrimaryKeySelective(account);
     }
+
+    public void saveWords(Words words, Account account) {
+        words.setUsername(account.getUsername());
+        wordsMapper.insertSelective(words);
+        logger.info("{}留言{}成功",account,words);
+        //保存公告
+        Notice notice = new Notice();
+        notice.setTitle(words.getTitle() + "留言");
+        notice.setContent(words.getContent());
+        noticeMapper.insertSelective(notice);
+        logger.info("{}公告新增成功");
+    }
 }
