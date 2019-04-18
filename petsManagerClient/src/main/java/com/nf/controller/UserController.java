@@ -72,9 +72,7 @@ public class UserController {
     @PostMapping("/cliam")
     public String saveCliam(Cliam cliam, RedirectAttributes redirectAttributes){
         try{
-            Account account = shiroUtil.getCurrAcc();
-            accountService.saveCliam(account,cliam);
-
+            accountService.saveCliam(cliam);
             redirectAttributes.addFlashAttribute("message", "提交成功");
         }catch (ServiceException e){
             redirectAttributes.addFlashAttribute("message",e.getMessage());
@@ -92,7 +90,7 @@ public class UserController {
         //根据当前登录账户的电话获取申请记录对象
         List<Cliam> cliamList = accountService.findCliamBymobile(account.getMobile());
         model.addAttribute("cliamList",cliamList);
-        return "cliamstate";
+        return "manager/cliamstate";
     }
 
     /**查看用户信息
@@ -127,6 +125,7 @@ public class UserController {
     public String savewords(Words words,RedirectAttributes redirectAttributes){
         accountService.saveWords(words,shiroUtil.getCurrAcc());
         redirectAttributes.addFlashAttribute("words",words);
+        redirectAttributes.addFlashAttribute("message","留言成功");
         return "redirect:/words";
     }
 }

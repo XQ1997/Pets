@@ -13,7 +13,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div id="home" class="header">
-    <%@ include file="../include/header.jsp"%>
+    <jsp:include page="../include/header.jsp">
+        <jsp:param name="menu" value="cliam"/>
+    </jsp:include>
     <div class="banner two">
         <div class="container">
             <div class="pag-nav">
@@ -64,6 +66,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <%@ include file="../include/js.jsp"%>
-<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

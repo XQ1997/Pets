@@ -48,7 +48,7 @@ public class ShiroRealm extends AuthorizingRealm {
                    //返回一个简单的认证消息 第一个参数为使用getPrincipal()方法时返回的值，第二个参数为凭证，第三个参数为realm类的名(实现Realm接口中getName()方法中声明)
                    return new SimpleAuthenticationInfo(account,account.getPassword(),getName());
                }else{
-                   throw new LockedAccountException("账户锁定或者禁用" + account.getRole());
+                   throw new LockedAccountException("账户异常" + account.getRole());
                }
             }
         }

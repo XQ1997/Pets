@@ -84,11 +84,10 @@ public class AccountService {
     }
 
     /**保存新的宠物认领申请记录
-     * @param account
      * @param cliam　宠物认领申请记录对象
      * @throws ServiceException　错误原因通过异常抛出
      */
-    public void saveCliam(Account account, Cliam cliam) throws ServiceException {
+    public void saveCliam(Cliam cliam) throws ServiceException {
         Account oldAcc = findByMobile(cliam.getMobile());
         if(oldAcc == null){
             throw new ServiceException("该用户未注册，请注册后再申请宠物认领");
@@ -100,7 +99,7 @@ public class AccountService {
         if(cliamList != null && !cliamList.isEmpty()){
             throw new ServiceException("该宠物已经被认领，请重新选择宠物！");
         }
-        cliam.setUsername(account.getUsername());
+        cliam.setUsername(oldAcc.getUsername());
         cliam.setState(Cliam.STATE_IN);
         cliamMapper.insertSelective(cliam);
         logger.info("{}申请提交成功",cliam);
@@ -183,15 +182,25 @@ public class AccountService {
         accountMapper.updateByPrimaryKeySelective(account);
     }
 
-    public void saveWords(Words words, Account account) {
-        words.setUsername(account.getUsername());
+    public void saveWords(Words words, Account currAcc) {
+        words.setUsername(currAcc.getUsername());
         wordsMapper.insertSelective(words);
-        logger.info("{}留言{}成功",account,words);
+        logger.info("留言{}成功",words);
         //保存公告
         Notice notice = new Notice();
         notice.setTitle(words.getTitle() + "留言");
         notice.setContent(words.getContent());
         noticeMapper.insertSelective(notice);
         logger.info("{}公告新增成功");
+    }
+
+    /**根据页码显示相应的公告
+     * @param pageNo
+     * @return
+     */
+    public PageInfo<Notice> findAllNoticeByPageNo(Integer pageNo) {
+        PageHelper.startPage(pageNo,5);
+        List<Notice> noticeList = noticeMapper.selectByExample(new NoticeExample());
+        return new PageInfo<>(noticeList);
     }
 }

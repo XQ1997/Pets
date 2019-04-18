@@ -13,7 +13,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <div id="home" class="header">
-    <%@ include file="../include/header.jsp"%>
+    <jsp:include page="../include/header.jsp">
+        <jsp:param name="menu" value="about"/>
+    </jsp:include>
     <div class="banner two">
         <div class="container">
             <div class="pag-nav">
@@ -30,7 +32,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="port-head">
             <h3>关于我们</h3>
-            <a href="/cliam/state" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>查看申请状态</a>
         </div>
         <div class="portfolio-bottom">
             <div class="col-md-4 contact-top-left">
@@ -56,6 +57,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <%@ include file="../include/js.jsp"%>
-<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

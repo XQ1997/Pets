@@ -34,6 +34,12 @@
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/</url-pattern>
+        <url-pattern>/user</url-pattern>
+        <url-pattern>/cliam/*</url-pattern>
+        <url-pattern>/pet/*</url-pattern>
+        <url-pattern>/words</url-pattern>
+        <url-pattern>/home</url-pattern>
+        <url-pattern>/about</url-pattern>
     </filter-mapping>
 
     <!--配置中央控制器-->

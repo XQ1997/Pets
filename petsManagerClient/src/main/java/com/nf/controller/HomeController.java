@@ -102,7 +102,10 @@ public class HomeController {
      * @return
      */
     @GetMapping("/home")
-    public String home( ){
+    public String home(@RequestParam(name = "pageNo",required = false,defaultValue = "1") Integer pageNo,
+                      Model model){
+        PageInfo<Notice> pageInfo = accountService.findAllNoticeByPageNo(pageNo);
+        model.addAttribute("pageInfo",pageInfo);
         return "index";
     }
 
