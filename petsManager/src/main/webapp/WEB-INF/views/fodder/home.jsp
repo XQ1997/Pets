@@ -26,7 +26,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">宠物饲料信息</h3>
                     <div class="box-tools pull-right">
-                        <a href="/fodder/new" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新建饲料使用</a>
+                        <a href="/fodder/new" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新建饲料库存数量</a>
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                                 title="Collapse">
                             <i class="fa fa-minus"></i></button>
@@ -40,8 +40,8 @@
                              <tr>
                                  <th class="text-center">宠物类别</th>
                                  <th class="text-center">使用数量</th>
-                                <%-- <th class="text-center">支出/花费</th>
-                                 <th class="text-center">单袋饲料单价</th>--%>
+                                 <th class="text-center">支出/花费</th>
+                                 <th class="text-center">单袋饲料单价</th>
                                  <th class="text-center">#</th>
                              </tr>
                          </thead>

@@ -20,7 +20,7 @@
         <section class="content">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">饲料使用情况</h3>
+                    <h3 class="box-title">饲料库存数量</h3>
                     <div class="box-tools pull-right">
                         <a href="/fodder" class="btn btn-success btn-sm pull-right"><i class="fa fa-backward"></i>返回</a>
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -55,16 +55,16 @@
                                 <input type="text" name="number" class="form-control"/>
                             </div>
                         </div>
-                        <%--<div class="form-group">
+                        <div class="form-group">
                             <label class="col-md-3 control-label">饲料单价:</label>
                             <div class="col-md-8">
                                 <input type="text" name="price" class="form-control"/>
                             </div>
-                        </div>--%>
+                        </div>
                     </form>
                 </div>
                 <div class="box-footer">
-                    <button class="btn btn-primary pull-right" id="saveBtn">保存</button>
+                    <button class="btn btn-primary pull-right" id="saveBtn">创建</button>
                 </div>
             </div>
         </section>
