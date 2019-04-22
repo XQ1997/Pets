@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Account implements Serializable {
     public static final String TYPE_ADMIN = "管理员";
-    public static final String TYPE_USER = "领养人";
+    public static final String TYPE_USER = "会员";
 
     private Integer id;
 

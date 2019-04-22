@@ -86,6 +86,10 @@ public class HomeController {
             //登录成功之后跳转的目标页面的判断
             SavedRequest savedRequest = WebUtils.getSavedRequest(request);
             String url = "/home";
+            Account account = shiroUtil.getCurrAcc();
+            if(Account.TYPE_USER.equals(account.getRole())){
+                url = "/index";
+            }
             if(savedRequest != null){
                 url = savedRequest.getRequestUrl();
             }
@@ -214,5 +218,78 @@ public class HomeController {
         accountService.saveNotice(notice);
         redirectAttributes.addFlashAttribute("message", "新增公告成功");
         return "redirect:/home";
+    }
+
+    /**跳转到首页
+     * @return
+     */
+    @GetMapping("/index")
+    public String home(@RequestParam(name = "pageNo",required = false,defaultValue = "1") Integer pageNo,
+                       Model model){
+        PageInfo<Notice> pageInfo = accountService.findAllNoticeByPageNo(pageNo);
+        model.addAttribute("pageInfo",pageInfo);
+        return "index";
+    }
+
+
+    /**保存注册用户
+     * @param account
+     * @param redirectAttributes
+     * @return
+     */
+    @PostMapping("/regist")
+    public String saveUser(Account account, RedirectAttributes redirectAttributes){
+        try {
+            accountService.saveAcc(account);
+            redirectAttributes.addFlashAttribute("message", "用户注册成功");
+        }catch (ServiceException e){
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
+        }
+        return "redirect:/";
+    }
+
+    /**跳转到忘记密码验证问题页面
+     * @return
+     */
+    @GetMapping("/losepass")
+    public String losepass(){
+        return "validate";
+    }
+
+    /**获取回答的问题答案，回答正确之后进行设置新密码，问题有错误进行刷新
+     * @param account
+     * @param redirectAttributes
+     * @return
+     */
+    @PostMapping("/losepass")
+    public String lose(Account account, RedirectAttributes redirectAttributes){
+        try {
+            accountService.validate(account);
+            redirectAttributes.addFlashAttribute("message", "验证通过，请设置新密码");
+            redirectAttributes.addFlashAttribute("mobile", account.getMobile());
+            return "redirect:/pass";
+        }catch (ServiceException e){
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
+        }
+        return "redirect:/losepass";
+    }
+
+    /**忘记密码之后直接设置新密码
+     * @return
+     */
+    @GetMapping("/pass")
+    public String newpass(){
+        return "pass";
+    }
+
+    /**保存新设置的密码，
+     * @param password
+     * @return
+     */
+    @PostMapping("/pass")
+    public String savenew(String password,String mobile){
+
+        accountService.makepass(password,mobile);
+        return "redirect:/";
     }
 }

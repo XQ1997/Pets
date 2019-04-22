@@ -50,8 +50,8 @@
                                 <tr>
                                     <td class="text-center"><strong>${fodder.type}</strong></td>
                                     <td class="text-center"><strong>${fodder.number}</strong></td>
-                                   <%-- <td class="text-center"><strong>${fodder.totalnum}</strong></td>
-                                    <td class="text-center"><strong>${fodder.price}</strong></td>--%>
+                                    <td class="text-center"><strong>${fodder.totalnum}</strong></td>
+                                    <td class="text-center"><strong>${fodder.price}</strong></td>
                                     <td class="text-center">
                                         <a href="javascript:;" rel="${fodder.id}" class="add"><i class="glyphicon glyphicon-plus"></i></a>
                                         <a href="javascript:;" rel="${fodder.id}" class="reduce"><i class="glyphicon glyphicon-minus"></i></a>

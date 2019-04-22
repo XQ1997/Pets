@@ -418,4 +418,53 @@ public class AccountService {
         List<Reply> replyList = replyMapper.selectByExample(replyExample);
         return replyList;
     }
+
+    /**仅根据页码进行显示list
+     * @param pageNo
+     * @return
+     */
+    public PageInfo<Notice> findAllNoticeByPageNo(Integer pageNo) {
+        //因为是单表查询，所以使用Example类中的方法也可以实现过滤查询
+        PageHelper.startPage(pageNo,5);
+        NoticeExample noticeExample = new NoticeExample();
+        //设置降序
+        noticeExample.setOrderByClause("id desc");
+
+        List<Notice> noticeList = noticeMapper.selectByExample(noticeExample);
+        return new PageInfo<>(noticeList);
+    }
+
+    /**对忘记密码进行问题验证
+     * @param account
+     */
+    public void validate(Account account) {
+        AccountExample accountExample = new AccountExample();
+        accountExample.createCriteria().andMobileEqualTo(account.getMobile());
+        List<Account> accountList = accountMapper.selectByExample(accountExample);
+        if(accountList != null && !accountList.isEmpty()){
+            Account dacc = accountList.get(0);
+            if(account.getJob() == null && account.getJob() != dacc.getJob()){
+                throw new ServiceException("信息填写错误，验证失败！");
+            }
+            if(account.getAddress() == null && account.getAddress() != dacc.getAddress()){
+                throw new ServiceException("信息填写错误，验证失败！");
+            }
+            if(account.getCardnum() == null && account.getCardnum() != dacc.getCardnum()){
+                throw new ServiceException("信息填写错误，验证失败！");
+            }
+        }else{
+            throw new ServiceException("该用户尚未注册，验证失败！");
+        }
+    }
+
+    /**直接根据电话号码进行设置新密码
+     * @param password
+     * @param mobile
+     */
+    public void makepass(String password, String mobile) {
+        Account account = findByMobile(mobile);
+        account.setPassword(DigestUtils.md5Hex(password));
+        account.setUpdateTime(new Date());
+        accountMapper.updateByPrimaryKeySelective(account);
+    }
 }

@@ -248,4 +248,11 @@ public class PetsService {
             fodderMapper.updateByPrimaryKeySelective(fodder);
         }
     }
+
+    /**查找所有的宠物
+     * @return
+     */
+    public List<Pets> findAllPets() {
+        return petsMapper.selectByExample(new PetsExample());
+    }
 }

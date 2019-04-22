@@ -42,14 +42,10 @@ public class ShiroRealm extends AuthorizingRealm {
             if(account == null){
                 throw new ServiceException("找不到账户" + mobile);
             }else{
-               if(Account.TYPE_ADMIN.equals(account.getRole())){
-                   //usernamePasswordToken.getHost()获得认证对象传过来的ip地址
-                   logger.info("{},登录了系统{}",account,usernamePasswordToken.getHost());
-                   //返回一个简单的认证消息 第一个参数为使用getPrincipal()方法时返回的值，第二个参数为凭证，第三个参数为realm类的名(实现Realm接口中getName()方法中声明)
-                   return new SimpleAuthenticationInfo(account,account.getPassword(),getName());
-               }else{
-                   throw new LockedAccountException("账户锁定或者禁用" + account.getRole());
-               }
+               //usernamePasswordToken.getHost()获得认证对象传过来的ip地址
+               logger.info("{},登录了系统{}",account,usernamePasswordToken.getHost());
+               //返回一个简单的认证消息 第一个参数为使用getPrincipal()方法时返回的值，第二个参数为凭证，第三个参数为realm类的名(实现Realm接口中getName()方法中声明)
+               return new SimpleAuthenticationInfo(account,account.getPassword(),getName());
             }
         }
         return null;
