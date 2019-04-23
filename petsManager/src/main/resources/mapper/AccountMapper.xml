@@ -16,8 +16,8 @@
     <result column="card_out_photo" jdbcType="VARCHAR" property="cardOutPhoto" />
     <result column="number" jdbcType="VARCHAR" property="number" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -122,8 +122,8 @@
       #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{cardnum,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{userPhoto,jdbcType=VARCHAR}, #{cardInPhoto,jdbcType=VARCHAR}, #{cardOutPhoto,jdbcType=VARCHAR}, 
-      #{number,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{number,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{updateTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.fdy.entity.Account">
     insert into t_account
@@ -221,10 +221,10 @@
         #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=DATE},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -280,10 +280,10 @@
         mobile = #{record.mobile,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=DATE},
       </if>
       <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=DATE},
       </if>
     </set>
     <if test="_parameter != null">
@@ -306,8 +306,8 @@
       card_out_photo = #{record.cardOutPhoto,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      create_time = #{record.createTime,jdbcType=DATE},
+      update_time = #{record.updateTime,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -355,10 +355,10 @@
         mobile = #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=DATE},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -378,8 +378,8 @@
       card_out_photo = #{cardOutPhoto,jdbcType=VARCHAR},
       number = #{number,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

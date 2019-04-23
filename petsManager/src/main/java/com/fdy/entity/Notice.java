@@ -3,7 +3,7 @@ package com.fdy.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/**公告实体类
+/**
  * @author 
  */
 public class Notice implements Serializable {

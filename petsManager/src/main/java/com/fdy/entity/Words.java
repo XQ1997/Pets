@@ -3,7 +3,7 @@ package com.fdy.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/**留言信息实体类
+/**
  * @author 
  */
 public class Words implements Serializable {

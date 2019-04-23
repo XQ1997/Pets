@@ -79,24 +79,16 @@ public class PetsService {
             throw new ServiceException("该流浪宠物名已存在，请重新命名！");
         }
 
-        int num;
         //根据种类查询已存在的数目
         PetsExample example = new PetsExample();
         example.createCriteria().andTypeEqualTo(pets.getType());
         List<Pets> petsnum = petsMapper.selectByExample(example);
-        if(petsnum == null){
-            num = 1;
-        }
-         num = petsnum.size();
-        pets.setNum(pets.getType() + num + "号");
+
+        pets.setNum(pets.getType() + (petsnum.size() + 1) + "号");
         pets.setState(Pets.STATE_NO);
+        pets.setCreateTime(new Date());
         petsMapper.insertSelective(pets);
         logger.info("{}流浪宠物登记成功",pets);
-
-        Notice notice = new Notice();
-        notice.setTitle("新增流浪宠物" + pets.getPetname());
-        notice.setContent(pets.getContent());
-        noticeMapper.insertSelective(notice);
     }
 
     /**根据id查询该流浪宠物
@@ -129,6 +121,15 @@ public class PetsService {
         Pets pets = findById(id);
         if(pets == null){
             throw new ServiceException("该流浪宠物不存在，请检查！");
+        }
+        //根据种类查询已存在的数目
+        PetsExample example = new PetsExample();
+        example.createCriteria().andTypeEqualTo(pets.getType());
+        List<Pets> petsnum = petsMapper.selectByExample(example);
+
+        for(int i = 1; i<petsnum.size(); i++) {
+            petsnum.get(i).setNum(petsnum.get(i).getType() + i + "号");
+            petsMapper.updateByPrimaryKeySelective(petsnum.get(i));
         }
         petsMapper.deleteByPrimaryKey(id);
         logger.info("{}宠物删除成功",pets);
@@ -178,6 +179,7 @@ public class PetsService {
             Notice notice = new Notice();
             notice.setTitle("领养成功");
             notice.setContent(acc.getUsername() + "成功领养" + pets.getPetname());
+            notice.setCreateTime(new Date());
             noticeMapper.insertSelective(notice);
         }
     }
@@ -213,7 +215,7 @@ public class PetsService {
     }
 
     /**
-     * 饲料使用数量增加1，
+     * 饲料使用数量增加响应数量，
      * @param id
      * @param val
      */
@@ -225,12 +227,13 @@ public class PetsService {
             Double totalnum = number * fodder.getPrice();
             fodder.setNumber(number);
             fodder.setTotalnum(totalnum);
+            fodder.setUpdateTime(new Date());
             fodderMapper.updateByPrimaryKeySelective(fodder);
         }
     }
 
     /**
-     * 饲料使用数量减少1
+     * 饲料使用数量减少相应数量
      * @param id
      * @param val
      */
@@ -245,6 +248,7 @@ public class PetsService {
             }
             fodder.setNumber(number);
             fodder.setTotalnum(totalnum);
+            fodder.setUpdateTime(new Date());
             fodderMapper.updateByPrimaryKeySelective(fodder);
         }
     }

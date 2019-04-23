@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author
+ * @author 
  */
 public class Pets implements Serializable {
-
-    public static final String STATE_CLIAM = "已认领";
+    
+	public static final String STATE_CLIAM = "已认领";
     public static final String STATE_NO = "未认领";
-    private Integer id;
+	
+	private Integer id;
 
     /**
      * 流浪宠物名字

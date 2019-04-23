@@ -73,17 +73,15 @@ public class AccountService {
         if(oldAcc != null){
             throw new ServiceException("该电话号码已注册过，请检查！");
         }
-        int num ;
         //根据注册角色查询已注册该角色的用户数量
         AccountExample accountExample = new AccountExample();
         accountExample.createCriteria().andRoleEqualTo(account.getRole());
         List<Account> accountList = accountMapper.selectByExample(accountExample);
 
-        if(accountList == null){
-            num = 1;
-        }
-        num = accountList.size();
-        account.setNumber(account.getRole() + num + "号");
+
+        account.setNumber(account.getRole() +(accountList.size() + 1) + "号");
+        account.setPassword(DigestUtils.md5Hex(account.getPassword()));
+        account.setCreateTime(new Date());
         accountMapper.insertSelective(account);
         logger.info("{}注册成功",account);
     }
@@ -107,6 +105,7 @@ public class AccountService {
         }
         cliam.setUsername(account.getUsername());
         cliam.setState(Cliam.STATE_IN);
+        cliam.setCreateTime(new Date());
         cliamMapper.insertSelective(cliam);
         logger.info("{}申请提交成功",cliam);
     }
@@ -141,12 +140,28 @@ public class AccountService {
 
     /**删除用户根据id
      * @param id
+     * @param account 当前登录用户
      */
-    public void del(Integer id)throws ServiceException {
+    public void del(Integer id, Account account)throws ServiceException {
         Account oldAcc = findById(id);
         if(oldAcc == null){
             throw new ServiceException("该用户不存在，请检查！");
         }
+
+        if(account.getMobile().equals(oldAcc.getMobile())) {
+            throw new ServiceException("该账户正在使用，使用失败");
+        }
+
+        //根据注册角色查询已注册该角色的用户数量
+        AccountExample accountExample = new AccountExample();
+        accountExample.createCriteria().andRoleEqualTo(oldAcc.getRole());
+        List<Account> accountList = accountMapper.selectByExample(accountExample);
+
+        for(int i = 1; i <= accountList.size(); i++) {
+            accountList.get(i).setNumber( accountList.get(i).getRole() + i + "号");
+            accountMapper.updateByPrimaryKeySelective(accountList.get(i));
+        }
+
         accountMapper.deleteByPrimaryKey(id);
         logger.info("{}用户删除成功",oldAcc);
     }
@@ -225,20 +240,6 @@ public class AccountService {
         return cliamMapper.selectByPrimaryKey(id);
     }
 
-    /**根据电话查询对应的用户
-     * @param mobile 电话
-     * @return
-     */
-    public Account findAccByMobile(String mobile) {
-        AccountExample accountExample = new AccountExample();
-        accountExample.createCriteria().andMobileEqualTo(mobile);
-        List<Account> accountList = accountMapper.selectByExample(accountExample);
-        if(accountList != null && !accountList.isEmpty()){
-            return accountList.get(0);
-        }
-        return null;
-    }
-
     /**根据宠物名获取对应的申请记录
      * @param petname
      * @return
@@ -267,7 +268,9 @@ public class AccountService {
         //保存公告
          Notice notice = new Notice();
          notice.setTitle(words.getTitle() + "留言");
+
          notice.setContent(words.getContent());
+         notice.setCreateTime(new Date());
          noticeMapper.insertSelective(notice);
          logger.info("{}公告新增成功");
     }
@@ -310,6 +313,7 @@ public class AccountService {
      * @param notice
      */
     public void saveNotice(Notice notice) {
+        notice.setCreateTime(new Date());
         noticeMapper.insertSelective(notice);
         logger.info("新增公告{}",notice);
     }
@@ -383,6 +387,7 @@ public class AccountService {
         Words words = wordsMapper.selectByPrimaryKey(id);
         if(words != null){
             reply.setWordname(words.getUsername());
+            reply.setCreateTime(new Date());
             replyMapper.insertSelective(reply);
             logger.info("{}回复成功",reply);
         }

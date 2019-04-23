@@ -9,8 +9,8 @@
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="cliam_name" jdbcType="VARCHAR" property="cliamName" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -110,7 +110,7 @@
       )
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{petname,jdbcType=VARCHAR}, 
       #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
-      #{cliamName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      #{cliamName,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.fdy.entity.Cliam">
@@ -167,10 +167,10 @@
         #{cliamName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=DATE},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -205,10 +205,10 @@
         cliam_name = #{record.cliamName,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=DATE},
       </if>
       <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=DATE},
       </if>
     </set>
     <if test="_parameter != null">
@@ -224,8 +224,8 @@
       mobile = #{record.mobile,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=VARCHAR},
       cliam_name = #{record.cliamName,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      create_time = #{record.createTime,jdbcType=DATE},
+      update_time = #{record.updateTime,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -252,10 +252,10 @@
         cliam_name = #{cliamName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=DATE},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -268,8 +268,8 @@
       mobile = #{mobile,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
       cliam_name = #{cliamName,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

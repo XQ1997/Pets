@@ -63,7 +63,7 @@ public class AuditingController {
         }
         try {
             Cliam cliam = accountService.findCliamByPets(pets.getPetname());
-            Account account = accountService.findAccByMobile(cliam.getMobile());
+            Account account = accountService.findByMobile(cliam.getMobile());
             model.addAttribute("account", account);
             model.addAttribute("cliam", cliam);
             model.addAttribute("pets", pets);

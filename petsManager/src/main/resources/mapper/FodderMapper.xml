@@ -5,9 +5,9 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="number" jdbcType="INTEGER" property="number" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="totalnum" jdbcType="DECIMAL" property="totalnum" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="totalnum" jdbcType="DOUBLE" property="totalnum" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -105,7 +105,7 @@
       price, totalnum, update_time
       )
     values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{price,jdbcType=DECIMAL}, #{totalnum,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}
+      #{price,jdbcType=DOUBLE}, #{totalnum,jdbcType=DOUBLE}, #{updateTime,jdbcType=DATE}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.fdy.entity.Fodder">
@@ -141,13 +141,13 @@
         #{number,jdbcType=INTEGER},
       </if>
       <if test="price != null">
-        #{price,jdbcType=DECIMAL},
+        #{price,jdbcType=DOUBLE},
       </if>
       <if test="totalnum != null">
-        #{totalnum,jdbcType=DECIMAL},
+        #{totalnum,jdbcType=DOUBLE},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -157,10 +157,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <select id="countByType" resultType="java.util.Map">
-    select totalnum as count,type from t_fodder GROUP BY type
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="countByType" resultType="java.util.Map">
+      select totalnum,type from t_fodder group by type
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update t_fodder
     <set>
       <if test="record.id != null">
@@ -173,13 +173,13 @@
         number = #{record.number,jdbcType=INTEGER},
       </if>
       <if test="record.price != null">
-        price = #{record.price,jdbcType=DECIMAL},
+        price = #{record.price,jdbcType=DOUBLE},
       </if>
       <if test="record.totalnum != null">
-        totalnum = #{record.totalnum,jdbcType=DECIMAL},
+        totalnum = #{record.totalnum,jdbcType=DOUBLE},
       </if>
       <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=DATE},
       </if>
     </set>
     <if test="_parameter != null">
@@ -191,9 +191,9 @@
     set id = #{record.id,jdbcType=INTEGER},
       type = #{record.type,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=DECIMAL},
-      totalnum = #{record.totalnum,jdbcType=DECIMAL},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      price = #{record.price,jdbcType=DOUBLE},
+      totalnum = #{record.totalnum,jdbcType=DOUBLE},
+      update_time = #{record.updateTime,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -208,13 +208,13 @@
         number = #{number,jdbcType=INTEGER},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=DECIMAL},
+        price = #{price,jdbcType=DOUBLE},
       </if>
       <if test="totalnum != null">
-        totalnum = #{totalnum,jdbcType=DECIMAL},
+        totalnum = #{totalnum,jdbcType=DOUBLE},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -223,9 +223,9 @@
     update t_fodder
     set type = #{type,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},
-      price = #{price,jdbcType=DECIMAL},
-      totalnum = #{totalnum,jdbcType=DECIMAL},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      price = #{price,jdbcType=DOUBLE},
+      totalnum = #{totalnum,jdbcType=DOUBLE},
+      update_time = #{updateTime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

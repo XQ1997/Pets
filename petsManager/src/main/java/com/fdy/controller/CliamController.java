@@ -59,7 +59,7 @@ public class CliamController {
         if(cliam == null){
             throw new NotFoundException();
         }
-        Account account = accountService.findAccByMobile(cliam.getMobile());
+        Account account = accountService.findByMobile(cliam.getMobile());
         model.addAttribute("account",account);
         model.addAttribute("cliam",cliam);
         return "cliam/look";

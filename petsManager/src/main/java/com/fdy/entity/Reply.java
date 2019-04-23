@@ -3,7 +3,7 @@ package com.fdy.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/**回复消息类
+/**
  * @author 
  */
 public class Reply implements Serializable {

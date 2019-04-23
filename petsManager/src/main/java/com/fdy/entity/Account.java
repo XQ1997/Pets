@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author
+ * @author 
  */
 public class Account implements Serializable {
-    public static final String TYPE_ADMIN = "管理员";
+    
+	public static final String TYPE_ADMIN = "管理员";
     public static final String TYPE_USER = "会员";
-
-    private Integer id;
+	
+	private Integer id;
 
     /**
      * 角色，一般有管理员，领养人角色
@@ -191,22 +192,5 @@ public class Account implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Account() {}
-
-    public Account(String role, String username, Integer age, String sex, String address, String cardnum, String job, String password, String userPhoto, String cardInPhoto, String cardOutPhoto, String mobile) {
-        this.role = role;
-        this.username = username;
-        this.age = age;
-        this.sex = sex;
-        this.address = address;
-        this.cardnum = cardnum;
-        this.job = job;
-        this.password = password;
-        this.userPhoto = userPhoto;
-        this.cardInPhoto = cardInPhoto;
-        this.cardOutPhoto = cardOutPhoto;
-        this.mobile = mobile;
     }
 }

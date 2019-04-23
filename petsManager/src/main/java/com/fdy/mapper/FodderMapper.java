@@ -30,5 +30,8 @@ public interface FodderMapper {
 
     int updateByPrimaryKey(Fodder record);
 
+    /**根据宠物类型返回对应的饲料花费情况
+     * @return
+     */
     List<Map<String,Object>> countByType();
 }

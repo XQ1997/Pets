@@ -26,8 +26,8 @@
       <div class="box no-border">
         <div class="box-body">
           <form class="form-inline">
-            <input type="text" name="title" placeholder="公告主题" class="form-control" value="${param.petname}">
-            <input type="text" name="createTime" placeholder="公告发布时间" id="datepicker" class="form-control" value="${param.age}">
+            <input type="text" name="title" placeholder="公告主题" class="form-control" value="${param.title}">
+            <input type="text" name="createTime" placeholder="公告发布时间" id="datepicker" class="form-control" value="${param.createTime}">
             <button class="btn btn-flat"><i class="fa fa-search"></i></button>
           </form>
         </div>
@@ -62,7 +62,7 @@
               <tr>
                 <td class="text-center"><strong>${notice.title}</strong></td>
                 <td class="text-center"><strong>${notice.content}</strong></td>
-                <td class="text-center"><strong><fmt:formatDate value="${notice.createTime}"  pattern='yyyy年MM月dd日'/></strong></td>
+                <td class="text-center"><strong><fmt:formatDate value="${notice.createTime}"  pattern='yyyy-MM-dd'/></strong></td>
                 <td class="text-center">
                   <a href="/notice/${notice.id}/edit"><i class="fa fa-edit"></i></a>
                   <a href="javascript:;" rel="${notice.id}" class="del"><i class="fa fa-trash"></i></a>

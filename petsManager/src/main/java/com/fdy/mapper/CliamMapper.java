@@ -2,9 +2,8 @@ package com.fdy.mapper;
 
 import com.fdy.entity.Cliam;
 import com.fdy.entity.CliamExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface CliamMapper {
     long countByExample(CliamExample example);

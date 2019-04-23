@@ -90,7 +90,7 @@ public class UserController {
     @ResponseBody
     public AjaxResponseData del(@PathVariable Integer id){
         try{
-            accountService.del(id);
+            accountService.del(id,shiroUtil.getCurrAcc());
             return AjaxResponseData.success();
         }catch (ServiceException e){
             return AjaxResponseData.error(e.getMessage());
