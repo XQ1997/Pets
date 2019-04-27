@@ -19,6 +19,8 @@
 	        <li class="${param.menu == 'cliam' ? 'active' : ''}"><a href="/cliam"><i class="fa fa-circle-o"></i> <span>认领申请管理</span></a></li>
 	        <li class="${param.menu == 'auditing' ? 'active' : ''}"><a href="/auditing"><i class="fa fa-circle-o"></i> <span>宠物认领审核</span></a></li>
             <li class="${param.menu == 'fodder' ? 'active' : ''}"><a href="/fodder"><i class="fa fa-circle-o"></i> <span>宠物饲料管理</span></a></li>
+            <li class="${param.menu == 'sick' ? 'active' : ''}"><a href="/sick"><i class="fa fa-circle-o"></i> <span>宠物就医管理</span></a></li>
+            <li class="${param.menu == 'money' ? 'active' : ''}"><a href="/money"><i class="fa fa-circle-o"></i> <span>救助款项</span></a></li>
             <li class="${param.menu == 'words' ? 'active' : ''}"><a href="/words"><i class="fa fa-circle-o"></i> <span>留言板</span></a></li>
         </ul>
     </section>

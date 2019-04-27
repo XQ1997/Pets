@@ -1,11 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>流浪宠物救助系统 | 宠物饲料管理</title>
+    <title>流浪宠物救助系统 | 救助款项管理</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <jsp:include page="../include/css.jsp"/>
@@ -15,7 +16,7 @@
 <div class="wrapper">
     <jsp:include page="../include/header.jsp"/>
     <jsp:include page="../include/sider.jsp">
-        <jsp:param name="menu" value="fodder"/>
+        <jsp:param name="menu" value="money"/>
     </jsp:include>
     <div class="content-wrapper">
         <section class="content">
@@ -24,9 +25,9 @@
             </c:if>
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">宠物饲料信息</h3>
+                    <h3 class="box-title">救助款项    -----剩余金额：${money}</h3>
                     <div class="box-tools pull-right">
-                        <a href="/fodder/new" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新建饲料库存数量</a>
+                        <a href="/money/new" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新建救助款项</a>
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                                 title="Collapse">
                             <i class="fa fa-minus"></i></button>
@@ -38,30 +39,33 @@
                      <table class="table">
                          <thead>
                              <tr>
-                                 <th class="text-center">宠物类别</th>
-                                 <th class="text-center">使用数量</th>
-                                 <th class="text-center">支出/花费</th>
-                                 <th class="text-center">单袋饲料单价</th>
+                                 <th class="text-center">救助来源</th>
+                                 <th class="text-center">救助金额</th>
+                                 <th class="text-center">捐助时间</th>
+                                 <th class="text-center">捐助经办人</th>
+                                 <th class="text-center">联系电话</th>
                                  <th class="text-center">#</th>
                              </tr>
                          </thead>
                          <tbody>
-                            <c:forEach items="${fodderList}" var="fodder">
+                            <c:forEach items="${pageInfo.list}" var="money">
                                 <tr>
-                                    <td class="text-center"><strong>${fodder.type}</strong></td>
-                                    <td class="text-center"><strong>${fodder.number}</strong></td>
-                                    <td class="text-center"><strong>${fodder.totalnum}</strong></td>
-                                    <td class="text-center"><strong>${fodder.price}</strong></td>
+                                    <td class="text-center"><strong>${money.type}</strong></td>
+                                    <td class="text-center"><strong>${money.price}</strong></td>
+                                    <td class="text-center"><strong><fmt:formatDate value="${money.createTime}"  pattern='yyyy年MM月dd日'/></strong></td>
+                                    <td class="text-center"><strong>${money.name}</strong></td>
+                                    <td class="text-center"><strong>${money.mobile}</strong></td>
                                     <td class="text-center">
-                                        <a href="javascript:;" rel="${fodder.id}" class="add"><i class="glyphicon glyphicon-plus"></i></a>
-                                        <a href="javascript:;" rel="${fodder.id}" class="reduce"><i class="glyphicon glyphicon-minus"></i></a>
+                                        <a href="javascript:;" rel="${money.id}" class="del"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
                          </tbody>
+                         <c:if test="${pageInfo.pages > 1}">
+                             <ul id="pagination-demo" class="pagination pull-right"></ul>
+                         </c:if>
                      </table>
                 </div>
-
             </div>
         </section>
     </div>
@@ -70,32 +74,21 @@
 <jsp:include page="../include/js.jsp"/>
 <script>
     $(function(){
-        $(".add").click(function () {
-            var id = $(this).attr("rel");
-            layer.prompt(function (val, index) {
-                layer.close(index);
-                $.ajax({
-                    url: '/fodder/' + id + '/add?val='+ val,
-                    type: 'get',
-                    success: function (result) {
-                        if (result.state == 'success') {
-                            window.history.go(0);
-                        } else {
-                            layer.msg(result.message);
-                        }
-                    },
-                    error: function () {
-                        layer.msg("服务器忙");
-                    }
-                });
-            })
+        $('#pagination-demo').twbsPagination({
+            totalPages: ${pageInfo.pages},
+            visiblePage:5,
+            first:'首页',
+            last:'末页',
+            prev:'上一页',
+            next:'下一页',
+            href:"?pageNo={{number}}"
         });
-        $(".reduce").click(function () {
+        $(".del").click(function () {
             var id = $(this).attr("rel");
-            layer.prompt(function(val, index) {
+            layer.confirm("确定要删除该捐助记录吗？",function (index) {
                 layer.close(index);
                 $.ajax({
-                    url:'/fodder/'+id+'/reduce?val='+val,
+                    url:'/money/'+id+'/del',
                     type:'get',
                     success:function (result) {
                         if(result.state == 'success') {

@@ -33,6 +33,10 @@ public class PetsService {
     private AccountMapper accountMapper;
     @Autowired
     private FodderMapper fodderMapper;
+    @Autowired
+    private SickMapper sickMapper;
+    @Autowired
+    private MoneyMapper moneyMapper;
 
     /**根据页码和搜索条件查询符合条件的流浪宠物
      * @param pageNo
@@ -202,7 +206,6 @@ public class PetsService {
      * @param fodder
      */
     public void saveFodder(Fodder fodder) {
-
         Integer number = Integer.valueOf(fodder.getNumber());
         Double price = fodder.getPrice();
         Double totalnum = number * price;
@@ -258,5 +261,105 @@ public class PetsService {
      */
     public List<Pets> findAllPets() {
         return petsMapper.selectByExample(new PetsExample());
+    }
+
+    /** 保存宠物就医记录
+     * @param sick
+     */
+    public void saveSick(Sick sick) {
+        sick.setCreateTime(new Date());
+        sickMapper.insertSelective(sick);
+        logger.info("{}就医记录新增成功",sick);
+    }
+
+    /**宠物就医记录根据页码
+     * @param pageNo
+     * @return
+     */
+    public PageInfo<Sick> findAllSickByPageNo(Integer pageNo) {
+        PageHelper.startPage(pageNo,5);
+        List<Sick> sickList = sickMapper.selectByExample(new SickExample());
+        return new PageInfo<>(sickList);
+    }
+
+    /**删除宠物就医记录
+     * @param id
+     */
+    public void delSick(Integer id)throws ServiceException {
+        Sick sick = sickMapper.selectByPrimaryKey(id);
+        if(sick != null){
+            sickMapper.deleteByPrimaryKey(id);
+        }else{
+            throw new ServiceException("删除失败，该记录并不存在！");
+        }
+
+    }
+
+    /**根据页码获取对应的捐助记录
+     * @param pageNo
+     * @return
+     */
+    public PageInfo<Money> findAllMoneyByPageNo(Integer pageNo) {
+        PageHelper.startPage(pageNo,5);
+        List<Money> moneyList = moneyMapper.selectByExample(new MoneyExample());
+        return new PageInfo<>(moneyList);
+    }
+
+    /**删除对应的捐助记录
+     * @param id
+     */
+    public void delMoney(Integer id)throws ServiceException {
+        Money money = moneyMapper.selectByPrimaryKey(id);
+        if(money != null){
+            moneyMapper.deleteByPrimaryKey(id);
+        }else{
+            throw new ServiceException("删除失败，该捐助记录不存在！");
+        }
+    }
+
+    /**保存新增的捐助记录
+     * @param money
+     */
+    public void saveMoney(Money money) {
+        money.setCreateTime(new Date());
+        moneyMapper.insertSelective(money);
+    }
+
+    /**计算当前的花费
+     * @return
+     */
+    public Double countmoney() {
+        //查询所有的饲料花费
+        List<Fodder> fodderList = fodderMapper.selectByExample(new FodderExample());
+        Double totolprice = 0D;
+        if(fodderList != null && !fodderList.isEmpty()){
+            for(Fodder fodder : fodderList){
+                Double price = fodder.getTotalnum();
+                totolprice += price;
+            }
+        }
+        //查询所有的宠物就医花费
+        List<Sick> sickList = sickMapper.selectByExample(new SickExample());
+        Double total = 0D;
+        if(sickList != null && !sickList.isEmpty()){
+            for(Sick sick : sickList){
+                Double money = sick.getMoney();
+                total += money;
+            }
+        }
+        //查询所有的捐助款
+        List<Money> moneyList = moneyMapper.selectByExample(new MoneyExample());
+        Double totalmoney = 0D;
+        if(moneyList != null && !moneyList.isEmpty()){
+            for(Money money : moneyList){
+                Double m = money.getPrice();
+                totalmoney += m;
+            }
+        }
+        Double overplus = totalmoney - total - totolprice;
+        if(overplus < 0){
+            overplus = 0D;
+        }
+        return overplus;
     }
 }

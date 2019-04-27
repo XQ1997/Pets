@@ -98,7 +98,6 @@
 <jsp:include page="../include/js.jsp"/>
 <script>
     $(function(){
-        console.log(${pageInfo.pages});
         $('#pagination-demo').twbsPagination({
             totalPages: ${pageInfo.pages},
             visiblePage:5,
@@ -106,10 +105,7 @@
             last:'末页',
             prev:'上一页',
             next:'下一页',
-            href:"?username="+encodeURIComponent('${param.username}')+
-            "&mobile="+encodeURIComponent('${param.mobile}')+
-            "&role="+encodeURIComponent('${param.role}')+
-            "&pageNo={{number}}"
+            href:"?&pageNo={{number}}"
         });
         $(".del").click(function () {
             var id = $(this).attr("rel");

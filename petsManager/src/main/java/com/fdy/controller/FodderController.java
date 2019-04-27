@@ -48,19 +48,6 @@ public class FodderController {
         return "redirect:/fodder";
     }
 
-    /**计算
-     * @return
-     */
-    @GetMapping("/count")
-    @ResponseBody
-    public AjaxResponseData count(){
-        List<Map<String,Object>> mapList =  petsService.couunt();
-        for(Map<String,Object> map : mapList){
-            System.out.println(map);
-        }
-        return AjaxResponseData.success(mapList);
-    }
-
     /**添加
      * @return
      */
