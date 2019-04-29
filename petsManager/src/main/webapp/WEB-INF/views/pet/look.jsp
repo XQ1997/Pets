@@ -79,11 +79,6 @@
                                 <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-preview" alt="">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="photo">
-                                <embed width="320" height="240" src="http://pmupn7ccj.bkt.clouddn.com/${pets.video}" />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

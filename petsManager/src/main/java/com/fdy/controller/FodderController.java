@@ -43,8 +43,12 @@ public class FodderController {
 
     @PostMapping("/new")
     public String saveFodder(Fodder fodder, RedirectAttributes redirectAttributes){
-        petsService.saveFodder(fodder);
-        redirectAttributes.addFlashAttribute("message","新增饲料使用情况成功");
+        try {
+            petsService.saveFodder(fodder);
+            redirectAttributes.addFlashAttribute("message", "新增饲料使用情况成功");
+        }catch (ServiceException e){
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
+        }
         return "redirect:/fodder";
     }
 

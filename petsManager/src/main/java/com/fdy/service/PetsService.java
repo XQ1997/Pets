@@ -70,7 +70,7 @@ public class PetsService {
         List<Pets> petsList = petsMapper.selectByExample(petsExample);
         return new PageInfo<>(petsList);
     }
-
+    int i = 1;
     /**保存新增的流浪宠物
      * @param pets 流浪宠物信息
      * @throws ServiceException 错误原因通过异常进行抛出
@@ -83,16 +83,18 @@ public class PetsService {
             throw new ServiceException("该流浪宠物名已存在，请重新命名！");
         }
 
-        //根据种类查询已存在的数目
-        PetsExample example = new PetsExample();
-        example.createCriteria().andTypeEqualTo(pets.getType());
-        List<Pets> petsnum = petsMapper.selectByExample(example);
-
-        pets.setNum(pets.getType() + (petsnum.size() + 1) + "号");
+        pets.setNum(pets.getType() + i + "号");
+        i++;
         pets.setState(Pets.STATE_NO);
         pets.setCreateTime(new Date());
         petsMapper.insertSelective(pets);
         logger.info("{}流浪宠物登记成功",pets);
+
+        Notice notice = new Notice();
+        notice.setTitle("流浪宠物发布");
+        notice.setContent("新增" + pets.getPetname());
+        notice.setCreateTime(new Date());
+        noticeMapper.insertSelective(notice);
     }
 
     /**根据id查询该流浪宠物
@@ -126,15 +128,7 @@ public class PetsService {
         if(pets == null){
             throw new ServiceException("该流浪宠物不存在，请检查！");
         }
-        //根据种类查询已存在的数目
-        PetsExample example = new PetsExample();
-        example.createCriteria().andTypeEqualTo(pets.getType());
-        List<Pets> petsnum = petsMapper.selectByExample(example);
 
-        for(int i = 1; i<petsnum.size(); i++) {
-            petsnum.get(i).setNum(petsnum.get(i).getType() + i + "号");
-            petsMapper.updateByPrimaryKeySelective(petsnum.get(i));
-        }
         petsMapper.deleteByPrimaryKey(id);
         logger.info("{}宠物删除成功",pets);
     }
@@ -205,7 +199,15 @@ public class PetsService {
     /**保存新增的饲料使用情况
      * @param fodder
      */
-    public void saveFodder(Fodder fodder) {
+    public void saveFodder(Fodder fodder)throws ServiceException {
+        List<Fodder> fodderList = fodderMapper.selectByExample(new FodderExample());
+        if(fodderList!= null && !fodderList.isEmpty()){
+            for(Fodder fodd : fodderList){
+                if(fodder.getType().equals(fodd.getType())){
+                    throw new ServiceException("该宠物类型饲料已创建，请重新选择类型，创建失败！");
+                }
+            }
+        }
         Integer number = Integer.valueOf(fodder.getNumber());
         Double price = fodder.getPrice();
         Double totalnum = number * price;
@@ -296,13 +298,11 @@ public class PetsService {
     }
 
     /**根据页码获取对应的捐助记录
-     * @param pageNo
      * @return
      */
-    public PageInfo<Money> findAllMoneyByPageNo(Integer pageNo) {
-        PageHelper.startPage(pageNo,5);
+    public List<Money> findAllMoney() {
         List<Money> moneyList = moneyMapper.selectByExample(new MoneyExample());
-        return new PageInfo<>(moneyList);
+        return moneyList;
     }
 
     /**删除对应的捐助记录
@@ -334,8 +334,10 @@ public class PetsService {
         Double totolprice = 0D;
         if(fodderList != null && !fodderList.isEmpty()){
             for(Fodder fodder : fodderList){
-                Double price = fodder.getTotalnum();
-                totolprice += price;
+                if(fodder.getTotalnum() != null){
+                    Double price = fodder.getTotalnum();
+                    totolprice += price;
+                }
             }
         }
         //查询所有的宠物就医花费
@@ -343,8 +345,10 @@ public class PetsService {
         Double total = 0D;
         if(sickList != null && !sickList.isEmpty()){
             for(Sick sick : sickList){
-                Double money = sick.getMoney();
-                total += money;
+                if(sick.getMoney() != null){
+                    Double money = sick.getMoney();
+                    total += money;
+                }
             }
         }
         //查询所有的捐助款
@@ -352,8 +356,10 @@ public class PetsService {
         Double totalmoney = 0D;
         if(moneyList != null && !moneyList.isEmpty()){
             for(Money money : moneyList){
-                Double m = money.getPrice();
-                totalmoney += m;
+                if(money.getPrice() != null){
+                    Double m = money.getPrice();
+                    totalmoney += m;
+                }
             }
         }
         Double overplus = totalmoney - total - totolprice;
@@ -361,5 +367,20 @@ public class PetsService {
             overplus = 0D;
         }
         return overplus;
+    }
+
+    /**根据 id查询捐助记录
+     * @param id
+     * @return
+     */
+    public Money findMoneyById(Integer id) {
+        return moneyMapper.selectByPrimaryKey(id);
+    }
+
+    /**保存修改后的捐助记录
+     * @param money
+     */
+    public void updateMoney(Money money) {
+        moneyMapper.updateByPrimaryKeySelective(money);
     }
 }

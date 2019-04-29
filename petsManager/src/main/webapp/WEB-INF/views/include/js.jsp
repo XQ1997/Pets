@@ -15,4 +15,4 @@
 <!-- jQuery validate -->
 <script src="/static/plugins/jquery.validate.min.js"></script>
 <!-- 分页 -->
-<script src="/static/plugins/jquery.twbsPagination.min.js"></script>
+<script src="/static/plugins/jquery.twbsPagination.js"></script>

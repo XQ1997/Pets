@@ -32,6 +32,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="port-head">
             <h3>用户信息查看</h3>
+            <a class="btn btn-success pull-right" href="/user/${account.id}/edit"><i class="fa fa-edit"></i>修改个人信息</a>
+            <a class="btn btn-success pull-right" href="/client/repassword"><i class="fa fa-edit"></i>修改密码</a>
         </div>
         <div class="portfolio-bottom">
             <table class="table">

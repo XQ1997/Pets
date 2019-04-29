@@ -45,7 +45,6 @@
                     </form>
                 </div>
             </div>
-
             <c:if test="${not empty message}">
                 <div class="alert alert-success text-center">${message}</div>
             </c:if>
@@ -137,8 +136,7 @@
                     }
                 });
             })
-        });
-
+        }); 
     })
 </script>
 </body>

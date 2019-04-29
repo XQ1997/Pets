@@ -65,6 +65,7 @@ public class AccountService {
         }
     }
 
+    int i = 1;
     /**保存注册用户
      * @param account 用户信息
      */
@@ -73,13 +74,9 @@ public class AccountService {
         if(oldAcc != null){
             throw new ServiceException("该电话号码已注册过，请检查！");
         }
-        //根据注册角色查询已注册该角色的用户数量
-        AccountExample accountExample = new AccountExample();
-        accountExample.createCriteria().andRoleEqualTo(account.getRole());
-        List<Account> accountList = accountMapper.selectByExample(accountExample);
 
-
-        account.setNumber(account.getRole() +(accountList.size() + 1) + "号");
+        account.setNumber(account.getRole() +i + "号");
+        i++;
         account.setPassword(DigestUtils.md5Hex(account.getPassword()));
         account.setCreateTime(new Date());
         accountMapper.insertSelective(account);
@@ -150,16 +147,6 @@ public class AccountService {
 
         if(account.getMobile().equals(oldAcc.getMobile())) {
             throw new ServiceException("该账户正在使用，使用失败");
-        }
-
-        //根据注册角色查询已注册该角色的用户数量
-        AccountExample accountExample = new AccountExample();
-        accountExample.createCriteria().andRoleEqualTo(oldAcc.getRole());
-        List<Account> accountList = accountMapper.selectByExample(accountExample);
-
-        for(int i = 1; i <= accountList.size(); i++) {
-            accountList.get(i).setNumber( accountList.get(i).getRole() + i + "号");
-            accountMapper.updateByPrimaryKeySelective(accountList.get(i));
         }
 
         accountMapper.deleteByPrimaryKey(id);
@@ -262,6 +249,7 @@ public class AccountService {
      */
     @Transactional(rollbackFor = RuntimeException.class)
     public void savewords(Words words, Account account) {
+        words.setCreateTime(new Date());
         words.setUsername(account.getUsername());
         wordsMapper.insertSelective(words);
         logger.info("{}留言{}成功",account,words);

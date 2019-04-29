@@ -11,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 /** 捐助记录控制器
  * @author fdy
  */
 @Controller
-@RequestMapping("/money")
+@RequestMapping("/mom")
 public class MoneyController {
 
     @Autowired
@@ -25,12 +27,12 @@ public class MoneyController {
      * @return
      */
     @GetMapping
-    public String home(@RequestParam(name = "pageNo",required = false,defaultValue = "1") Integer pageNo,
-                       Model model){
-        PageInfo<Money> pageInfo = petsService.findAllMoneyByPageNo(pageNo);
-        Double money = petsService.countmoney();
-        model.addAttribute("money",money);
-        model.addAttribute("pageInfo",pageInfo);
+    public String home(Model model){
+        List<Money> moneyList = petsService.findAllMoney();
+        Double moneys = petsService.countmoney();
+        System.out.println(moneys);
+        model.addAttribute("moneys",moneys);
+        model.addAttribute("moneyList",moneyList);
         return "money/home";
     }
 
@@ -49,7 +51,7 @@ public class MoneyController {
     public String saveSick(Money money, RedirectAttributes redirectAttributes){
         petsService.saveMoney(money);
         redirectAttributes.addFlashAttribute("message","新增捐助记录成功");
-        return "redirect:/money";
+        return "redirect:/mom";
     }
 
     /**删除捐助记录
@@ -65,5 +67,31 @@ public class MoneyController {
             return AjaxResponseData.error(e.getMessage());
         }
     }
+
+    /**跳转到捐助记录编辑页
+     * @return
+     */
+    @GetMapping("/{id:\\d+}/edit")
+    public String editMoney(@PathVariable Integer id, Model model){
+        Money money = petsService.findMoneyById(id);
+
+        model.addAttribute("money",money);
+        return "money/edit";
+    }
+
+    /** 保存更新后的用户信息
+     * @return
+     */
+    @PostMapping("/{id:\\d+}/edit")
+    public String updateMoney(Money money,RedirectAttributes redirectAttributes){
+        try{
+            petsService.updateMoney(money);
+            redirectAttributes.addFlashAttribute("message","修改成功");
+        }catch (ServiceException e){
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
+        }
+        return "redirect:/mom";
+    }
+
 
 }

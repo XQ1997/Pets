@@ -161,4 +161,31 @@ public class ClientController {
             return "redirect:/client/repassword";
         }
     }
+
+    /** 跳转到个人信息修改页面
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("/{id:\\d+}/edit")
+    public String editUser(@PathVariable Integer id, Model model){
+        Account account = accountService.findById(id);
+
+        model.addAttribute("account",account);
+        return "user/edit";
+    }
+
+    /** 保存更新后的用户信息
+     * @return
+     */
+    @PostMapping("/{id:\\d+}/edit")
+    public String updateUser(Account account,RedirectAttributes redirectAttributes){
+        try{
+            accountService.updateAcc(account);
+            redirectAttributes.addFlashAttribute("message","修改成功");
+        }catch (ServiceException e){
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
+        }
+        return "redirect:/user";
+    }
 }

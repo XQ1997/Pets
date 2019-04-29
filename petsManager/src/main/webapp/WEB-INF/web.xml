@@ -41,7 +41,7 @@
         <url-pattern>/auditing/*</url-pattern>
         <url-pattern>/cliam/*</url-pattern>
         <url-pattern>/fodder/*</url-pattern>
-        <url-pattern>/money/*</url-pattern>
+        <url-pattern>/mom/*</url-pattern>
         <url-pattern>/sick/*</url-pattern>
         <url-pattern>/pet/*</url-pattern>
         <url-pattern>/user/*</url-pattern>

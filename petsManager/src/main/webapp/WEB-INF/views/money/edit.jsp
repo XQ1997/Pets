@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>流浪宠物救助系统 | 救助款项管理 | 新建救助款项</title>
+    <title>流浪宠物救助系统 | 救助款项管理 | 修改救助款项</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <jsp:include page="../include/css.jsp"/>
@@ -22,7 +22,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">救助款项记录</h3>
                     <div class="box-tools pull-right">
-                        <a href="/money" class="btn btn-success btn-sm pull-right"><i class="fa fa-backward"></i>返回</a>
+                        <a href="/mom" class="btn btn-success btn-sm pull-right"><i class="fa fa-backward"></i>返回</a>
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                                 title="Collapse">
                             <i class="fa fa-minus"></i></button>
@@ -44,19 +44,19 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">救助金额:</label>
                             <div class="col-md-8">
-                                <input type="text" name="price" class="form-control"/>
+                                <input type="text" name="price" class="form-control" value="${money.price}"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">捐助经办人:</label>
                             <div class="col-md-8">
-                                <input type="text" name="name" class="form-control"/>
+                                <input type="text" name="name" class="form-control" value="${money.name}"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">联系电话:</label>
                             <div class="col-md-8">
-                                <input type="text" name="mobile" class="form-control"/>
+                                <input type="text" name="mobile" class="form-control" value="${money.mobile}"/>
                             </div>
                         </div>
                     </form>

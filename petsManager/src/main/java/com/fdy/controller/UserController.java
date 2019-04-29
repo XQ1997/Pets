@@ -65,7 +65,6 @@ public class UserController {
 
         model.addAttribute("account",account);
         model.addAttribute("token",qiniustore.getUploadToken());
-        model.addAttribute("role",shiroUtil.getCurrAcc().getRole());
         return "user/edit";
     }
 

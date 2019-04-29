@@ -65,14 +65,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </table>
         </div>
         <div class="port-head">
-            <h3>宠物介绍视频</h3>
+            <h3>宠物领养注意事项</h3>
         </div>
         <div class="portfolio-bottom">
-            <div>
-                <c:if test="${pets.video != null}">
-                    <embed width="320" height="240" src="http://pq422kh3g.bkt.clouddn.com/${pets.video}" />
-                </c:if>
-            </div>
+             <textarea  rows=7 cols=30>${pets.content}</textarea>
         </div>
     </div>
 </div>

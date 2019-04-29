@@ -25,9 +25,9 @@
             </c:if>
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">救助款项    -----剩余金额：${money}</h3>
+                    <h3 class="box-title">救助款项    -----剩余金额：${moneys}</h3>
                     <div class="box-tools pull-right">
-                        <a href="/money/new" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新建救助款项</a>
+                        <a href="/mom/new" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新建救助款项</a>
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                                 title="Collapse">
                             <i class="fa fa-minus"></i></button>
@@ -48,7 +48,7 @@
                              </tr>
                          </thead>
                          <tbody>
-                            <c:forEach items="${pageInfo.list}" var="money">
+                            <c:forEach items="${moneyList}" var="money">
                                 <tr>
                                     <td class="text-center"><strong>${money.type}</strong></td>
                                     <td class="text-center"><strong>${money.price}</strong></td>
@@ -56,14 +56,12 @@
                                     <td class="text-center"><strong>${money.name}</strong></td>
                                     <td class="text-center"><strong>${money.mobile}</strong></td>
                                     <td class="text-center">
+                                        <a href="/mom/${money.id}/edit"><i class="fa fa-edit"></i></a>
                                         <a href="javascript:;" rel="${money.id}" class="del"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
                          </tbody>
-                         <c:if test="${pageInfo.pages > 1}">
-                             <ul id="pagination-demo" class="pagination pull-right"></ul>
-                         </c:if>
                      </table>
                 </div>
             </div>
@@ -74,21 +72,12 @@
 <jsp:include page="../include/js.jsp"/>
 <script>
     $(function(){
-        $('#pagination-demo').twbsPagination({
-            totalPages: ${pageInfo.pages},
-            visiblePage:5,
-            first:'首页',
-            last:'末页',
-            prev:'上一页',
-            next:'下一页',
-            href:"?pageNo={{number}}"
-        });
         $(".del").click(function () {
             var id = $(this).attr("rel");
             layer.confirm("确定要删除该捐助记录吗？",function (index) {
                 layer.close(index);
                 $.ajax({
-                    url:'/money/'+id+'/del',
+                    url:'/mom/'+id+'/del',
                     type:'get',
                     success:function (result) {
                         if(result.state == 'success') {

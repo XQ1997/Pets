@@ -83,8 +83,8 @@
                                     <label class="col-md-3 control-label">角色</label>
                                     <div class="col-md-8">
                                         <select name="role" class="form-control">
-                                            <option value="管理员">管理员</option>
-                                            <option value="领养人">领养人</option>
+                                            <option value="管理员" ${account.role == "管理员" ? 'selected' : ''}>管理员</option>
+                                            <option value="领养人" ${account.role == "领养人" ? 'selected' : ''}>领养人</option>
                                         </select>
                                     </div>
                                 </div>

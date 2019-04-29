@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">宠物就医信息</h3>
                     <div class="box-tools pull-right">
-                        <a href="/sick" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新建饲料库存数量</a>
+                        <a href="/sick/news" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新建流浪宠物就医记录</a>
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                                 title="Collapse">
                             <i class="fa fa-minus"></i></button>

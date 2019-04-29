@@ -37,7 +37,7 @@ public class SickController {
     /** 跳转到新增宠物就医记录
      * @return
      */
-    @GetMapping("/new")
+    @GetMapping("/news")
     public String newSick(){
         return "sick/new";
     }
@@ -45,7 +45,7 @@ public class SickController {
     /** 保存宠物就医记录
      * @return
      */
-    @PostMapping("/new")
+    @PostMapping("/news")
     public String saveSick(Sick sick, RedirectAttributes redirectAttributes){
         petsService.saveSick(sick);
         redirectAttributes.addFlashAttribute("message","新增宠物就医记录成功");

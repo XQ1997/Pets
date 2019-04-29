@@ -39,6 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <a href="/client/pet/${pets.id}">
                             <img src="http://pq422kh3g.bkt.clouddn.com/${pets.image}" alt="" class="img-responsive zoom-img"/>
                         </a>
+                        <a href="/client/cliam" class="btn btn-sm btn-success">领养</a>
                     </c:forEach>
                 </div>
             </div>
