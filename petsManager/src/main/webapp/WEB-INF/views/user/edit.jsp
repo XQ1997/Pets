@@ -111,7 +111,7 @@
                                 <div class="col-md-6">
                                     <div id="picker3">用户一寸照片</div>
                                     <div class="custphoto" id="photo">
-                                        <img src="http://pmupn7ccj.bkt.clouddn.com/${account.userPhoto}-preview" alt="">
+                                        <img src="http://pmupn7ccj.bkt.clouddn.com/${account.userPhoto}-custphoto" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -122,13 +122,13 @@
                             <div class="col-md-6">
                                 <div id="picker">身份证正面照片</div>
                                 <div class="photo" id="userinPhoto">
-                                    <img src="http://pmupn7ccj.bkt.clouddn.com/${account.cardInPhoto}-preview" alt="">
+                                    <img src="http://pmupn7ccj.bkt.clouddn.com/${account.cardInPhoto}-photo" alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div id="picker2">身份证反面照片</div>
                                 <div class="photo" id="userblackPhoto">
-                                    <img src="http://pmupn7ccj.bkt.clouddn.com/${account.cardOutPhoto}-preview" alt="">
+                                    <img src="http://pmupn7ccj.bkt.clouddn.com/${account.cardOutPhoto}-photo" alt="">
                                 </div>
                             </div>
                         </div>
@@ -235,7 +235,7 @@
             //获取七牛上图片名称
             var fileName = response.key;
             //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-preview");
+            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-photo");
             $img.appendTo($("#userinPhoto"));
 
             //将key存放进隐藏域中
@@ -287,7 +287,7 @@
             //获取七牛上图片名称
             var fileName = response.key;
             //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-preview");
+            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-photo");
             $img.appendTo($("#userblackPhoto"));
 
             //将key存放进隐藏域中

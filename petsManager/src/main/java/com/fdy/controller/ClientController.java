@@ -6,6 +6,7 @@ import com.fdy.entity.Pets;
 import com.fdy.entity.Words;
 import com.fdy.exception.NotFoundException;
 import com.fdy.exception.ServiceException;
+import com.fdy.filestore.Qiniustore;
 import com.fdy.service.AccountService;
 import com.fdy.service.PetsService;
 import com.fdy.util.ShiroUtil;
@@ -36,6 +37,8 @@ public class ClientController {
     private PetsService petsService;
     @Autowired
     private ShiroUtil shiroUtil;
+    @Autowired
+    private Qiniustore qiniustore;
 
     /**跳转到宠物
      * @return
@@ -172,7 +175,7 @@ public class ClientController {
         Account account = accountService.findById(id);
 
         model.addAttribute("account",account);
-        return "user/edit";
+        return "clientPage/edit";
     }
 
     /** 保存更新后的用户信息
@@ -187,5 +190,29 @@ public class ClientController {
             redirectAttributes.addFlashAttribute("message",e.getMessage());
         }
         return "redirect:/user";
+    }
+
+    /**跳转到宠物发布页面
+     * @return
+     */
+    @GetMapping("/publish")
+    public String publish(Model model){
+        String token = qiniustore.getUploadToken();
+        model.addAttribute("token",token);
+        return "clientPage/publish";
+    }
+
+    /**保存新增的宠物信息
+     * @return
+     */
+    @PostMapping("/publish")
+    public String savepets(Pets pets,RedirectAttributes redirectAttributes){
+        try {
+            petsService.savepets(pets);
+            redirectAttributes.addFlashAttribute("message", "发布流浪宠物成功");
+        }catch (ServiceException e){
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
+        }
+        return "redirect:/client/publish";
     }
 }

@@ -9,7 +9,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <jsp:include page="../include/css.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/plugins/uploader/webuploader.css">
+    <link rel="stylesheet" href="/static/plugins/uploader/webuploader.css">
     <style>
         .petphoto {
             width: 150px;
@@ -107,7 +107,6 @@
 <jsp:include page="../include/js.jsp"/>
 <script src="/static/plugins/uploader/webuploader.min.js"></script>
 <script src="/static/dist/js/layer/layer.js"></script>
-<script src="/static/plugins/jquery.twbsPagination.js"></script>
 <script>
     $(function(){
         //初始化webuploader组件 上传图片
@@ -147,7 +146,7 @@
             //获取七牛上图片名称
             var fileName = response.key;
             //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pq422kh3g.bkt.clouddn.com/" + fileName);
+            var $img = $("<img>").attr("src","http://pq422kh3g.bkt.clouddn.com/-custphoto" + fileName);
             $img.appendTo($("#photo"));
 
             //将key存放进隐藏域中

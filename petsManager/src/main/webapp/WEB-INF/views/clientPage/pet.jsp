@@ -19,7 +19,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="pag-nav">
                 <ul class="p-list">
-                    <li><a href="/home">首页</a></li> &nbsp;&nbsp;/&nbsp;
+                    <li><a href="/index">首页</a></li> &nbsp;&nbsp;/&nbsp;
                     <li class="act">&nbsp;宠物管理</li>
                 </ul>
             </div>
@@ -37,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="col-md-3 gallery-left two">
                     <c:forEach items="${petsList}" var="pets">
                         <a href="/client/pet/${pets.id}">
-                            <img src="http://pq422kh3g.bkt.clouddn.com/${pets.image}" alt="" class="img-responsive zoom-img"/>
+                            <img src="http://pq422kh3g.bkt.clouddn.com/${pets.image}-custphoto" alt="" class="img-responsive zoom-img"/>
                         </a>
                         <a href="/client/cliam" class="btn btn-sm btn-success">领养</a>
                     </c:forEach>
@@ -46,6 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
+<%@ include file="../client/footer.jsp"%>
 <%@ include file="../client/js.jsp"%>
 </body>
 </html>

@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="photo">
-                                <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-preview" alt="">
+                                <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-photo" alt="">
                             </div>
                         </div>
                     </div>

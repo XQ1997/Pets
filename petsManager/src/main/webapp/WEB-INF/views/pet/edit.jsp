@@ -9,7 +9,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <jsp:include page="../include/css.jsp"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/plugins/uploader/webuploader.css">
+    <link rel="stylesheet" href="/static/plugins/uploader/webuploader.css">
     <style>
         .petphoto {
             width: 150px;
@@ -91,7 +91,7 @@
                                 <div class="col-md-6">
                                     <div id="picker">宠物照片</div>
                                     <div class="petphoto" id="photo" >
-                                        <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-preview" alt="">
+                                        <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-custphoto" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
             //获取七牛上图片名称
             var fileName = response.key;
             //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-preview");
+            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-custphoto");
             $img.appendTo($("#photo"));
 
             //将key存放进隐藏域中

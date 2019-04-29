@@ -10,6 +10,23 @@
     <meta name="keywords" content="Gato Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
     <%@ include file="../client/css.jsp"%>
+    <style>
+        .photo {
+            width: 100%;
+            height: 300px;
+            border: 2px dashed #ccc;
+            margin-top: 20px;
+            text-align: center;
+            line-height: 300px;
+        }
+        .custphoto {
+            width: 150px;
+            height: 200px;
+            border: 2px dashed #ccc;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <div id="home" class="header">
@@ -20,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="pag-nav">
                 <ul class="p-list">
-                    <li><a href="/home">首页</a></li> &nbsp;&nbsp;/&nbsp;
+                    <li><a href="/index">首页</a></li> &nbsp;&nbsp;/&nbsp;
                     <li class="act">&nbsp;用户信息</li>
                 </ul>
             </div>
@@ -68,17 +85,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="row">
                     <div class="col-md-4">
                         <div class="photo">
-                            <img src="http://pq422kh3g.bkt.clouddn.com/${account.userPhoto}" alt="">
+                            <img src="http://pq422kh3g.bkt.clouddn.com/${account.userPhoto}-photo" alt="">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="photo">
-                            <img src="http://pq422kh3g.bkt.clouddn.com/${account.cardInPhoto}" alt="">
+                            <img src="http://pq422kh3g.bkt.clouddn.com/${account.cardInPhoto}-photo" alt="">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="photo">
-                            <img src="http://pq422kh3g.bkt.clouddn.com/${account.cardOutPhoto}" alt="">
+                            <img src="http://pq422kh3g.bkt.clouddn.com/${account.cardOutPhoto}-photo" alt="">
                         </div>
                     </div>
                 </div>
@@ -86,6 +103,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
+<%@ include file="../client/footer.jsp"%>
 <%@ include file="../client/js.jsp"%>
 </body>
 </html>
