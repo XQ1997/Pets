@@ -85,14 +85,22 @@ public class PetsService {
 
         pets.setNum(pets.getType() + i + "号");
         i++;
-        pets.setState(Pets.STATE_NO);
+        if(pets.getSendtype() != null){
+            pets.setState("未" + pets.getSendtype());
+        }else{
+            pets.setState(Pets.STATE_NO);
+        }
         pets.setCreateTime(new Date());
         petsMapper.insertSelective(pets);
-        logger.info("{}流浪宠物登记成功",pets);
 
         Notice notice = new Notice();
-        notice.setTitle("流浪宠物发布");
-        notice.setContent("新增" + pets.getPetname());
+        if(pets.getSendtype() != null){
+            notice.setTitle("用户发布" + pets.getSendtype() + "宠物");
+
+        }else{
+            notice.setTitle("流浪宠物发布");
+        }
+        notice.setContent(pets.getContent());
         notice.setCreateTime(new Date());
         noticeMapper.insertSelective(notice);
     }
@@ -384,7 +392,30 @@ public class PetsService {
         moneyMapper.updateByPrimaryKeySelective(money);
     }
 
+    /**根据id查询到公告信息
+     * @param id
+     * @return
+     */
     public Notice findNoticeById(Integer id) {
         return noticeMapper.selectByPrimaryKey(id);
+    }
+
+    /**用户确认领养宠物
+     * @param id
+     * @param account
+     * @param val
+     */
+    public void confirm(Integer id, Account account, String val) {
+        Pets pets = petsMapper.selectByPrimaryKey(id);
+        if(pets != null){
+            pets.setState("已" + pets.getSendtype());
+            Cliam cliam = new Cliam();
+            cliam.setCliamName(account.getUsername());
+            cliam.setUsername(val);
+            cliam.setPetname(pets.getPetname());
+            cliam.setContent(account.getUsername() + "发布" + pets.getPetname() + pets.getSendtype() + "宠物，让" + val + pets.getSendtype());
+            cliam.setCreateTime(new Date());
+            cliamMapper.insertSelective(cliam);
+        }
     }
 }

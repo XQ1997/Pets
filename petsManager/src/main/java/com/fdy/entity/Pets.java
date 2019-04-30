@@ -10,8 +10,6 @@ public class Pets implements Serializable {
     
 	public static final String STATE_CLIAM = "已认领";
     public static final String STATE_NO = "未认领";
-    public static final String TYPE_GIVE = "送养";
-    public static final String TYPE_TUO = "托管";
 	
 	private Integer id;
 

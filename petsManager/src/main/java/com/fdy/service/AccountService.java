@@ -460,4 +460,16 @@ public class AccountService {
         account.setUpdateTime(new Date());
         accountMapper.updateByPrimaryKeySelective(account);
     }
+
+    public Cliam findCliamByMobile(String mobile) {
+        CliamExample cliamExample = new CliamExample();
+        cliamExample.createCriteria().andMobileEqualTo(mobile);
+
+        List<Cliam> cliamList = cliamMapper.selectByExample(cliamExample);
+        if(cliamList != null && !cliamList.isEmpty()){
+            Cliam cliam = cliamList.get(0);
+            return cliam;
+        }
+        return null;
+    }
 }

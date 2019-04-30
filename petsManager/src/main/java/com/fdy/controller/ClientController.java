@@ -6,16 +6,14 @@ import com.fdy.exception.ServiceException;
 import com.fdy.filestore.Qiniustore;
 import com.fdy.service.AccountService;
 import com.fdy.service.PetsService;
+import com.fdy.util.AjaxResponseData;
 import com.fdy.util.ShiroUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -71,7 +69,10 @@ public class ClientController {
         if(pets == null){
             throw new NotFoundException();
         }
+        Cliam cliam = accountService.findCliamByMobile(pets.getMobile());
+        model.addAttribute("cliam",cliam);
         model.addAttribute("pets",pets);
+        model.addAttribute("mobile",shiroUtil.getCurrAcc().getMobile());
         if(pets.getSendtype() != null){
             return "clientPage/userpet";
         }
@@ -228,5 +229,15 @@ public class ClientController {
             redirectAttributes.addFlashAttribute("message",e.getMessage());
         }
         return "redirect:/client/publish";
+    }
+
+    /**确认领养
+     * @return
+     */
+    @GetMapping("/pet/{id:\\d+}/confirm")
+    @ResponseBody
+    public AjaxResponseData add(@PathVariable Integer id,String val){
+        petsService.confirm(id,shiroUtil.getCurrAcc(),val);
+        return AjaxResponseData.success();
     }
 }

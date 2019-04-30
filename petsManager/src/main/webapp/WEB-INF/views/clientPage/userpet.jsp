@@ -32,6 +32,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="port-head">
             <h3>宠物详细信息</h3>
+            <c:if test="${pets.mobile == mobile}">
+                <a href="javascript:;" rel="${pets.id}" id="confirm"><i class="glyphicon glyphicon-ok"></i></a>
+            </c:if>
             <a href="/client/pet" class="btn btn-sm btn-info pull-right">返回</a>
         </div>
         <div class="portfolio-bottom">
@@ -53,6 +56,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <td>${pets.mobile}</td>
                 </tr>
                 <tr>
+                    <td class="text-muted text-center"><i>发布人:</i></td>
+                    <td>${cliam.cliamName}</td>
+                    <td colspan="2"></td>
+                    <td class="text-muted text-center"><i>领养人:</i></td>
+                    <td>${cliam.username}</td>
+                </tr>
+                <tr>
                     <td class="text-muted text-center"><i>年龄:</i></td>
                     <td>${pets.age}</td>
                     <td colspan="2"></td>
@@ -72,5 +82,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <%@ include file="../client/footer.jsp"%>
 <%@ include file="../client/js.jsp"%>
+<script>
+    $(function(){
+        $("#confirm").click(function () {
+            var id = $(this).attr("rel");
+            layer.prompt("请填写领养人并确定领养",function (val,index) {
+                layer.close(index);
+                $.ajax({
+                    url: '/client/pet/' + id + '/confirm?val='+ val,
+                    type: 'get',
+                    success: function (result) {
+                        if (result.state == 'success') {
+                            window.history.go(0);
+                        } else {
+                            layer.msg(result.message);
+                        }
+                    },
+                    error: function () {
+                        layer.msg("服务器忙");
+                    }
+                });
+            })
+        });
+    })
+</script>
 </body>
 </html>
