@@ -42,7 +42,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </tr>
                 <tr>
                     <td class="text-muted text-right"><i>公告内容:</i></td>
-                    <td class="text-left"><textarea disabled>${notice.content}</textarea></td>
+                    <td class="text-left"><textarea disabled cols=80>${notice.content}</textarea></td>
                 </tr>
                 </tbody>
             </table>

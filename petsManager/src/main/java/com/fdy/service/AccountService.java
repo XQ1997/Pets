@@ -462,13 +462,32 @@ public class AccountService {
     }
 
     public Cliam findCliamByMobile(String mobile) {
-        CliamExample cliamExample = new CliamExample();
-        cliamExample.createCriteria().andMobileEqualTo(mobile);
+        if(mobile != null){
+            CliamExample cliamExample = new CliamExample();
+            cliamExample.createCriteria().andMobileEqualTo(mobile);
 
-        List<Cliam> cliamList = cliamMapper.selectByExample(cliamExample);
-        if(cliamList != null && !cliamList.isEmpty()){
-            Cliam cliam = cliamList.get(0);
-            return cliam;
+            List<Cliam> cliamList = cliamMapper.selectByExample(cliamExample);
+            if(cliamList != null && !cliamList.isEmpty()){
+                for(Cliam cliam : cliamList){
+                    if(mobile.equals(cliam.getMobile()) && cliam.getState() == null){
+                        return cliam;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**根据当前登录账户显示留言记录
+     * @param username
+     * @return
+     */
+    public Words findWordsByAcc(String username) {
+        WordsExample wordsExample = new WordsExample();
+        wordsExample.createCriteria().andUsernameEqualTo(username);
+        List<Words> wordsList = wordsMapper.selectByExample(wordsExample);
+        if(wordsList != null && !wordsList.isEmpty()){
+            return wordsList.get(0);
         }
         return null;
     }

@@ -77,6 +77,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </c:if>
             </div>
         </div>
+        <br/>
+        <br/>
+        <div class="row">
+            <div>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td class="text-muted text-center"><i>${words.username}留言标题为：--${words.title}的内容为:</i></td>
+                        <td><textarea disabled>${words.content}</textarea></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-offset-2">
+                <table class="table">
+                    <tbody>
+                    <c:forEach items="${replyList}" var="reply">
+                        <tr>
+                            <td class="text-muted text-center"><i>${reply.replyname}回复${words.username}的内容:</i></td>
+                            <td><textarea disabled>${reply.content}</textarea></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 <%@ include file="../client/footer.jsp"%>

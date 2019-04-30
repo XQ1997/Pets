@@ -72,7 +72,7 @@
     $(function(){
         $(".add").click(function () {
             var id = $(this).attr("rel");
-            layer.prompt("添加库存数量",function (val, index) {
+            layer.prompt(function (val, index) {
                 layer.close(index);
                 $.ajax({
                     url: '/fodder/' + id + '/add?val='+ val,
@@ -92,7 +92,7 @@
         });
         $(".reduce").click(function () {
             var id = $(this).attr("rel");
-            layer.prompt("减少饲料库存",function(val, index) {
+            layer.prompt(function(val, index) {
                 layer.close(index);
                 $.ajax({
                     url:'/fodder/'+id+'/reduce?val='+val,

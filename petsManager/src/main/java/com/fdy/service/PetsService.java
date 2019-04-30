@@ -412,10 +412,24 @@ public class PetsService {
             Cliam cliam = new Cliam();
             cliam.setCliamName(account.getUsername());
             cliam.setUsername(val);
+            cliam.setMobile(account.getMobile());
             cliam.setPetname(pets.getPetname());
             cliam.setContent(account.getUsername() + "发布" + pets.getPetname() + pets.getSendtype() + "宠物，让" + val + pets.getSendtype());
             cliam.setCreateTime(new Date());
             cliamMapper.insertSelective(cliam);
+        }
+        CliamExample cliamExample = new CliamExample();
+        cliamExample.createCriteria().andMobileEqualTo(pets.getMobile());
+
+        List<Cliam> cliamList = cliamMapper.selectByExample(cliamExample);
+        if(cliamList != null && !cliamList.isEmpty()){
+            for(Cliam cliam : cliamList){
+                if(pets.getMobile().equals(cliam.getMobile()) && cliam.getState() == null){
+                    cliam.setUsername(val);
+                    cliam.setUpdateTime(new Date());
+                    cliamMapper.updateByPrimaryKeySelective(cliam);
+                }
+            }
         }
     }
 }

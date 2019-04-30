@@ -33,7 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="port-head">
             <h3>宠物详细信息</h3>
             <c:if test="${pets.mobile == mobile}">
-                <a href="javascript:;" rel="${pets.id}" id="confirm"><i class="glyphicon glyphicon-ok"></i></a>
+                <a href="javascript:;" rel="${pets.id}" class="confirm btn btn-sm btn-success pull-right">确认</a>
             </c:if>
             <a href="/client/pet" class="btn btn-sm btn-info pull-right">返回</a>
         </div>
@@ -82,11 +82,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <%@ include file="../client/footer.jsp"%>
 <%@ include file="../client/js.jsp"%>
+<!-- layer -->
+<script src="/static/dist/js/layer/layer.js"></script>
 <script>
     $(function(){
-        $("#confirm").click(function () {
+        $(".confirm").click(function () {
             var id = $(this).attr("rel");
-            layer.prompt("请填写领养人并确定领养",function (val,index) {
+            layer.prompt("确认",function (val, index) {
                 layer.close(index);
                 $.ajax({
                     url: '/client/pet/' + id + '/confirm?val='+ val,

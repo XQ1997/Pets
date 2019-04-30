@@ -137,7 +137,12 @@ public class ClientController {
      * @return
      */
     @GetMapping("/words")
-    public String words(){
+    public String words(Model model){
+        Words words = accountService.findWordsByAcc(shiroUtil.getCurrAcc().getUsername());
+        if(words != null){
+            List<Reply> replyList = accountService.findALLReply(words.getUsername());
+            model.addAttribute("replyList",replyList);
+        }
         return "clientPage/words";
     }
 
