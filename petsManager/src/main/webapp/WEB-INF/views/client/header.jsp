@@ -8,7 +8,7 @@
         <div class="top-menu">
             <ul>
                 <nav>
-                    <li><a class="${param.menu == 'pet' ? 'active' : ''}" href="/client/pet">宠物管理</a></li>
+                    <li><a class="${param.menu == 'pet' ? 'active' : ''}" href="/client/pet">宠物信息</a></li>
                     <li><a class="${param.menu == 'publish' ? 'active' : ''}" href="/client/publish">宠物发布</a></li>
                     <li><a class="${param.menu == 'cliam' ? 'active' : ''}" href="/client/cliam">领养申请</a></li>
                     <li><a class="${param.menu == 'user' ? 'active' : ''}" href="/client/user">个人信息</a></li>

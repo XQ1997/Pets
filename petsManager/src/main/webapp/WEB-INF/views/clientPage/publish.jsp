@@ -41,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="gallery services">
     <div class="container">
         <div class="port-head">
-            <h3>宠物信息</h3>
+            <h3>宠物发布</h3>
         </div>
         <br/>
         <c:if test="${not empty message}">
@@ -71,6 +71,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-3 control-label">联系方式:</label>
+                            <div class="col-md-8">
+                                <input type="text" name="mobile" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">发布类型:</label>
+                            <div class="col-md-8">
+                                <select name="sendtype" class="form-control">
+                                    <option value="送养">送养</option>
+                                    <option value="托管">托管</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 control-label">宠物类别:</label>
                             <div class="col-md-8">
                                 <select name="type" class="form-control">
@@ -88,7 +103,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">宠物描述:</label>
+                            <label class="col-md-3 control-label">注意事项:</label>
                             <div class="col-md-8">
                                 <textarea name="content" rows=7 cols=60></textarea>
                             </div>

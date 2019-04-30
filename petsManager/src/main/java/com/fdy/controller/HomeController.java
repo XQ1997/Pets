@@ -3,6 +3,7 @@ package com.fdy.controller;
 import com.fdy.entity.Account;
 import com.fdy.entity.Notice;
 import com.fdy.entity.Pets;
+import com.fdy.exception.NotFoundException;
 import com.fdy.exception.ServiceException;
 import com.fdy.service.AccountService;
 import com.fdy.service.PetsService;
@@ -161,6 +162,20 @@ public class HomeController {
             redirectAttributes.addFlashAttribute("message",e.getMessage());
             return "redirect:/repassword";
         }
+    }
+
+    /**跳转到公告详情页
+     * @param model
+     * @return
+     */
+    @GetMapping("/notice/{id:\\d+}")
+    public String looknotice(@PathVariable Integer id, Model model){
+        Notice notice = petsService.findNoticeById(id);
+        if(notice == null){
+            throw new NotFoundException();
+        }
+        model.addAttribute("notice",notice);
+        return "noticelook";
     }
 
     /**跳转到公告编辑页

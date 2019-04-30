@@ -8,7 +8,8 @@
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="num" jdbcType="VARCHAR" property="num" />
-    <result column="video" jdbcType="VARCHAR" property="video" />
+    <result column="sendtype" jdbcType="VARCHAR" property="sendtype" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="place" jdbcType="VARCHAR" property="place" />
     <result column="type" jdbcType="VARCHAR" property="type" />
@@ -76,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, petname, state, age, content, num, video, image, place, type, accname, userid, 
-    create_time, update_time
+    id, petname, state, age, content, num, sendtype, mobile, image, place, type, accname, 
+    userid, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.fdy.entity.PetsExample" resultMap="BaseResultMap">
     select
@@ -112,14 +113,16 @@
   <insert id="insert" parameterType="com.fdy.entity.Pets">
     insert into t_pets (id, petname, state, 
       age, content, num, 
-      video, image, place, 
-      type, accname, userid, 
-      create_time, update_time)
+      sendtype, mobile, image, 
+      place, type, accname, 
+      userid, create_time, update_time
+      )
     values (#{id,jdbcType=INTEGER}, #{petname,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR}, 
-      #{video,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{accname,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE})
+      #{sendtype,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{place,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{accname,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.fdy.entity.Pets">
     insert into t_pets
@@ -142,8 +145,11 @@
       <if test="num != null">
         num,
       </if>
-      <if test="video != null">
-        video,
+      <if test="sendtype != null">
+        sendtype,
+      </if>
+      <if test="mobile != null">
+        mobile,
       </if>
       <if test="image != null">
         image,
@@ -186,8 +192,11 @@
       <if test="num != null">
         #{num,jdbcType=VARCHAR},
       </if>
-      <if test="video != null">
-        #{video,jdbcType=VARCHAR},
+      <if test="sendtype != null">
+        #{sendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
@@ -239,8 +248,11 @@
       <if test="record.num != null">
         num = #{record.num,jdbcType=VARCHAR},
       </if>
-      <if test="record.video != null">
-        video = #{record.video,jdbcType=VARCHAR},
+      <if test="record.sendtype != null">
+        sendtype = #{record.sendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
       </if>
       <if test="record.image != null">
         image = #{record.image,jdbcType=VARCHAR},
@@ -276,7 +288,8 @@
       age = #{record.age,jdbcType=INTEGER},
       content = #{record.content,jdbcType=VARCHAR},
       num = #{record.num,jdbcType=VARCHAR},
-      video = #{record.video,jdbcType=VARCHAR},
+      sendtype = #{record.sendtype,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR},
       place = #{record.place,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=VARCHAR},
@@ -306,8 +319,11 @@
       <if test="num != null">
         num = #{num,jdbcType=VARCHAR},
       </if>
-      <if test="video != null">
-        video = #{video,jdbcType=VARCHAR},
+      <if test="sendtype != null">
+        sendtype = #{sendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
@@ -340,7 +356,8 @@
       age = #{age,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
       num = #{num,jdbcType=VARCHAR},
-      video = #{video,jdbcType=VARCHAR},
+      sendtype = #{sendtype,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       place = #{place,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},

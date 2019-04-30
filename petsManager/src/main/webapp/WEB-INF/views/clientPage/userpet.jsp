@@ -33,24 +33,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="port-head">
             <h3>宠物详细信息</h3>
             <a href="/client/pet" class="btn btn-sm btn-info pull-right">返回</a>
-            <a href="/client/cliam" class="btn btn-sm btn-success pull-right">领养</a>
         </div>
         <div class="portfolio-bottom">
             <table class="table">
                 <tbody>
                 <tr>
-                    <td class="text-muted text-center"><i>流浪宠物名称:</i></td>
+                    <td class="text-muted text-center"><i>宠物名称:</i></td>
                     <td>${pets.petname}</td>
-                    <td class="text-muted text-center"><i>当前状态:</i></td>
-                    <td>${pets.state}</td>
-                    <td class="text-muted text-center"><i>救助地点:</i></td>
+                    <td colspan="2"></td>
+                    <td class="text-muted text-center"><i>地点:</i></td>
                     <td>${pets.place}</td>
                 </tr>
                 <tr>
                     <td class="text-muted text-center"><i>宠物种类:</i></td>
                     <td>${pets.type}</td>
-                    <td class="text-muted text-center"><i>宠物编号:</i></td>
-                    <td>${pets.num}</td>
+                    <td class="text-muted text-center"><i>发送类型:</i></td>
+                    <td>${pets.sendtype}</td>
+                    <td class="text-muted text-center"><i>联系电话:</i></td>
+                    <td>${pets.mobile}</td>
                 </tr>
                 <tr>
                     <td class="text-muted text-center"><i>年龄:</i></td>

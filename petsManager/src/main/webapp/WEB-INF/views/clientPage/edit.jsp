@@ -32,6 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="port-head">
             <h3>个人信息</h3>
+            <a href="/client/user" class="btn btn-sm btn-success pull-right">返回</a>
         </div>
         <br/>
         <div class="portfolio-bottom">
@@ -43,24 +44,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
                 <div class="form-group has-feedback">
-                    <label class="col-md-3 control-label">联系电话:</label>
-                    <div class="col-md-8">
-                        <input type="text" name="mobile" class="form-control" value="${account.mobile}"/>
-                    </div>
-                </div>
-                <div class="form-group has-feedback">
                     <label class="col-md-3 control-label">年龄:</label>
                     <div class="col-md-8">
                         <input type="text" name="age" class="form-control" value="${account.age}"/>
-                    </div>
-                </div>
-                <div class="form-group has-feedback">
-                    <label class="col-md-3 control-label">角色</label>
-                    <div class="col-md-8">
-                        <select name="role" class="form-control">
-                            <option value="管理员" ${account.role == "管理员" ? 'selected' : ''}>管理员</option>
-                            <option value="领养人" ${account.role == "领养人" ? 'selected' : ''}>领养人</option>
-                        </select>
                     </div>
                 </div>
                 <div class="form-group has-feedback">
@@ -73,12 +59,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <label class="col-md-3 control-label">从事工作:</label>
                     <div class="col-md-8">
                         <input type="text" name="job" class="form-control" value="${account.job}"/>
-                    </div>
-                </div>
-                <div class="form-group has-feedback">
-                    <label class="col-md-3 control-label">身份证号:</label>
-                    <div class="col-md-8">
-                        <input type="text" name="cardnum" class="form-control" value="${account.cardnum}"/>
                     </div>
                 </div>
             </form>

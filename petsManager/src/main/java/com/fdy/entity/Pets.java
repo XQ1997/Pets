@@ -10,6 +10,8 @@ public class Pets implements Serializable {
     
 	public static final String STATE_CLIAM = "已认领";
     public static final String STATE_NO = "未认领";
+    public static final String TYPE_GIVE = "送养";
+    public static final String TYPE_TUO = "托管";
 	
 	private Integer id;
 
@@ -39,9 +41,14 @@ public class Pets implements Serializable {
     private String num;
 
     /**
-     * 宠物视频
+     * 发送类型
      */
-    private String video;
+    private String sendtype;
+
+    /**
+     * 联系电话
+     */
+    private String mobile;
 
     /**
      * 宠物照片
@@ -122,12 +129,20 @@ public class Pets implements Serializable {
         this.num = num;
     }
 
-    public String getVideo() {
-        return video;
+    public String getSendtype() {
+        return sendtype;
     }
 
-    public void setVideo(String video) {
-        this.video = video;
+    public void setSendtype(String sendtype) {
+        this.sendtype = sendtype;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getImage() {

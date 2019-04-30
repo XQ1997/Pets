@@ -532,73 +532,143 @@ public class PetsExample {
             return (Criteria) this;
         }
 
-        public Criteria andVideoIsNull() {
-            addCriterion("video is null");
+        public Criteria andSendtypeIsNull() {
+            addCriterion("sendtype is null");
             return (Criteria) this;
         }
 
-        public Criteria andVideoIsNotNull() {
-            addCriterion("video is not null");
+        public Criteria andSendtypeIsNotNull() {
+            addCriterion("sendtype is not null");
             return (Criteria) this;
         }
 
-        public Criteria andVideoEqualTo(String value) {
-            addCriterion("video =", value, "video");
+        public Criteria andSendtypeEqualTo(String value) {
+            addCriterion("sendtype =", value, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoNotEqualTo(String value) {
-            addCriterion("video <>", value, "video");
+        public Criteria andSendtypeNotEqualTo(String value) {
+            addCriterion("sendtype <>", value, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoGreaterThan(String value) {
-            addCriterion("video >", value, "video");
+        public Criteria andSendtypeGreaterThan(String value) {
+            addCriterion("sendtype >", value, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoGreaterThanOrEqualTo(String value) {
-            addCriterion("video >=", value, "video");
+        public Criteria andSendtypeGreaterThanOrEqualTo(String value) {
+            addCriterion("sendtype >=", value, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLessThan(String value) {
-            addCriterion("video <", value, "video");
+        public Criteria andSendtypeLessThan(String value) {
+            addCriterion("sendtype <", value, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLessThanOrEqualTo(String value) {
-            addCriterion("video <=", value, "video");
+        public Criteria andSendtypeLessThanOrEqualTo(String value) {
+            addCriterion("sendtype <=", value, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoLike(String value) {
-            addCriterion("video like", value, "video");
+        public Criteria andSendtypeLike(String value) {
+            addCriterion("sendtype like", value, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoNotLike(String value) {
-            addCriterion("video not like", value, "video");
+        public Criteria andSendtypeNotLike(String value) {
+            addCriterion("sendtype not like", value, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoIn(List<String> values) {
-            addCriterion("video in", values, "video");
+        public Criteria andSendtypeIn(List<String> values) {
+            addCriterion("sendtype in", values, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoNotIn(List<String> values) {
-            addCriterion("video not in", values, "video");
+        public Criteria andSendtypeNotIn(List<String> values) {
+            addCriterion("sendtype not in", values, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoBetween(String value1, String value2) {
-            addCriterion("video between", value1, value2, "video");
+        public Criteria andSendtypeBetween(String value1, String value2) {
+            addCriterion("sendtype between", value1, value2, "sendtype");
             return (Criteria) this;
         }
 
-        public Criteria andVideoNotBetween(String value1, String value2) {
-            addCriterion("video not between", value1, value2, "video");
+        public Criteria andSendtypeNotBetween(String value1, String value2) {
+            addCriterion("sendtype not between", value1, value2, "sendtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileIsNull() {
+            addCriterion("mobile is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileIsNotNull() {
+            addCriterion("mobile is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileEqualTo(String value) {
+            addCriterion("mobile =", value, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileNotEqualTo(String value) {
+            addCriterion("mobile <>", value, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileGreaterThan(String value) {
+            addCriterion("mobile >", value, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileGreaterThanOrEqualTo(String value) {
+            addCriterion("mobile >=", value, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileLessThan(String value) {
+            addCriterion("mobile <", value, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileLessThanOrEqualTo(String value) {
+            addCriterion("mobile <=", value, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileLike(String value) {
+            addCriterion("mobile like", value, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileNotLike(String value) {
+            addCriterion("mobile not like", value, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileIn(List<String> values) {
+            addCriterion("mobile in", values, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileNotIn(List<String> values) {
+            addCriterion("mobile not in", values, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileBetween(String value1, String value2) {
+            addCriterion("mobile between", value1, value2, "mobile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobileNotBetween(String value1, String value2) {
+            addCriterion("mobile not between", value1, value2, "mobile");
             return (Criteria) this;
         }
 

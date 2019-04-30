@@ -20,7 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="pag-nav">
                 <ul class="p-list">
-                    <li><a href="/home">首页</a></li> &nbsp;&nbsp;/&nbsp;
+                    <li><a href="/index">首页</a></li> &nbsp;&nbsp;/&nbsp;
                 </ul>
             </div>
         </div>
@@ -36,15 +36,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <thead>
                 <tr>
                     <th class="text-center">公告主题</th>
-                    <th class="text-center">公告内容</th>
                     <th class="text-center">发布时间</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${pageInfo.list}" var="notice">
                     <tr>
-                        <td class="text-center"><strong>${notice.title}</strong></td>
-                        <td class="text-center"><strong>${notice.content}</strong></td>
+                        <td class="text-center"><strong><a href="/client/notice/${notice.id}"> ${notice.title}</a></strong></td>
                         <td class="text-center"><strong><fmt:formatDate value="${notice.createTime}"  pattern='yyyy年MM月dd日'/></strong></td>
                     </tr>
                 </c:forEach>

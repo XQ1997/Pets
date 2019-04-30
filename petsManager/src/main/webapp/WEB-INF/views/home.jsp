@@ -52,7 +52,6 @@
             <thead>
             <tr>
               <th class="text-center">公告主题</th>
-              <th class="text-center">公告内容</th>
               <th class="text-center">发布时间</th>
               <th class="text-center">#</th>
             </tr>
@@ -60,8 +59,7 @@
             <tbody>
             <c:forEach items="${pageInfo.list}" var="notice">
               <tr>
-                <td class="text-center"><strong>${notice.title}</strong></td>
-                <td class="text-center"><strong>${notice.content}</strong></td>
+                <td class="text-center"><strong><a href="/notice/${notice.id}">${notice.title}</a></strong></td>
                 <td class="text-center"><strong><fmt:formatDate value="${notice.createTime}"  pattern='yyyy-MM-dd'/></strong></td>
                 <td class="text-center">
                   <a href="/notice/${notice.id}/edit"><i class="fa fa-edit"></i></a>

@@ -383,4 +383,8 @@ public class PetsService {
     public void updateMoney(Money money) {
         moneyMapper.updateByPrimaryKeySelective(money);
     }
+
+    public Notice findNoticeById(Integer id) {
+        return noticeMapper.selectByPrimaryKey(id);
+    }
 }

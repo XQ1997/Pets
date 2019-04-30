@@ -1,9 +1,6 @@
 package com.fdy.controller;
 
-import com.fdy.entity.Account;
-import com.fdy.entity.Cliam;
-import com.fdy.entity.Pets;
-import com.fdy.entity.Words;
+import com.fdy.entity.*;
 import com.fdy.exception.NotFoundException;
 import com.fdy.exception.ServiceException;
 import com.fdy.filestore.Qiniustore;
@@ -40,6 +37,20 @@ public class ClientController {
     @Autowired
     private Qiniustore qiniustore;
 
+    /**跳转到公告详情页
+     * @param model
+     * @return
+     */
+    @GetMapping("/notice/{id:\\d+}")
+    public String looknotice(@PathVariable Integer id, Model model){
+        Notice notice = petsService.findNoticeById(id);
+        if(notice == null){
+            throw new NotFoundException();
+        }
+        model.addAttribute("notice",notice);
+        return "clientPage/noticelook";
+    }
+
     /**跳转到宠物
      * @return
      */
@@ -61,6 +72,9 @@ public class ClientController {
             throw new NotFoundException();
         }
         model.addAttribute("pets",pets);
+        if(pets.getSendtype() != null){
+            return "clientPage/userpet";
+        }
         return "clientPage/petlook";
     }
 
