@@ -44,7 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul>
                     <c:forEach items="${petsList}" var="pets">
                     <li><a href="/client/pet/${pets.id}">
-                        <img src="http://pq422kh3g.bkt.clouddn.com/${pets.image}-custphoto" alt="" class="img-responsive zoom-img"/>
+                        <img src="http://pqtuic9ww.bkt.clouddn.com/${pets.image}-custphoto" alt="" class="img-responsive zoom-img"/>
                         </a></li>
                     </c:forEach>
                 </ul>

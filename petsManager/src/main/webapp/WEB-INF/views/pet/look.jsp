@@ -118,7 +118,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="photo">
-                                <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-photo" alt="">
+                                <img src="http://pqtuic9ww.bkt.clouddn.com/${pets.image}-photo" alt="">
                             </div>
                         </div>
                     </div>

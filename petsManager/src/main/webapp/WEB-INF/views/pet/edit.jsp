@@ -91,7 +91,7 @@
                                 <div class="col-md-6">
                                     <div id="picker">宠物照片</div>
                                     <div class="petphoto" id="photo" >
-                                        <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-custphoto" alt="">
+                                        <img src="http://pqtuic9ww.bkt.clouddn.com/${pets.image}-custphoto" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
             //获取七牛上图片名称
             var fileName = response.key;
             //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-custphoto");
+            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-custphoto");
             $img.appendTo($("#photo"));
 
             //将key存放进隐藏域中

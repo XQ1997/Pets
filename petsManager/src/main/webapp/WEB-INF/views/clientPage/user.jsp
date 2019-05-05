@@ -85,17 +85,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="row">
                     <div class="col-md-4">
                         <div class="photo">
-                            <img src="http://pq422kh3g.bkt.clouddn.com/${account.userPhoto}-photo" alt="">
+                            <img src="http://pqtuic9ww.bkt.clouddn.com/${account.userPhoto}-photo" alt="">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="photo">
-                            <img src="http://pq422kh3g.bkt.clouddn.com/${account.cardInPhoto}-photo" alt="">
+                            <img src="http://pqtuic9ww.bkt.clouddn.com/${account.cardInPhoto}-photo" alt="">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="photo">
-                            <img src="http://pq422kh3g.bkt.clouddn.com/${account.cardOutPhoto}-photo" alt="">
+                            <img src="http://pqtuic9ww.bkt.clouddn.com/${account.cardOutPhoto}-photo" alt="">
                         </div>
                     </div>
                 </div>

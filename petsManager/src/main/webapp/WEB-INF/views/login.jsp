@@ -275,7 +275,7 @@
             //获取七牛上图片名称
             var fileName = response.key;
             //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-custphoto");
+            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-custphoto");
             $img.appendTo($("#photo"));
 
             //将key存放进隐藏域中
@@ -327,7 +327,7 @@
             //获取七牛上图片名称
             var fileName = response.key;
             //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-preview");
+            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-preview");
             $img.appendTo($("#userinPhoto"));
 
             //将key存放进隐藏域中
@@ -347,7 +347,7 @@
             //选完文件之后，是否自动上传
             auto:true,
             // swf文件路径
-            swf:'${pageContext.request.contextPath}/static/plugins/uploader/Uploader.swf',
+            swf:'/static/plugins/uploader/Uploader.swf',
 
             // 文件接收服务端。
             server: 'http://upload-z1.qiniup.com',
@@ -379,7 +379,7 @@
             //获取七牛上图片名称
             var fileName = response.key;
             //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pmupn7ccj.bkt.clouddn.com/" + fileName + "-preview");
+            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-preview");
             $img.appendTo($("#userblackPhoto"));
 
             //将key存放进隐藏域中

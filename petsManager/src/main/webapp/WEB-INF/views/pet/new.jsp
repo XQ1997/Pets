@@ -146,7 +146,7 @@
             //获取七牛上图片名称
             var fileName = response.key;
             //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pq422kh3g.bkt.clouddn.com/-custphoto" + fileName);
+            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/-custphoto" + fileName);
             $img.appendTo($("#photo"));
 
             //将key存放进隐藏域中

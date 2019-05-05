@@ -74,7 +74,11 @@ public class AccountService {
         if(oldAcc != null){
             throw new ServiceException("该电话号码已注册过，请检查！");
         }
-
+        if(account.getRole() == null){
+            account.setRole(Account.TYPE_USER);
+        }else{
+            account.setRole(account.getRole());
+        }
         account.setNumber(account.getRole() +i + "号");
         i++;
         account.setPassword(DigestUtils.md5Hex(account.getPassword()));
