@@ -5,6 +5,7 @@ import com.fdy.entity.Notice;
 import com.fdy.entity.Pets;
 import com.fdy.exception.NotFoundException;
 import com.fdy.exception.ServiceException;
+import com.fdy.filestore.Qiniustore;
 import com.fdy.service.AccountService;
 import com.fdy.service.PetsService;
 import com.fdy.util.AjaxResponseData;
@@ -43,12 +44,14 @@ public class HomeController {
     private ShiroUtil shiroUtil;
     @Autowired
     private PetsService petsService;
+    @Autowired
+    private Qiniustore qiniustore;
 
     /**登录页面
      * @return 跳转到登录页面
      */
     @GetMapping("/")
-    public String login(){
+    public String login(Model model){
         //获得subject对象
         Subject subject = SecurityUtils.getSubject();
         //判断当前是否有已经认证的账户(该subject是否认证)，认证过的话就退出该账户
@@ -59,6 +62,7 @@ public class HomeController {
         if(subject.isRemembered()){
             return "redirect:/home";
         }
+        model.addAttribute("token",qiniustore.getUploadToken());
         return "login";
     }
 
