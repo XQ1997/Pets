@@ -107,96 +107,97 @@
         </form>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">注册信息</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" id="saveForm" class="form-horizontal" action="/regist">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <br>
-                                <input type="hidden" name="cardInPhoto" id="custPhotoIn">
-                                <input type="hidden" name="cardOutPhoto" id="custPhotoOut">
-                                <input type="hidden" name="userPhoto" id="userPhoto">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">用户姓名:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="username" class="form-control" autofocus/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">登录密码:</label>
-                                    <div class="col-md-8">
-                                        <input type="password" name="password" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">联系电话:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="mobile" class="form-control" required/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">年龄:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="age" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">性别</label>
-                                    <div class="col-md-8">
-                                        <input type="radio" name="sex" value="男" checked>男
-                                        <input type="radio" name="sex" value="女">女
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">住址:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="address" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">从事工作:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="job" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">身份证号:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="cardnum" class="form-control" required/>
-                                    </div>
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">注册信息</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="saveForm" class="form-horizontal" action="/regist">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <br>
+                            <input type="hidden" name="cardInPhoto" id="custPhotoIn">
+                            <input type="hidden" name="cardOutPhoto" id="custPhotoOut">
+                            <input type="hidden" name="userPhoto" id="userPhoto">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">用户姓名:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="username" class="form-control" autofocus/>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="col-md-12">
-                                    <div id="picker3">用户一寸照</div>
-                                    <div class="custphoto" id="photo"></div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">登录密码:</label>
+                                <div class="col-md-8">
+                                    <input type="password" name="password" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">联系电话:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="mobile" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">年龄:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="age" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">性别</label>
+                                <div class="col-md-8">
+                                    <input type="radio" name="sex" value="男" checked>男
+                                    <input type="radio" name="sex" value="女">女
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">住址:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="address" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">从事工作:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="job" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">身份证号:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="cardnum" class="form-control" required/>
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div id="picker">身份证正面照片</div>
-                                <div class="photo" id="userinPhoto"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div id="picker2">身份证反面照片</div>
-                                <div class="photo" id="userblackPhoto"></div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <div id="picker3">用户一寸照</div>
+                                <div class="custphoto" id="photo"></div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary pull-right" id="saveBtn">注册</button>
-                </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="picker">身份证正面照片</div>
+                            <div class="photo" id="userinPhoto"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="picker2">身份证反面照片</div>
+                            <div class="photo" id="userblackPhoto"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary pull-right" id="saveBtn">注册</button>
             </div>
         </div>
     </div>
