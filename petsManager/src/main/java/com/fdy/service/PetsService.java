@@ -82,7 +82,6 @@ public class PetsService {
         if(petsList != null && !petsList.isEmpty()){
             throw new ServiceException("该流浪宠物名已存在，请重新命名！");
         }
-
         pets.setNum(pets.getType() + i + "号");
         i++;
         if(pets.getSendtype() != null){

@@ -51,7 +51,7 @@ public class HomeController {
      * @return 跳转到登录页面
      */
     @GetMapping("/")
-    public String login(Model model){
+    public String login(){
         //获得subject对象
         Subject subject = SecurityUtils.getSubject();
         //判断当前是否有已经认证的账户(该subject是否认证)，认证过的话就退出该账户
@@ -62,7 +62,6 @@ public class HomeController {
         if(subject.isRemembered()){
             return "redirect:/home";
         }
-        model.addAttribute("token",qiniustore.getUploadToken());
         return "login";
     }
 
@@ -250,6 +249,14 @@ public class HomeController {
         return "index";
     }
 
+    /**跳转到注册页面
+     * @return
+     */
+    @GetMapping("/regist")
+    public String regist(Model model){
+        model.addAttribute("token",qiniustore.getUploadToken());
+        return "regist";
+    }
 
     /**保存注册用户
      * @param account

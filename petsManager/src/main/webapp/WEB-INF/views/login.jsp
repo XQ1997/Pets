@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="/static/plugins/iCheck/square/blue.css">
-    <link rel="stylesheet" href="/static/plugins/uploader/webuploader.css">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -101,107 +99,13 @@
                     <a href="/losepass">忘记密码</a>
                 </div>
                 <div class="col-xs-6">
-                    <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#myModal">注册</button>
+                    <a href="/regist" class="btn btn-success form-control">注册</a>
                 </div>
             </div>
         </form>
     </div>
-
-
 </div>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">注册信息</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="saveForm" class="form-horizontal" action="/regist">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <br>
-                            <input type="hidden" name="cardInPhoto" id="custPhotoIn">
-                            <input type="hidden" name="cardOutPhoto" id="custPhotoOut">
-                            <input type="hidden" name="userPhoto" id="userPhoto">
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">用户姓名:</label>
-                                <div class="col-md-8">
-                                    <input type="text" name="username" class="form-control" autofocus/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">登录密码:</label>
-                                <div class="col-md-8">
-                                    <input type="password" name="password" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">联系电话:</label>
-                                <div class="col-md-8">
-                                    <input type="text" name="mobile" class="form-control" required/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">年龄:</label>
-                                <div class="col-md-8">
-                                    <input type="text" name="age" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">性别</label>
-                                <div class="col-md-8">
-                                    <input type="radio" name="sex" value="男" checked>男
-                                    <input type="radio" name="sex" value="女">女
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">住址:</label>
-                                <div class="col-md-8">
-                                    <input type="text" name="address" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">从事工作:</label>
-                                <div class="col-md-8">
-                                    <input type="text" name="job" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">身份证号:</label>
-                                <div class="col-md-8">
-                                    <input type="text" name="cardnum" class="form-control" required/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="col-md-12">
-                                <div id="picker3">用户一寸照</div>
-                                <div class="custphoto" id="photo"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div id="picker">身份证正面照片</div>
-                            <div class="photo" id="userinPhoto"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div id="picker2">身份证反面照片</div>
-                            <div class="photo" id="userblackPhoto"></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary pull-right" id="saveBtn">注册</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- jQuery 3 -->
 <script src="/static/plugins/jQuery/jquery-3.2.1.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -209,8 +113,6 @@
 <!-- iCheck -->
 <script src="/static/plugins/iCheck/icheck.min.js"></script>
 <script src="/static/dist/js/canvas/canvas-nest-class.js"></script>
-<script src="/static/plugins/uploader/webuploader.min.js"></script>
-<script src="/static/plugins/jquery.validate.min.js"></script>
 <script>
     $(function () {
         new CanvasNest({
@@ -238,191 +140,6 @@
 		$("#loginBtn").click(function(){
 			$("#loginForm").submit();
 		});
-
-        //初始化客户一寸照片
-        var uploader = WebUploader.create({
-            //选完文件之后，是否自动上传
-            auto:true,
-            // swf文件路径
-            swf:'/static/plugins/uploader/Uploader.swf',
-
-            // 文件接收服务端。
-            server: 'http://upload-z1.qiniup.com',
-            //文件上传域的name
-            fileVal:'file',
-            //文件上传请求的参数表，每次发送都会发送发送此对象中的参数
-            formData:{
-                "token":"${token}"
-            },
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#picker3',
-            //只允许接收图片文件
-            accept:{
-                title:'Images',
-                extensions:'gif,jpg,jpeg,bmp,png',
-                mineTypes:'image/*'
-            }
-        });
-        var index = -1;
-        //文件成功。失败处理
-        uploader.on( 'uploadStart', function( file ) {
-            index = layer.load(1);
-        });
-        uploader.on( 'uploadSuccess', function( file,response ) {
-            //先清空内容
-            $("#photo").html("");
-
-            //获取七牛上图片名称
-            var fileName = response.key;
-            //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-custphoto");
-            $img.appendTo($("#photo"));
-
-            //将key存放进隐藏域中
-            $("#userPhoto").val(fileName);
-
-            layer.msg("上传成功");
-        });
-        uploader.on( 'uploadError', function( file ) {
-            layer.msg("服务器异常");
-        });
-        uploader.on( 'uploadComplete', function( file ) {
-            layer.close(index);
-        });
-
-        //初始化身份证照片正面
-        var uploader = WebUploader.create({
-            //选完文件之后，是否自动上传
-            auto:true,
-            // swf文件路径
-            swf:'/static/plugins/uploader/Uploader.swf',
-
-            // 文件接收服务端。
-            server: 'http://upload-z1.qiniup.com',
-            //文件上传域的name
-            fileVal:'file',
-            //文件上传请求的参数表，每次发送都会发送发送此对象中的参数
-            formData:{
-                "token":"${token}"
-            },
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#picker',
-            //只允许接收图片文件
-            accept:{
-                title:'Images',
-                extensions:'gif,jpg,jpeg,bmp,png',
-                mineTypes:'image/*'
-            }
-        });
-        var index = -1;
-        //文件成功。失败处理
-        uploader.on( 'uploadStart', function( file ) {
-            index = layer.load(1);
-        });
-        uploader.on( 'uploadSuccess', function( file,response ) {
-            //先清空内容
-            $("#userinPhoto").html("");
-
-            //获取七牛上图片名称
-            var fileName = response.key;
-            //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-preview");
-            $img.appendTo($("#userinPhoto"));
-
-            //将key存放进隐藏域中
-            $("#cardInPhoto").val(fileName);
-
-            layer.msg("上传成功");
-        });
-        uploader.on( 'uploadError', function( file ) {
-            layer.msg("服务器异常");
-        });
-        uploader.on( 'uploadComplete', function( file ) {
-            layer.close(index);
-        });
-
-        //初始化身份证照片反面
-        var uploader = WebUploader.create({
-            //选完文件之后，是否自动上传
-            auto:true,
-            // swf文件路径
-            swf:'/static/plugins/uploader/Uploader.swf',
-
-            // 文件接收服务端。
-            server: 'http://upload-z1.qiniup.com',
-            //文件上传域的name
-            fileVal:'file',
-            //文件上传请求的参数表，每次发送都会发送发送此对象中的参数
-            formData:{
-                "token":"${token}"
-            },
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#picker2',
-            //只允许接收图片文件
-            accept:{
-                title:'Images',
-                extensions:'gif,jpg,jpeg,bmp,png',
-                mineTypes:'image/*'
-            }
-        });
-        var index = -1;
-        //文件成功。失败处理
-        uploader.on( 'uploadStart', function( file ) {
-            index = layer.load(1);
-        });
-        uploader.on( 'uploadSuccess', function( file,response ) {
-            //先清空内容
-            $("#userblackPhoto").html("");
-
-            //获取七牛上图片名称
-            var fileName = response.key;
-            //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-preview");
-            $img.appendTo($("#userblackPhoto"));
-
-            //将key存放进隐藏域中
-            $("#custPhotoOut").val(fileName);
-
-            layer.msg("上传成功");
-        });
-        uploader.on( 'uploadError', function( file ) {
-            layer.msg("服务器异常");
-        });
-        uploader.on( 'uploadComplete', function( file ) {
-            layer.close(index);
-        });
-
-        $("#saveBtn").click(function () {
-            $("#saveForm").submit();
-        });
-        //表单校验
-        $("#saveForm").validate({
-            errorClass : 'text-danger',
-            errorElement : 'span',
-            rules : {
-                mobile :{
-                    "required" : true,
-                    "minlength": 11
-                },
-                cardnum : {
-                    "required" : true,
-                    "minlength": 18
-                }
-            },
-            messages :{
-                mobile :{
-                    "required" : "请输入联系电话",
-                    "minlength": "用户名长度不得少于11位"
-                },
-                cardnum : {
-                    "required" : "请输入身份证号",
-                    "minlength": "身份证号长度不得少于18位"
-                }
-            }
-        });
     });
 </script>
 </body>

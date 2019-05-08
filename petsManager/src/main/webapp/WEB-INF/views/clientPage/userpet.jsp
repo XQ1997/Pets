@@ -76,7 +76,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <h3>注意事项</h3>
         </div>
         <div class="portfolio-bottom">
-             <textarea  rows=7 cols=75>${pets.content}</textarea>
+             <textarea  rows=7 cols=75 disabled>${pets.content}</textarea>
         </div>
     </div>
 </div>
