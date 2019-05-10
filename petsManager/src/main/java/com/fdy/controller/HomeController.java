@@ -268,10 +268,11 @@ public class HomeController {
         try {
             accountService.saveAcc(account);
             redirectAttributes.addFlashAttribute("message", "用户注册成功");
+            return "redirect:/";
         }catch (ServiceException e){
-            redirectAttributes.addFlashAttribute("message",e.getMessage());
+            redirectAttributes.addFlashAttribute("message","注册失败");
         }
-        return "redirect:/";
+        return "redirect:/regist";
     }
 
     /**跳转到忘记密码验证问题页面

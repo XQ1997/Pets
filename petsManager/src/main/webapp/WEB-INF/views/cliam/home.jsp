@@ -85,7 +85,6 @@
 <jsp:include page="../include/js.jsp"/>
 <script>
     $(function(){
-        console.log(${pageInfo.pages});
         $('#pagination-demo').twbsPagination({
             totalPages: ${pageInfo.pages},
             visiblePage:5,

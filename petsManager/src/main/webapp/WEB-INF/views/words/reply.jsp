@@ -44,7 +44,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label">回复人:</label>
               <div class="col-md-8">
-                <input type="text" name="replyname" size=80 value="<shiro:principal property="username"/>"/>
+                <input type="text" name="replyname"  size=80 value="<shiro:principal property="username"/>"/>
               </div>
             </div>
             <div class="form-group">
@@ -67,6 +67,7 @@
 <script>
     $(function(){
         $("#saveBtn").click(function(){
+          console.log();
             $("#saveword").submit();
         });
     })

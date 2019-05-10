@@ -138,10 +138,13 @@ public class ClientController {
      */
     @GetMapping("/words")
     public String words(Model model){
-        Words words = accountService.findWordsByAcc(shiroUtil.getCurrAcc().getUsername());
-        if(words != null){
-            List<Reply> replyList = accountService.findALLReply(words.getUsername());
-            model.addAttribute("replyList",replyList);
+        List<Words> wordsList = accountService.findWordsByAcc(shiroUtil.getCurrAcc().getUsername());
+        model.addAttribute("wordsList",wordsList);
+        if(wordsList != null){
+            for(Words words : wordsList){
+                List<Reply> replyList = accountService.findALLReply(words.getId());
+                model.addAttribute("replyList",replyList);
+            }
         }
         return "clientPage/words";
     }
@@ -209,7 +212,7 @@ public class ClientController {
         }catch (ServiceException e){
             redirectAttributes.addFlashAttribute("message",e.getMessage());
         }
-        return "redirect:/user";
+        return "redirect:/client/user";
     }
 
     /**跳转到宠物发布页面

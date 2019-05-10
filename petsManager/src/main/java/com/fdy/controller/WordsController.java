@@ -2,6 +2,7 @@ package com.fdy.controller;
 
 import com.fdy.entity.Account;
 import com.fdy.entity.Reply;
+import com.fdy.entity.WordReply;
 import com.fdy.entity.Words;
 import com.fdy.exception.ServiceException;
 import com.fdy.service.AccountService;
@@ -61,9 +62,9 @@ public class WordsController {
      * @param redirectAttributes
      * @return
      */
-    @PostMapping("{id:\\d+}/reply")
-    public String savereply(@PathVariable Integer id,Reply reply, RedirectAttributes redirectAttributes){
-        accountService.saveReply(reply,id);
+    @PostMapping("{wordId:\\d+}/reply")
+    public String savereply(@PathVariable Integer wordId,Reply reply, RedirectAttributes redirectAttributes){
+        accountService.saveReply(reply,wordId);
         redirectAttributes.addFlashAttribute("message","回复成功");
         return "redirect:/words";
     }
@@ -89,7 +90,7 @@ public class WordsController {
     public String look(@PathVariable Integer id,Model model){
         Words words = accountService.findWordsById(id);
         if(words != null){
-            List<Reply> replyList = accountService.findALLReply(words.getUsername());
+            List<Reply> replyList = accountService.findALLReply(id);
             model.addAttribute("replyList",replyList);
         }
         model.addAttribute("words",words);

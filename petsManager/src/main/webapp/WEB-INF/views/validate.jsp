@@ -65,13 +65,13 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">住址:</label>
                 <div class="col-md-8">
-                    <input type="text" name="address" class="form-control"/>
+                    <input type="text" name="address" class="form-control" required/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-3 control-label">从事工作:</label>
                 <div class="col-md-8">
-                    <input type="text" name="job" class="form-control"/>
+                    <input type="text" name="job" class="form-control" required/>
                 </div>
             </div>
             <div class="form-group">
@@ -93,7 +93,7 @@
 <!-- iCheck -->
 <script src="/static/plugins/iCheck/icheck.min.js"></script>
 <script src="/static/dist/js/canvas/canvas-nest-class.js"></script>
-<script src="/static/dist/js/jquery.validate.min.js"></script>
+<script src="/static/plugins/jquery.validate.min.js"></script>
 <script>
     $(function () {
         new CanvasNest({
@@ -105,6 +105,47 @@
         });
         $("#saveBtn").click(function () {
             $("#saveForm").submit();
+        });
+        //表单校验
+        $("#saveForm").validate({
+            errorClass : 'text-danger',
+            errorElement : 'span',
+            rules : {
+                mobile :{
+                    "required" : true,
+                    "minlength": 11
+                },
+                address : {
+                    "required" : true,
+                    "minlength" : 5
+                },
+                job :{
+                    "required" : true,
+                    "minlength" : 1
+                },
+                cardnum : {
+                    "required" : true,
+                    "minlength": 18
+                }
+            },
+            messages :{
+                mobile :{
+                    "required" : "请输入联系电话",
+                    "minlength": "联系电话长度不得少于11位"
+                },
+                address : {
+                    "required" : "请输入住址",
+                    "minlength" : "住址长度至少为5位"
+                },
+                job :{
+                    "required" : "请输入工作",
+                    "minlength" : "工作长度至少为1位"
+                },
+                cardnum : {
+                    "required" : "请输入身份证号",
+                    "minlength": "身份证号长度不得少于18位"
+                }
+            }
         });
     });
 </script>

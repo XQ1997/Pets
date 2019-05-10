@@ -39,21 +39,6 @@ public class Account implements Serializable {
     private String password;
 
     /**
-     * 一寸照
-     */
-    private String userPhoto;
-
-    /**
-     * 身份证正面照
-     */
-    private String cardInPhoto;
-
-    /**
-     * 身份证背面照
-     */
-    private String cardOutPhoto;
-
-    /**
      * 用户编号
      */
     private String number;
@@ -136,30 +121,6 @@ public class Account implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getUserPhoto() {
-        return userPhoto;
-    }
-
-    public void setUserPhoto(String userPhoto) {
-        this.userPhoto = userPhoto;
-    }
-
-    public String getCardInPhoto() {
-        return cardInPhoto;
-    }
-
-    public void setCardInPhoto(String cardInPhoto) {
-        this.cardInPhoto = cardInPhoto;
-    }
-
-    public String getCardOutPhoto() {
-        return cardOutPhoto;
-    }
-
-    public void setCardOutPhoto(String cardOutPhoto) {
-        this.cardOutPhoto = cardOutPhoto;
     }
 
     public String getNumber() {

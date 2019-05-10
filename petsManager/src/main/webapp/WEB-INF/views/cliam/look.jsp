@@ -10,16 +10,6 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <jsp:include page="../include/css.jsp"/>
-    <style>
-        .photo {
-            width: 300px;
-            height: 300px;
-            border: 2px dashed #ccc;
-            margin-top: 20px;
-            text-align: center;
-            line-height: 300px;
-        }
-    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -98,30 +88,6 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">关联资质</h3>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="photo">
-                                <img src="http://pmupn7ccj.bkt.clouddn.com/${account.userPhoto}-preview" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="photo">
-                                <img src="http://pmupn7ccj.bkt.clouddn.com/${account.cardInPhoto}-preview" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="photo">
-                                <img src="http://pmupn7ccj.bkt.clouddn.com/${account.cardOutPhoto}-preview" alt="">
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

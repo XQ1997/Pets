@@ -9,24 +9,6 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <jsp:include page="../include/css.jsp"/>
-    <link rel="stylesheet" href="/static/plugins/uploader/webuploader.css">
-    <style>
-        .photo {
-            width: 100%;
-            height: 300px;
-            border: 2px dashed #ccc;
-            margin-top: 20px;
-            text-align: center;
-            line-height: 300px;
-        }
-        .custphoto {
-            width: 150px;
-            height: 200px;
-            border: 2px dashed #ccc;
-            margin-top: 20px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -55,81 +37,49 @@
                 </div>
                 <div class="box-body">
                     <form method="post" id="saveForm" class="form-horizontal">
-                        <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">用户姓名:</label>
                             <div class="col-md-8">
-                                <br>
-                                <input type="hidden" name="cardInPhoto" id="custPhotoIn">
-                                <input type="hidden" name="cardOutPhoto" id="custPhotoOut">
-                                <input type="hidden" name="userPhoto" id="userPhoto">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">用户姓名:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="username" class="form-control" value="${account.username}" autofocus/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">联系电话:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="mobile" class="form-control" value="${account.mobile}"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">年龄:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="age" class="form-control" value="${account.age}"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">角色</label>
-                                    <div class="col-md-8">
-                                        <select name="role" class="form-control">
-                                            <option value="管理员" ${account.role == "管理员" ? 'selected' : ''}>管理员</option>
-                                            <option value="领养人" ${account.role == "领养人" ? 'selected' : ''}>领养人</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">住址:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="address" class="form-control" value="${account.address}"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">从事工作:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="job" class="form-control" value="${account.job}"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">身份证号:</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="cardnum" class="form-control" value="${account.cardnum}"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="col-md-6">
-                                    <div id="picker3">用户一寸照片</div>
-                                    <div class="custphoto" id="photo">
-                                        <img src="http://pqtuic9ww.bkt.clouddn.com/${account.userPhoto}-custphoto" alt="">
-                                    </div>
-                                </div>
+                                <input type="text" name="username" class="form-control" value="${account.username}" autofocus required/>
                             </div>
                         </div>
-                        <br>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div id="picker">身份证正面照片</div>
-                                <div class="photo" id="userinPhoto">
-                                    <img src="http://pqtuic9ww.bkt.clouddn.com/${account.cardInPhoto}-photo" alt="">
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">联系电话:</label>
+                            <div class="col-md-8">
+                                <input type="text" name="mobile" class="form-control" value="${account.mobile}" required/>
                             </div>
-                            <div class="col-md-6">
-                                <div id="picker2">身份证反面照片</div>
-                                <div class="photo" id="userblackPhoto">
-                                    <img src="http://pqtuic9ww.bkt.clouddn.com/${account.cardOutPhoto}-photo" alt="">
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">年龄:</label>
+                            <div class="col-md-8">
+                                <input type="text" name="age" class="form-control" value="${account.age}" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">角色</label>
+                            <div class="col-md-8">
+                                <select name="role" class="form-control">
+                                    <option value="管理员" ${account.role == "管理员" ? 'selected' : ''}>管理员</option>
+                                    <option value="领养人" ${account.role == "领养人" ? 'selected' : ''}>领养人</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">住址:</label>
+                            <div class="col-md-8">
+                                <input type="text" name="address" class="form-control" value="${account.address}" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">从事工作:</label>
+                            <div class="col-md-8">
+                                <input type="text" name="job" class="form-control" value="${account.job}" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">身份证号:</label>
+                            <div class="col-md-8">
+                                <input type="text" name="cardnum" class="form-control" value="${account.cardnum}" required/>
                             </div>
                         </div>
                     </form>
@@ -143,167 +93,75 @@
     <jsp:include page="../include/footer.jsp"></jsp:include>
 </div>
 <jsp:include page="../include/js.jsp"></jsp:include>
-<script src="/static/plugins/uploader/webuploader.min.js"></script>
+<script src="/static/plugins/jquery.validate.min.js"></script>
 <script>
     $(function () {
-        //初始化客户一寸照片
-        var uploader = WebUploader.create({
-            //选完文件之后，是否自动上传
-            auto:true,
-            // swf文件路径
-            swf:'/static/plugins/uploader/Uploader.swf',
-
-            // 文件接收服务端。
-            server: 'http://upload-z1.qiniup.com',
-            //文件上传域的name
-            fileVal:'file',
-            //文件上传请求的参数表，每次发送都会发送发送此对象中的参数
-            formData:{
-                "token":"${token}"
-            },
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#picker3',
-            //只允许接收图片文件
-            accept:{
-                title:'Images',
-                extensions:'gif,jpg,jpeg,bmp,png',
-                mineTypes:'image/*'
-            }
-        });
-        var index = -1;
-        //文件成功。失败处理
-        uploader.on( 'uploadStart', function( file ) {
-            index = layer.load(1);
-        });
-        uploader.on( 'uploadSuccess', function( file,response ) {
-            //先清空内容
-            $("#photo").html("");
-
-            //获取七牛上图片名称
-            var fileName = response.key;
-            //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-custphoto");
-            $img.appendTo($("#photo"));
-
-            //将key存放进隐藏域中
-            $("#userPhoto").val(fileName);
-
-            layer.msg("上传成功");
-        });
-        uploader.on( 'uploadError', function( file ) {
-            layer.msg("服务器异常");
-        });
-        uploader.on( 'uploadComplete', function( file ) {
-            layer.close(index);
-        });
-
-        //初始化身份证照片正面
-        var uploader = WebUploader.create({
-            //选完文件之后，是否自动上传
-            auto:true,
-            // swf文件路径
-            swf:'/static/plugins/uploader/Uploader.swf',
-
-            // 文件接收服务端。
-            server: 'http://upload-z1.qiniup.com',
-            //文件上传域的name
-            fileVal:'file',
-            //文件上传请求的参数表，每次发送都会发送发送此对象中的参数
-            formData:{
-                "token":"${token}"
-            },
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#picker',
-            //只允许接收图片文件
-            accept:{
-                title:'Images',
-                extensions:'gif,jpg,jpeg,bmp,png',
-                mineTypes:'image/*'
-            }
-        });
-        var index = -1;
-        //文件成功。失败处理
-        uploader.on( 'uploadStart', function( file ) {
-            index = layer.load(1);
-        });
-        uploader.on( 'uploadSuccess', function( file,response ) {
-            //先清空内容
-            $("#userinPhoto").html("");
-
-            //获取七牛上图片名称
-            var fileName = response.key;
-            //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-photo");
-            $img.appendTo($("#userinPhoto"));
-
-            //将key存放进隐藏域中
-            $("#cardInPhoto").val(fileName);
-
-            layer.msg("上传成功");
-        });
-        uploader.on( 'uploadError', function( file ) {
-            layer.msg("服务器异常");
-        });
-        uploader.on( 'uploadComplete', function( file ) {
-            layer.close(index);
-        });
-
-        //初始化身份证照片反面
-        var uploader = WebUploader.create({
-            //选完文件之后，是否自动上传
-            auto:true,
-            // swf文件路径
-            swf:'${pageContext.request.contextPath}/static/plugins/uploader/Uploader.swf',
-
-            // 文件接收服务端。
-            server: 'http://upload-z1.qiniup.com',
-            //文件上传域的name
-            fileVal:'file',
-            //文件上传请求的参数表，每次发送都会发送发送此对象中的参数
-            formData:{
-                "token":"${token}"
-            },
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#picker2',
-            //只允许接收图片文件
-            accept:{
-                title:'Images',
-                extensions:'gif,jpg,jpeg,bmp,png',
-                mineTypes:'image/*'
-            }
-        });
-        var index = -1;
-        //文件成功。失败处理
-        uploader.on( 'uploadStart', function( file ) {
-            index = layer.load(1);
-        });
-        uploader.on( 'uploadSuccess', function( file,response ) {
-            //先清空内容
-            $("#userblackPhoto").html("");
-
-            //获取七牛上图片名称
-            var fileName = response.key;
-            //动态添加从七牛请求的图像
-            var $img = $("<img>").attr("src","http://pqtuic9ww.bkt.clouddn.com/" + fileName + "-photo");
-            $img.appendTo($("#userblackPhoto"));
-
-            //将key存放进隐藏域中
-            $("#custPhotoOut").val(fileName);
-
-            layer.msg("上传成功");
-        });
-        uploader.on( 'uploadError', function( file ) {
-            layer.msg("服务器异常");
-        });
-        uploader.on( 'uploadComplete', function( file ) {
-            layer.close(index);
-        });
-
         $("#saveBtn").click(function () {
             $("#saveForm").submit();
+        });
+        $("#saveForm").validate({
+            errorClass : 'text-danger',
+            errorElement : 'span',
+            rules : {
+                mobile :{
+                    "required" : true,
+                    "minlength": 11
+                },
+                username :{
+                    "required" : true,
+                    "minlength" : 1
+                },
+                password : {
+                    "required" : true,
+                    "rangelength":[5,17]
+                },
+                age :{
+                    "required" : true,
+                    "range":[18,70]
+                },
+                address : {
+                    "required" : true,
+                    "minlength" : 5
+                },
+                job :{
+                    "required" : true,
+                    "minlength" : 1
+                },
+                cardnum : {
+                    "required" : true,
+                    "minlength": 18
+                }
+            },
+            messages :{
+                mobile :{
+                    "required" : "请输入联系电话",
+                    "minlength": "联系电话长度不得少于11位"
+                },
+                username :{
+                    "required" : "请输入用户名",
+                    "minlength" : "用户名至少一位"
+                },
+                password : {
+                    "required" : "请输入密码",
+                    "rangelength":"密码长度为5-17位"
+                },
+                age :{
+                    "required" : "请输入年龄",
+                    "range":"年龄为大于18岁，不超过70岁"
+                },
+                address : {
+                    "required" : "请输入住址",
+                    "minlength" : "住址长度至少为5位"
+                },
+                job :{
+                    "required" : "请输入工作",
+                    "minlength" : "工作长度至少为1位"
+                },
+                cardnum : {
+                    "required" : "请输入身份证号",
+                    "minlength": "身份证号长度不得少于18位"
+                }
+            }
         });
     })
 </script>

@@ -60,6 +60,7 @@
     <jsp:include page="include/footer.jsp"></jsp:include>
 </div>
 <jsp:include page="include/js.jsp"></jsp:include>
+<script src="/static/plugins/jquery.validate.min.js"></script>
 <script>
     $(function () {
         $("#saveBtn").click(function () {
@@ -68,6 +69,31 @@
             }, function(){
                 $("#saveForm").submit();
             });
+        });
+        //表单校验
+        $("#saveForm").validate({
+            errorClass : 'text-danger',
+            errorElement : 'span',
+            rules : {
+                oldpass : {
+                    "required" : true,
+                    "rangelength":[5,17]
+                },
+                newpass : {
+                    "required" : true,
+                    "rangelength":[5,17]
+                }
+            },
+            messages :{
+                oldpass : {
+                    "required" : "请输入原密码",
+                    "rangelength":"密码长度为5-17位"
+                },
+                newpass : {
+                    "required" : "请输入新密码",
+                    "rangelength":"密码长度为5-17位"
+                }
+            }
         });
     })
 </script>

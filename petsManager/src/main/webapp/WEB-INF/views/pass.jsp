@@ -56,7 +56,7 @@
                 <label class="col-md-3 control-label">新密码:</label>
                 <div class="col-md-8">
                     <input type="hidden" name="mobile" value="${mobile}" class="form-control"/>
-                    <input type="password" name="password" class="form-control"/>
+                    <input type="password" name="password" class="form-control" required/>
                 </div>
             </div>
         </form>
@@ -70,6 +70,7 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/dist/js/canvas/canvas-nest-class.js"></script>
+<script src="/static/plugins/jquery.validate.min.js"></script>
 <script>
     $(function () {
         new CanvasNest({
@@ -81,6 +82,23 @@
         });
         $("#saveBtn").click(function () {
             $("#saveForm").submit();
+        });
+        //表单校验
+        $("#saveForm").validate({
+            errorClass : 'text-danger',
+            errorElement : 'span',
+            rules : {
+                password : {
+                    "required" : true,
+                    "rangelength":[5,17]
+                }
+            },
+            messages :{
+                password : {
+                    "required" : "请输入密码",
+                    "rangelength":"密码长度为5-17位"
+                }
+            }
         });
     });
 </script>

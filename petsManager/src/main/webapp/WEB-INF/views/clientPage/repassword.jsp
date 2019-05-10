@@ -60,10 +60,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <%@ include file="../client/footer.jsp"%>
 <%@ include file="../client/js.jsp"%>
+<script src="/static/plugins/jquery.validate.min.js"></script>
 <script>
     $(function(){
         $("#saveBtn").click(function(){
             $("#addCliam").submit();
+        });
+        //表单校验
+        $("#addCliam").validate({
+            errorClass : 'text-danger',
+            errorElement : 'span',
+            rules : {
+                oldpass : {
+                    "required" : true,
+                    "rangelength":[5,17]
+                },
+                newpass : {
+                    "required" : true,
+                    "rangelength":[5,17]
+                }
+            },
+            messages :{
+                oldpass : {
+                    "required" : "请输入原密码",
+                    "rangelength":"密码长度为5-17位"
+                },
+                newpass : {
+                    "required" : "请输入新密码",
+                    "rangelength":"密码长度为5-17位"
+                }
+            }
         });
     })
 </script>

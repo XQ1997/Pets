@@ -40,25 +40,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="form-group has-feedback">
                     <label class="col-md-3 control-label">用户姓名:</label>
                     <div class="col-md-8">
-                        <input type="text" name="username" class="form-control" value="${account.username}" autofocus/>
+                        <input type="text" name="username" class="form-control" value="${account.username}" autofocus required/>
                     </div>
                 </div>
                 <div class="form-group has-feedback">
                     <label class="col-md-3 control-label">年龄:</label>
                     <div class="col-md-8">
-                        <input type="text" name="age" class="form-control" value="${account.age}"/>
+                        <input type="text" name="age" class="form-control" value="${account.age}" required/>
                     </div>
                 </div>
                 <div class="form-group has-feedback">
                     <label class="col-md-3 control-label">住址:</label>
                     <div class="col-md-8">
-                        <input type="text" name="address" class="form-control" value="${account.address}"/>
+                        <input type="text" name="address" class="form-control" value="${account.address}" required/>
                     </div>
                 </div>
                 <div class="form-group has-feedback">
                     <label class="col-md-3 control-label">从事工作:</label>
                     <div class="col-md-8">
-                        <input type="text" name="job" class="form-control" value="${account.job}"/>
+                        <input type="text" name="job" class="form-control" value="${account.job}" required/>
                     </div>
                 </div>
             </form>
@@ -70,10 +70,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <%@ include file="../client/footer.jsp"%>
 <%@ include file="../client/js.jsp"%>
+<script src="/static/plugins/jquery.validate.min.js"></script>
 <script>
     $(function(){
         $("#saveBtn").click(function(){
             $("#addCliam").submit();
+        });
+        $("#addCliam").validate({
+            errorClass : 'text-danger',
+            errorElement : 'span',
+            rules : {
+                username :{
+                    "required" : true,
+                    "minlength" : 1
+                },
+                age :{
+                    "required" : true,
+                    "range":[18,70]
+                },
+                address : {
+                    "required" : true,
+                    "minlength" : 5
+                },
+                job :{
+                    "required" : true,
+                    "minlength" : 1
+                }
+            },
+            messages :{
+                username :{
+                    "required" : "请输入用户名",
+                    "minlength" : "用户名至少一位"
+                },
+                age :{
+                    "required" : "请输入年龄",
+                    "range":"年龄为大于18岁，不超过70岁"
+                },
+                address : {
+                    "required" : "请输入住址",
+                    "minlength" : "住址长度至少为5位"
+                },
+                job :{
+                    "required" : "请输入工作",
+                    "minlength" : "工作长度至少为1位"
+                }
+            }
         });
     })
 </script>

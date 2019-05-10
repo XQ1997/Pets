@@ -151,30 +151,6 @@
                     </table>
                 </div>
             </div>
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">关联资质</h3>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="photo">
-                                <img src="http://pmupn7ccj.bkt.clouddn.com/${account.userPhoto}-preview" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="photo">
-                                <img src="http://pmupn7ccj.bkt.clouddn.com/${account.cardInPhoto}-preview" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="photo">
-                                <img src="http://pmupn7ccj.bkt.clouddn.com/${account.cardOutPhoto}-preview" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
     </div>
     <jsp:include page="../include/footer.jsp"/>

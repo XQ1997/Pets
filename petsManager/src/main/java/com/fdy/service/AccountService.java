@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,8 @@ public class AccountService {
     private NoticeMapper noticeMapper;
     @Autowired
     private ReplyMapper replyMapper;
+    @Autowired
+    private WordReplyMapper wordReplyMapper;
 
     /**
      * 根据电话获得用户对象
@@ -375,14 +378,20 @@ public class AccountService {
      * @param reply
      * @param id
      */
+    @Transactional(rollbackFor = RuntimeException.class)
     public void saveReply(Reply reply, Integer id) {
         Words words = wordsMapper.selectByPrimaryKey(id);
+        System.out.println(reply);
         if(words != null){
             reply.setWordname(words.getUsername());
             reply.setCreateTime(new Date());
             replyMapper.insertSelective(reply);
-            logger.info("{}回复成功",reply);
         }
+        System.out.println(reply.getId());
+        WordReply wordReply = new WordReply();
+        wordReply.setWordId(id);
+        wordReply.setReplyId(reply.getId());
+        wordReplyMapper.insertSelective(wordReply);
     }
 
     /**删除留言
@@ -406,13 +415,18 @@ public class AccountService {
     }
 
     /**根据留言中的留言人姓名作为回复中的留言人查询所有回复内容
-     * @param username
+     * @param id
      * @return
      */
-    public List<Reply> findALLReply(String username) {
-        ReplyExample replyExample = new ReplyExample();
-        replyExample.createCriteria().andWordnameEqualTo(username);
-        List<Reply> replyList = replyMapper.selectByExample(replyExample);
+    public List<Reply> findALLReply(Integer id) {
+        List<WordReply> wordReplyList = findAllID(id);
+        List<Reply> replyList = new ArrayList();;
+        if(wordReplyList != null && !wordReplyList.isEmpty()){
+            for(WordReply wordReply : wordReplyList){
+                 Reply reply = replyMapper.selectByPrimaryKey(wordReply.getReplyId());
+                 replyList.add(reply);
+            }
+        }
         return replyList;
     }
 
@@ -486,13 +500,23 @@ public class AccountService {
      * @param username
      * @return
      */
-    public Words findWordsByAcc(String username) {
+    public List<Words> findWordsByAcc(String username) {
         WordsExample wordsExample = new WordsExample();
         wordsExample.createCriteria().andUsernameEqualTo(username);
         List<Words> wordsList = wordsMapper.selectByExample(wordsExample);
         if(wordsList != null && !wordsList.isEmpty()){
-            return wordsList.get(0);
+            return wordsList;
         }
         return null;
+    }
+
+    /**根据留言id在关联关系表中查询所有的记录
+     * @param id
+     * @return
+     */
+    public List<WordReply> findAllID(Integer id) {
+        WordReplyExample wordReplyExample = new WordReplyExample();
+        wordReplyExample.createCriteria().andWordIdEqualTo(id);
+        return wordReplyMapper.selectByExample(wordReplyExample);
     }
 }

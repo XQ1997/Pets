@@ -75,7 +75,7 @@
         </c:if>
         <form method="post" id="loginForm">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Mobile" name="mobile" value="${mobile}" autofocus required">
+                <input type="text" class="form-control" placeholder="Mobile" name="mobile" value="${mobile}" autofocus required>
                 <span class="glyphicon glyphicon-phone form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -113,6 +113,7 @@
 <!-- iCheck -->
 <script src="/static/plugins/iCheck/icheck.min.js"></script>
 <script src="/static/dist/js/canvas/canvas-nest-class.js"></script>
+<script src="/static/plugins/jquery.validate.min.js"></script>
 <script>
     $(function () {
         new CanvasNest({
@@ -140,6 +141,31 @@
 		$("#loginBtn").click(function(){
 			$("#loginForm").submit();
 		});
+        //表单校验
+        $("#saveForm").validate({
+            errorClass : 'text-danger',
+            errorElement : 'span',
+            rules : {
+                mobile :{
+                    "required" : true,
+                    "minlength": 11
+                },
+                password : {
+                    "required" : true,
+                    "rangelength":[5,17]
+                }
+            },
+            messages :{
+                mobile :{
+                    "required" : "请输入联系电话",
+                    "minlength": "联系电话长度不得少于11位"
+                },
+                password : {
+                    "required" : "请输入密码",
+                    "rangelength":"密码长度为5-17位"
+                }
+            }
+        });
     });
 </script>
 </body>

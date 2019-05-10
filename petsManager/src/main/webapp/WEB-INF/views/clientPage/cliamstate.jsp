@@ -32,7 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="port-head">
             <h3>领养申请信息查看</h3>
-            <a href="/cliam/state" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>查看申请状态</a>
+            <a href="/client/cliam" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>返回</a>
         </div>
         <div class="portfolio-bottom">
             <c:forEach items="${cliamList}" var="cliam">

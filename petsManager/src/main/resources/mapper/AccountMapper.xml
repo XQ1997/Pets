@@ -11,9 +11,6 @@
     <result column="cardnum" jdbcType="VARCHAR" property="cardnum" />
     <result column="job" jdbcType="VARCHAR" property="job" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="user_photo" jdbcType="VARCHAR" property="userPhoto" />
-    <result column="card_in_photo" jdbcType="VARCHAR" property="cardInPhoto" />
-    <result column="card_out_photo" jdbcType="VARCHAR" property="cardOutPhoto" />
     <result column="number" jdbcType="VARCHAR" property="number" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
@@ -78,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, role, username, age, sex, address, cardnum, job, password, user_photo, card_in_photo, 
-    card_out_photo, number, mobile, create_time, update_time
+    id, role, username, age, sex, address, cardnum, job, password, number, mobile, create_time, 
+    update_time
   </sql>
   <select id="selectByExample" parameterType="com.fdy.entity.AccountExample" resultMap="BaseResultMap">
     select
@@ -115,13 +112,11 @@
     insert into t_account (id, role, username, 
       age, sex, address, 
       cardnum, job, password, 
-      user_photo, card_in_photo, card_out_photo, 
       number, mobile, create_time, 
       update_time)
     values (#{id,jdbcType=INTEGER}, #{role,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{cardnum,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{userPhoto,jdbcType=VARCHAR}, #{cardInPhoto,jdbcType=VARCHAR}, #{cardOutPhoto,jdbcType=VARCHAR}, 
       #{number,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
       #{updateTime,jdbcType=DATE})
   </insert>
@@ -154,15 +149,6 @@
       </if>
       <if test="password != null">
         password,
-      </if>
-      <if test="userPhoto != null">
-        user_photo,
-      </if>
-      <if test="cardInPhoto != null">
-        card_in_photo,
-      </if>
-      <if test="cardOutPhoto != null">
-        card_out_photo,
       </if>
       <if test="number != null">
         number,
@@ -204,15 +190,6 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="userPhoto != null">
-        #{userPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="cardInPhoto != null">
-        #{cardInPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="cardOutPhoto != null">
-        #{cardOutPhoto,jdbcType=VARCHAR},
       </if>
       <if test="number != null">
         #{number,jdbcType=VARCHAR},
@@ -264,15 +241,6 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.userPhoto != null">
-        user_photo = #{record.userPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cardInPhoto != null">
-        card_in_photo = #{record.cardInPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cardOutPhoto != null">
-        card_out_photo = #{record.cardOutPhoto,jdbcType=VARCHAR},
-      </if>
       <if test="record.number != null">
         number = #{record.number,jdbcType=VARCHAR},
       </if>
@@ -301,9 +269,6 @@
       cardnum = #{record.cardnum,jdbcType=VARCHAR},
       job = #{record.job,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      user_photo = #{record.userPhoto,jdbcType=VARCHAR},
-      card_in_photo = #{record.cardInPhoto,jdbcType=VARCHAR},
-      card_out_photo = #{record.cardOutPhoto,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=DATE},
@@ -339,15 +304,6 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="userPhoto != null">
-        user_photo = #{userPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="cardInPhoto != null">
-        card_in_photo = #{cardInPhoto,jdbcType=VARCHAR},
-      </if>
-      <if test="cardOutPhoto != null">
-        card_out_photo = #{cardOutPhoto,jdbcType=VARCHAR},
-      </if>
       <if test="number != null">
         number = #{number,jdbcType=VARCHAR},
       </if>
@@ -373,9 +329,6 @@
       cardnum = #{cardnum,jdbcType=VARCHAR},
       job = #{job,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      user_photo = #{userPhoto,jdbcType=VARCHAR},
-      card_in_photo = #{cardInPhoto,jdbcType=VARCHAR},
-      card_out_photo = #{cardOutPhoto,jdbcType=VARCHAR},
       number = #{number,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},
