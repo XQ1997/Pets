@@ -88,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $(function(){
         $(".confirm").click(function () {
             var id = $(this).attr("rel");
-            layer.prompt("确认",function (val, index) {
+            layer.prompt({title: '输入领养/托管人姓名'},function (val, index) {
                 layer.close(index);
                 $.ajax({
                     url: '/client/pet/' + id + '/confirm?val='+ val,
