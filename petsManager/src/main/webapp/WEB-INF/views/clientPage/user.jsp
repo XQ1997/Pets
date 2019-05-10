@@ -36,6 +36,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <a class="btn btn-success pull-right" href="/client/repassword"><i class="fa fa-edit"></i>修改密码</a>
         </div>
         <div class="portfolio-bottom">
+            <c:if test="${not empty message}">
+                <div class="alert alert-success text-center">${message}</div>
+            </c:if>
             <table class="table">
                 <tbody>
                 <tr>

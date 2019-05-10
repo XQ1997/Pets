@@ -134,11 +134,17 @@ public class AccountService {
     }
 
     /**更新当前用户信息
+     * @param accountId
      * @param account
      */
-    public void updateAcc(Account account) {
-        account.setUpdateTime(new Date());
-        accountMapper.updateByPrimaryKeySelective(account);
+    public void updateAcc(Integer accountId, Account account) {
+        Account oldAcc = findById(accountId);
+        oldAcc.setUsername(account.getUsername());
+        oldAcc.setAge(account.getAge());
+        oldAcc.setAddress(account.getAddress());
+        oldAcc.setJob(account.getJob());
+        oldAcc.setUpdateTime(new Date());
+        accountMapper.updateByPrimaryKeySelective(oldAcc);
         logger.info("{}用户更新成功",account);
     }
 
@@ -414,7 +420,7 @@ public class AccountService {
         return wordsMapper.selectByPrimaryKey(id);
     }
 
-    /**根据留言中的留言人姓名作为回复中的留言人查询所有回复内容
+    /**根据留言id去关联关系表中查询所有的回复id并进行封装
      * @param id
      * @return
      */

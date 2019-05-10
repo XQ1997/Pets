@@ -71,10 +71,10 @@ public class UserController {
     /** 保存更新后的用户信息
      * @return
      */
-    @PostMapping("/{id:\\d+}/edit")
-    public String updatepet(Account account,RedirectAttributes redirectAttributes){
+    @PostMapping("/{accountId:\\d+}/edit")
+    public String updatepet(@PathVariable Integer accountId,Account account,RedirectAttributes redirectAttributes){
         try{
-            accountService.updateAcc(account);
+            accountService.updateAcc(accountId, account);
             redirectAttributes.addFlashAttribute("message","修改成功");
         }catch (ServiceException e){
             redirectAttributes.addFlashAttribute("message",e.getMessage());

@@ -33,7 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="port-head">
             <h3>宠物详细信息</h3>
             <c:if test="${pets.mobile == mobile}">
-                <a href="javascript:;" rel="${pets.id}" class="confirm btn btn-sm btn-success pull-right">确认</a>
+                <a href="javascript:;" rel="${pets.id}" class="confirm btn btn-sm btn-success pull-right">确认领养</a>
             </c:if>
             <a href="/client/pet" class="btn btn-sm btn-info pull-right">返回</a>
         </div>

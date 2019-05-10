@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**客户端控制器
@@ -121,7 +122,8 @@ public class ClientController {
      */
     @GetMapping("/user")
     public String usermanager(Model model){
-        model.addAttribute("account",shiroUtil.getCurrAcc());
+        Account account = accountService.findById(shiroUtil.getCurrAcc().getId());
+        model.addAttribute("account",account);
         return "clientPage/user";
     }
 
@@ -139,14 +141,22 @@ public class ClientController {
     @GetMapping("/words")
     public String words(Model model){
         List<Words> wordsList = accountService.findWordsByAcc(shiroUtil.getCurrAcc().getUsername());
-        model.addAttribute("wordsList",wordsList);
-        if(wordsList != null){
-            for(Words words : wordsList){
-                List<Reply> replyList = accountService.findALLReply(words.getId());
-                model.addAttribute("replyList",replyList);
-            }
-        }
+        model.addAttribute("wordsLists",wordsList);
         return "clientPage/words";
+    }
+
+    /**查看回复内容
+     * @return
+     */
+    @GetMapping("/{id:\\d+}/lookreply")
+    public String lookreply(@PathVariable Integer id, Model model){
+        Words words = accountService.findWordsById(id);
+        if(words != null){
+            List<Reply> replyList = accountService.findALLReply(id);
+            model.addAttribute("replyList",replyList);
+        }
+        model.addAttribute("words",words);
+        return "clientPage/lookreply";
     }
 
     /**保存留言信息
@@ -204,10 +214,10 @@ public class ClientController {
     /** 保存更新后的用户信息
      * @return
      */
-    @PostMapping("/{id:\\d+}/edit")
-    public String updateUser(Account account,RedirectAttributes redirectAttributes){
+    @PostMapping("/{accountId:\\d+}/edit")
+    public String updateUser(@PathVariable Integer accountId,Account account,RedirectAttributes redirectAttributes){
         try{
-            accountService.updateAcc(account);
+            accountService.updateAcc(accountId,account);
             redirectAttributes.addFlashAttribute("message","修改成功");
         }catch (ServiceException e){
             redirectAttributes.addFlashAttribute("message",e.getMessage());
