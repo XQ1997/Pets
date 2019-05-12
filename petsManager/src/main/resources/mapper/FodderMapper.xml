@@ -5,8 +5,6 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="number" jdbcType="INTEGER" property="number" />
-    <result column="price" jdbcType="DOUBLE" property="price" />
-    <result column="totalnum" jdbcType="DOUBLE" property="totalnum" />
     <result column="update_time" jdbcType="DATE" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, type, number, price, totalnum, update_time
+    id, type, number, update_time
   </sql>
   <select id="selectByExample" parameterType="com.fdy.entity.FodderExample" resultMap="BaseResultMap">
     select
@@ -102,11 +100,9 @@
   </delete>
   <insert id="insert" parameterType="com.fdy.entity.Fodder">
     insert into t_fodder (id, type, number, 
-      price, totalnum, update_time
-      )
+      update_time)
     values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{price,jdbcType=DOUBLE}, #{totalnum,jdbcType=DOUBLE}, #{updateTime,jdbcType=DATE}
-      )
+      #{updateTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.fdy.entity.Fodder">
     insert into t_fodder
@@ -119,12 +115,6 @@
       </if>
       <if test="number != null">
         number,
-      </if>
-      <if test="price != null">
-        price,
-      </if>
-      <if test="totalnum != null">
-        totalnum,
       </if>
       <if test="updateTime != null">
         update_time,
@@ -140,12 +130,6 @@
       <if test="number != null">
         #{number,jdbcType=INTEGER},
       </if>
-      <if test="price != null">
-        #{price,jdbcType=DOUBLE},
-      </if>
-      <if test="totalnum != null">
-        #{totalnum,jdbcType=DOUBLE},
-      </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=DATE},
       </if>
@@ -157,10 +141,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-    <select id="countByType" resultType="java.util.Map">
-      select totalnum,type from t_fodder group by type
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map">
     update t_fodder
     <set>
       <if test="record.id != null">
@@ -171,12 +152,6 @@
       </if>
       <if test="record.number != null">
         number = #{record.number,jdbcType=INTEGER},
-      </if>
-      <if test="record.price != null">
-        price = #{record.price,jdbcType=DOUBLE},
-      </if>
-      <if test="record.totalnum != null">
-        totalnum = #{record.totalnum,jdbcType=DOUBLE},
       </if>
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=DATE},
@@ -191,8 +166,6 @@
     set id = #{record.id,jdbcType=INTEGER},
       type = #{record.type,jdbcType=VARCHAR},
       number = #{record.number,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=DOUBLE},
-      totalnum = #{record.totalnum,jdbcType=DOUBLE},
       update_time = #{record.updateTime,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -207,12 +180,6 @@
       <if test="number != null">
         number = #{number,jdbcType=INTEGER},
       </if>
-      <if test="price != null">
-        price = #{price,jdbcType=DOUBLE},
-      </if>
-      <if test="totalnum != null">
-        totalnum = #{totalnum,jdbcType=DOUBLE},
-      </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=DATE},
       </if>
@@ -223,8 +190,6 @@
     update t_fodder
     set type = #{type,jdbcType=VARCHAR},
       number = #{number,jdbcType=INTEGER},
-      price = #{price,jdbcType=DOUBLE},
-      totalnum = #{totalnum,jdbcType=DOUBLE},
       update_time = #{updateTime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>

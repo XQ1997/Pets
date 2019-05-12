@@ -100,12 +100,16 @@ public class AccountService {
         if(oldAcc == null){
             throw new ServiceException("该用户未注册，请注册后再申请宠物认领");
         }
-        //根据申请记录中是否有该宠物的申请并且该申请的状态为未通过，如果有则提交失败，没有则提交成功
+        //根据申请记录中是否有该宠物的申请并且该申请的状态为已通过，如果有则提交失败，没有则提交成功
         CliamExample cliamExample = new CliamExample();
-        cliamExample.createCriteria().andCliamNameEqualTo(cliam.getPetname()).andStateEqualTo(Cliam.STATE_PASS);
+        cliamExample.createCriteria().andStateEqualTo(Cliam.STATE_PASS);
         List<Cliam> cliamList = cliamMapper.selectByExample(cliamExample);
         if(cliamList != null && !cliamList.isEmpty()){
-            throw new ServiceException("该宠物已经被认领，请重新选择宠物！");
+            for(Cliam c : cliamList){
+                if(c.getPetname().equals(cliam.getPetname())){
+                    throw new ServiceException("该宠物已经被认领，请重新选择宠物！");
+                }
+            }
         }
         cliam.setUsername(account.getUsername());
         cliam.setState(Cliam.STATE_IN);
@@ -122,7 +126,15 @@ public class AccountService {
         CliamExample cliamExample = new CliamExample();
         cliamExample.createCriteria().andMobileEqualTo(mobile);
         List<Cliam> cliamList = cliamMapper.selectByExample(cliamExample);
-        return cliamList;
+        List<Cliam> cliams = new ArrayList<>();
+        if(cliamList != null  && !cliamList.isEmpty()){
+            for(Cliam cliam : cliamList){
+                if(cliam.getState() != null){
+                    cliams.add(cliam);
+                }
+            }
+        }
+        return cliams;
     }
 
     /**根据id查询当前的用户

@@ -39,16 +39,6 @@ public class Pets implements Serializable {
     private String num;
 
     /**
-     * 发送类型
-     */
-    private String sendtype;
-
-    /**
-     * 联系电话
-     */
-    private String mobile;
-
-    /**
      * 宠物照片
      */
     private String image;
@@ -67,11 +57,6 @@ public class Pets implements Serializable {
      * 领养人
      */
     private String accname;
-
-    /**
-     * 认领该宠物的主人
-     */
-    private Integer userid;
 
     private Date createTime;
 
@@ -127,22 +112,6 @@ public class Pets implements Serializable {
         this.num = num;
     }
 
-    public String getSendtype() {
-        return sendtype;
-    }
-
-    public void setSendtype(String sendtype) {
-        this.sendtype = sendtype;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
     public String getImage() {
         return image;
     }
@@ -173,14 +142,6 @@ public class Pets implements Serializable {
 
     public void setAccname(String accname) {
         this.accname = accname;
-    }
-
-    public Integer getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Integer userid) {
-        this.userid = userid;
     }
 
     public Date getCreateTime() {

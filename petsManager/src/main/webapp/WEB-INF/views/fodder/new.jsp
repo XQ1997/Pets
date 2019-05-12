@@ -33,34 +33,18 @@
                 <div class="box-body">
                     <form method="post" id="saveFodder" class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-md-3 control-label">宠物类别:</label>
+                            <label class="col-md-3 control-label">饲料名称:</label>
                             <div class="col-md-8">
-                                <select name="type" class="form-control">
-                                    <option value="哺乳动物类">哺乳动物类</option>
-                                    <option value="鸟类">鸟类</option>
-                                    <option value="爬行动物类">爬行动物类</option>
-                                    <option value="两栖动物类">两栖动物类</option>
-                                    <option value="鱼类">鱼类</option>
-                                    <option value="昆虫动物类">昆虫动物类</option>
-                                    <option value="植物宠物类">植物宠物类</option>
-                                    <option value="茶宠宠物">茶宠宠物</option>
-                                    <option value="另类宠物">另类宠物</option>
-                                    <option value="其他">其他</option>
-                                </select>
+                                <input type="text" name="type" class="form-control" autofocus/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">使用数量:</label>
+                            <label class="col-md-3 control-label">增加数量:</label>
                             <div class="col-md-8">
                                 <input type="text" name="number" class="form-control"/>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">饲料单价:</label>
-                            <div class="col-md-8">
-                                <input type="text" name="price" class="form-control"/>
-                            </div>
-                        </div>
+
                     </form>
                 </div>
                 <div class="box-footer">

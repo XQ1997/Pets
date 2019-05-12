@@ -2,6 +2,7 @@ package com.fdy.controller;
 
 import com.fdy.entity.Account;
 import com.fdy.entity.Cliam;
+import com.fdy.exception.NotFoundException;
 import com.fdy.exception.ServiceException;
 import com.fdy.filestore.Qiniustore;
 import com.fdy.service.AccountService;
@@ -158,5 +159,19 @@ public class UserController {
         List<Cliam> cliamList = accountService.findCliamBymobile(account.getMobile());
         model.addAttribute("cliamList",cliamList);
         return "user/state";
+    }
+
+    /**跳转到用户详情页
+     * @param model
+     * @return
+     */
+    @GetMapping("/{id:\\d+}")
+    public String look(@PathVariable Integer id,Model model){
+        Account account = accountService.findById(id);
+        if(account == null){
+            throw new NotFoundException();
+        }
+        model.addAttribute("account",account);
+        return "user/look";
     }
 }

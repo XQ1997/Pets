@@ -22,7 +22,7 @@
 <div class="wrapper">
   <%@ include file="../include/header.jsp"%>
   <jsp:include page="../include/sider.jsp">
-    <jsp:param name="menu" value="words"/>
+    <jsp:param name="menu" value="home"/>
   </jsp:include>
 
   <!-- 右侧内容部分 -->
@@ -39,16 +39,16 @@
           </div>
         </div>
         <div class="box-body">
-          <form method="post" id="saveword" class="form-horizontal center-block">
+          <form method="post" id="saveword" class="form-horizontal">
             <div class="form-group">
-              <label class="col-md-4 control-label">公告主题:</label>
-              <div class="col-md-8">
+              <label class="col-md-3 control-label">公告主题:</label>
+              <div class="col-md-9">
                 <input type="text" name="title" size=80 autofocus/>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">公告内容:</label>
-              <div class="col-md-8">
+              <label class="col-md-3 control-label">公告内容:</label>
+              <div class="col-md-9">
                 <textarea name="content" rows=7 cols=80></textarea>
               </div>
             </div>

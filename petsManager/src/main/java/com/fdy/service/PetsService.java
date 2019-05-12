@@ -211,17 +211,13 @@ public class PetsService {
         if(fodderList!= null && !fodderList.isEmpty()){
             for(Fodder fodd : fodderList){
                 if(fodder.getType().equals(fodd.getType())){
-                    throw new ServiceException("该宠物类型饲料已创建，请重新选择类型，创建失败！");
+                    throw new ServiceException("该饲料已创建库存，请重新选择！");
                 }
             }
         }
         Integer number = Integer.valueOf(fodder.getNumber());
-        Double price = fodder.getPrice();
-        Double totalnum = number * price;
 
         fodder.setNumber(number);
-        fodder.setPrice(price);
-        fodder.setTotalnum(totalnum);
         fodderMapper.insertSelective(fodder);
         logger.info("新增饲料使用情况成功{}",fodder);
     }

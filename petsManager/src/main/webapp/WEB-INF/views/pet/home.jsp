@@ -50,7 +50,7 @@
             </c:if>
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">流浪宠物信息</h3>
+                    <h3 class="box-title">宠物审核信息</h3>
                     <div class="box-tools pull-right">
                         <a href="/pet/new" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus"></i>新增流浪宠物</a>
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -69,8 +69,6 @@
                                  <th class="text-center">类别</th>
                                  <th class="text-center">当前状态</th>
                                  <th class="text-center">年龄</th>
-                                 <th class="text-center">救助地点</th>
-                                 <th class="text-center">描述</th>
                                  <th class="text-center">#</th>
                              </tr>
                          </thead>
@@ -82,8 +80,6 @@
                                     <td class="text-center"><strong>${pets.type}</strong></td>
                                     <td class="text-center"><strong>${pets.state}</strong></td>
                                     <td class="text-center"><strong>${pets.age}</strong></td>
-                                    <td class="text-center"><strong>${pets.place}</strong></td>
-                                    <td class="text-center"><strong>${pets.content}</strong></td>
                                     <td class="text-center">
                                         <a href="/pet/${pets.id}/edit"><i class="fa fa-edit"></i></a>
                                         <a href="javascript:;" rel="${pets.id}" class="del"><i class="fa fa-trash"></i></a>

@@ -13,7 +13,7 @@
   <%@ include file="../include/css.jsp"%>
   <style>
     .box1{
-      width: 400px;
+      width: 900px;
       height: 100%;
     }
   </style>
@@ -44,8 +44,8 @@
           <table class="table">
             <tbody>
               <tr>
-                <td class="text-muted text-center"><i>${words.username}留言标题为：--${words.title}的内容为:</i></td>
-                <td><textarea disabled>${words.content}</textarea></td>
+                <td class="text-muted text-center text-success"><h4>${words.username}&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;留言标题为:"${words.title}"&nbsp;&nbsp;&nbsp;&nbsp;内容为:</h4></td>
+                <td><textarea disabled rows="4" cols="50">${words.content}</textarea></td>
               </tr>
             </tbody>
           </table>
@@ -55,8 +55,8 @@
             <tbody>
             <c:forEach items="${replyList}" var="reply">
               <tr>
-                <td class="text-muted text-center"><i>${reply.replyname}回复${words.username}的内容:</i></td>
-                <td><textarea disabled>${reply.content}</textarea></td>
+                <td class="text-muted text-center text-info"><h4>${reply.replyname}&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;回复标题为:"${words.title}"&nbsp;&nbsp;&nbsp;&nbsp;内容为:</h4></td>
+                <td><textarea disabled rows="4" cols="50" >${reply.content}</textarea></td>
               </tr>
             </c:forEach>
             </tbody>

@@ -58,9 +58,6 @@
                                  <th class="text-center">角色</th>
                                  <th class="text-center">年龄</th>
                                  <th class="text-center">性别</th>
-                                 <th class="text-center">地址</th>
-                                 <th class="text-center">工作</th>
-                                 <th class="text-center">身份证号</th>
                                  <th class="text-center">联系电话</th>
                                  <th class="text-center">用户编号</th>
                                  <th class="text-center">#</th>
@@ -69,13 +66,10 @@
                          <tbody>
                             <c:forEach items="${pageInfo.list}" var="account">
                                 <tr>
-                                    <td class="text-center"><strong>${account.username}</strong></td>
+                                    <td class="text-center"><strong><a href="/user/${account.id}">${account.username}</a></strong></td>
                                     <td class="text-center"><strong>${account.role}</strong></td>
                                     <td class="text-center"><strong>${account.age}</strong></td>
                                     <td class="text-center"><strong>${account.sex}</strong></td>
-                                    <td class="text-center"><strong>${account.address}</strong></td>
-                                    <td class="text-center"><strong>${account.job}</strong></td>
-                                    <td class="text-center"><strong>${account.cardnum}</strong></td>
                                     <td class="text-center"><strong>${account.mobile}</strong></td>
                                     <td class="text-center"><strong>${account.number}</strong></td>
                                     <td class="text-center">

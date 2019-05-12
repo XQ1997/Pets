@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fdy.mapper.PetsMapper">
-  <resultMap id="BaseResultMap" type="com.fdy.entity.Pets">
+<mapper namespace="com.fdy.mapper.UserpetMapper">
+  <resultMap id="BaseResultMap" type="com.fdy.entity.Userpet">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pet_language_name" jdbcType="VARCHAR" property="petLanguageName" />
     <result column="petname" jdbcType="VARCHAR" property="petname" />
-    <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="num" jdbcType="VARCHAR" property="num" />
+    <result column="ontent" jdbcType="VARCHAR" property="ontent" />
+    <result column="sendtype" jdbcType="VARCHAR" property="sendtype" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="place" jdbcType="VARCHAR" property="place" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="accname" jdbcType="VARCHAR" property="accname" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
     <result column="update_time" jdbcType="DATE" property="updateTime" />
   </resultMap>
@@ -74,16 +75,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, petname, state, age, content, num, image, place, type, accname, create_time, 
-    update_time
+    id, pet_language_name, petname, age, ontent, sendtype, mobile, image, place, state, 
+    username, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="com.fdy.entity.PetsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.fdy.entity.UserpetExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_pets
+    from t_userpet
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,51 +95,54 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_pets
+    from t_userpet
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_pets
+    delete from t_userpet
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fdy.entity.PetsExample">
-    delete from t_pets
+  <delete id="deleteByExample" parameterType="com.fdy.entity.UserpetExample">
+    delete from t_userpet
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fdy.entity.Pets">
-    insert into t_pets (id, petname, state, 
-      age, content, num, 
-      image, place, type, 
-      accname, create_time, update_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{petname,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR}, 
-      #{image,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
-      #{accname,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
-      )
+  <insert id="insert" parameterType="com.fdy.entity.Userpet">
+    insert into t_userpet (id, pet_language_name, petname, 
+      age, ontent, sendtype, 
+      mobile, image, place, 
+      state, username, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{petLanguageName,jdbcType=VARCHAR}, #{petname,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{ontent,jdbcType=VARCHAR}, #{sendtype,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{updateTime,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="com.fdy.entity.Pets">
-    insert into t_pets
+  <insert id="insertSelective" parameterType="com.fdy.entity.Userpet">
+    insert into t_userpet
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
+      <if test="petLanguageName != null">
+        pet_language_name,
+      </if>
       <if test="petname != null">
         petname,
-      </if>
-      <if test="state != null">
-        state,
       </if>
       <if test="age != null">
         age,
       </if>
-      <if test="content != null">
-        content,
+      <if test="ontent != null">
+        ontent,
       </if>
-      <if test="num != null">
-        num,
+      <if test="sendtype != null">
+        sendtype,
+      </if>
+      <if test="mobile != null">
+        mobile,
       </if>
       <if test="image != null">
         image,
@@ -146,11 +150,11 @@
       <if test="place != null">
         place,
       </if>
-      <if test="type != null">
-        type,
+      <if test="state != null">
+        state,
       </if>
-      <if test="accname != null">
-        accname,
+      <if test="username != null">
+        username,
       </if>
       <if test="createTime != null">
         create_time,
@@ -163,20 +167,23 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="petLanguageName != null">
+        #{petLanguageName,jdbcType=VARCHAR},
+      </if>
       <if test="petname != null">
         #{petname,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        #{state,jdbcType=VARCHAR},
       </if>
       <if test="age != null">
         #{age,jdbcType=INTEGER},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
+      <if test="ontent != null">
+        #{ontent,jdbcType=VARCHAR},
       </if>
-      <if test="num != null">
-        #{num,jdbcType=VARCHAR},
+      <if test="sendtype != null">
+        #{sendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
@@ -184,11 +191,11 @@
       <if test="place != null">
         #{place,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
       </if>
-      <if test="accname != null">
-        #{accname,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=DATE},
@@ -198,32 +205,35 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fdy.entity.PetsExample" resultType="java.lang.Long">
-    select count(*) from t_pets
+  <select id="countByExample" parameterType="com.fdy.entity.UserpetExample" resultType="java.lang.Long">
+    select count(*) from t_userpet
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update t_pets
+    update t_userpet
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.petLanguageName != null">
+        pet_language_name = #{record.petLanguageName,jdbcType=VARCHAR},
+      </if>
       <if test="record.petname != null">
         petname = #{record.petname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.state != null">
-        state = #{record.state,jdbcType=VARCHAR},
       </if>
       <if test="record.age != null">
         age = #{record.age,jdbcType=INTEGER},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
+      <if test="record.ontent != null">
+        ontent = #{record.ontent,jdbcType=VARCHAR},
       </if>
-      <if test="record.num != null">
-        num = #{record.num,jdbcType=VARCHAR},
+      <if test="record.sendtype != null">
+        sendtype = #{record.sendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
       </if>
       <if test="record.image != null">
         image = #{record.image,jdbcType=VARCHAR},
@@ -231,11 +241,11 @@
       <if test="record.place != null">
         place = #{record.place,jdbcType=VARCHAR},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=VARCHAR},
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
       </if>
-      <if test="record.accname != null">
-        accname = #{record.accname,jdbcType=VARCHAR},
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=DATE},
@@ -249,40 +259,44 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update t_pets
+    update t_userpet
     set id = #{record.id,jdbcType=INTEGER},
+      pet_language_name = #{record.petLanguageName,jdbcType=VARCHAR},
       petname = #{record.petname,jdbcType=VARCHAR},
-      state = #{record.state,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
-      content = #{record.content,jdbcType=VARCHAR},
-      num = #{record.num,jdbcType=VARCHAR},
+      ontent = #{record.ontent,jdbcType=VARCHAR},
+      sendtype = #{record.sendtype,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR},
       place = #{record.place,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR},
-      accname = #{record.accname,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=DATE},
       update_time = #{record.updateTime,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fdy.entity.Pets">
-    update t_pets
+  <update id="updateByPrimaryKeySelective" parameterType="com.fdy.entity.Userpet">
+    update t_userpet
     <set>
+      <if test="petLanguageName != null">
+        pet_language_name = #{petLanguageName,jdbcType=VARCHAR},
+      </if>
       <if test="petname != null">
         petname = #{petname,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        state = #{state,jdbcType=VARCHAR},
       </if>
       <if test="age != null">
         age = #{age,jdbcType=INTEGER},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
+      <if test="ontent != null">
+        ontent = #{ontent,jdbcType=VARCHAR},
       </if>
-      <if test="num != null">
-        num = #{num,jdbcType=VARCHAR},
+      <if test="sendtype != null">
+        sendtype = #{sendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
@@ -290,11 +304,11 @@
       <if test="place != null">
         place = #{place,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
       </if>
-      <if test="accname != null">
-        accname = #{accname,jdbcType=VARCHAR},
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=DATE},
@@ -305,17 +319,18 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fdy.entity.Pets">
-    update t_pets
-    set petname = #{petname,jdbcType=VARCHAR},
-      state = #{state,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.fdy.entity.Userpet">
+    update t_userpet
+    set pet_language_name = #{petLanguageName,jdbcType=VARCHAR},
+      petname = #{petname,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
-      content = #{content,jdbcType=VARCHAR},
-      num = #{num,jdbcType=VARCHAR},
+      ontent = #{ontent,jdbcType=VARCHAR},
+      sendtype = #{sendtype,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       place = #{place,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      accname = #{accname,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}

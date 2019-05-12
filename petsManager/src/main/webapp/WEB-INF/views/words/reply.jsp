@@ -42,14 +42,14 @@
         <div class="box-body">
           <form method="post" id="saveword" class="form-horizontal center-block">
             <div class="form-group">
-              <label class="col-md-4 control-label">回复人:</label>
-              <div class="col-md-8">
+              <label class="col-md-3 control-label">回复人:</label>
+              <div class="col-md-9">
                 <input type="text" name="replyname"  size=80 value="<shiro:principal property="username"/>"/>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">回复内容:</label>
-              <div class="col-md-8">
+              <label class="col-md-3 control-label">回复内容:</label>
+              <div class="col-md-9">
                 <textarea name="content" rows=7 cols=80 autofocus></textarea>
               </div>
             </div>

@@ -47,7 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
                 <div class="form-group has-feedback">
-                    <label class="col-md-3 control-label">申请理由:</label>
+                    <label class="col-md-3 control-label">申请描述:</label>
                     <div class="col-md-8">
                         <textarea name="content" class="form-control" rows="3" required></textarea>
                     </div>

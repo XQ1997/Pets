@@ -20,16 +20,6 @@ public class Fodder implements Serializable {
     private Integer number;
 
     /**
-     * 该种类饲料单袋单价
-     */
-    private Double price;
-
-    /**
-     * 总共花费总价
-     */
-    private Double totalnum;
-
-    /**
      * 修改时间
      */
     private Date updateTime;
@@ -58,22 +48,6 @@ public class Fodder implements Serializable {
 
     public void setNumber(Integer number) {
         this.number = number;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Double getTotalnum() {
-        return totalnum;
-    }
-
-    public void setTotalnum(Double totalnum) {
-        this.totalnum = totalnum;
     }
 
     public Date getUpdateTime() {

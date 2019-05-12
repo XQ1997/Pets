@@ -38,10 +38,8 @@
                      <table class="table">
                          <thead>
                              <tr>
-                                 <th class="text-center">宠物类别</th>
+                                 <th class="text-center">饲料名称</th>
                                  <th class="text-center">使用数量</th>
-                                 <th class="text-center">支出/花费</th>
-                                 <th class="text-center">单袋饲料单价</th>
                                  <th class="text-center">#</th>
                              </tr>
                          </thead>
@@ -50,8 +48,6 @@
                                 <tr>
                                     <td class="text-center"><strong>${fodder.type}</strong></td>
                                     <td class="text-center"><strong>${fodder.number}</strong></td>
-                                    <td class="text-center"><strong>${fodder.totalnum}</strong></td>
-                                    <td class="text-center"><strong>${fodder.price}</strong></td>
                                     <td class="text-center">
                                         <a href="javascript:;" rel="${fodder.id}" class="add"><i class="glyphicon glyphicon-plus"></i></a>
                                         <a href="javascript:;" rel="${fodder.id}" class="reduce"><i class="glyphicon glyphicon-minus"></i></a>
@@ -72,7 +68,7 @@
     $(function(){
         $(".add").click(function () {
             var id = $(this).attr("rel");
-            layer.prompt(function (val, index) {
+            layer.prompt({title:"请输入增加的库存数量"},function (val, index) {
                 layer.close(index);
                 $.ajax({
                     url: '/fodder/' + id + '/add?val='+ val,
@@ -92,7 +88,7 @@
         });
         $(".reduce").click(function () {
             var id = $(this).attr("rel");
-            layer.prompt(function(val, index) {
+            layer.prompt({title:"请输入减少的库存数量"},function(val, index) {
                 layer.close(index);
                 $.ajax({
                     url:'/fodder/'+id+'/reduce?val='+val,

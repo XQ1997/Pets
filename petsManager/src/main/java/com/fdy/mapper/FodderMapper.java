@@ -3,8 +3,6 @@ package com.fdy.mapper;
 import com.fdy.entity.Fodder;
 import com.fdy.entity.FodderExample;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface FodderMapper {
@@ -29,9 +27,4 @@ public interface FodderMapper {
     int updateByPrimaryKeySelective(Fodder record);
 
     int updateByPrimaryKey(Fodder record);
-
-    /**根据宠物类型返回对应的饲料花费情况
-     * @return
-     */
-    List<Map<String,Object>> countByType();
 }
