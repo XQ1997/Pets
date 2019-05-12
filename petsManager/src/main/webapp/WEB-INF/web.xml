@@ -49,6 +49,7 @@
         <url-pattern>/client/*</url-pattern>
         <url-pattern>/logout</url-pattern>
         <url-pattern>/repassword</url-pattern>
+        <url-pattern>/userpet/*</url-pattern>
     </filter-mapping>
 
     <!--配置中央控制器-->

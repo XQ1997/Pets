@@ -121,46 +121,6 @@ public class UserController {
         return "redirect:/user";
     }
 
-    /**跳转到宠物申请认领页面
-     * @param model
-     * @return
-     */
-    @GetMapping("/cliam")
-    public String cliamPets(Model model){
-        return "user/cliam";
-    }
-
-    /**保存宠物认领申请记录
-     * @param cliam 认领申请记录对象
-     * @param redirectAttributes
-     * @return
-     */
-    @PostMapping("/cliam")
-    public String saveCliam(Cliam cliam,RedirectAttributes redirectAttributes){
-        try{
-            Account account = shiroUtil.getCurrAcc();
-            accountService.saveCliam(account,cliam);
-
-            redirectAttributes.addFlashAttribute("message", "提交成功");
-        }catch (ServiceException e){
-            redirectAttributes.addFlashAttribute("message",e.getMessage());
-        }
-        return "redirect:/user/cliam";
-    }
-
-    /**跳转到查看申请状态页面
-     * @param model
-     * @return
-     */
-    @GetMapping("/state")
-    public String state(Model model){
-        Account account = shiroUtil.getCurrAcc();
-        //根据当前登录账户的电话获取申请记录对象
-        List<Cliam> cliamList = accountService.findCliamBymobile(account.getMobile());
-        model.addAttribute("cliamList",cliamList);
-        return "user/state";
-    }
-
     /**跳转到用户详情页
      * @param model
      * @return

@@ -56,11 +56,13 @@ public class ClientController {
     @GetMapping("/pet")
     public String petManager(Model model){
         List<Pets> petsList = petsService.findAllPets();
+        List<Userpet> userpetList = petsService.findAllUserPets();
+        model.addAttribute("userpetList",userpetList);
         model.addAttribute("petsList",petsList);
         return "clientPage/pet";
     }
 
-    /**跳转到宠物详情页
+    /**跳转到流浪宠物详情页
      * @param model
      * @return
      */
@@ -70,14 +72,25 @@ public class ClientController {
         if(pets == null){
             throw new NotFoundException();
         }
-        Cliam cliam = accountService.findCliamByMobile(pets.getMobile());
-        model.addAttribute("cliam",cliam);
         model.addAttribute("pets",pets);
-        model.addAttribute("mobile",shiroUtil.getCurrAcc().getMobile());
-        if(pets.getSendtype() != null){
-            return "clientPage/userpet";
-        }
         return "clientPage/petlook";
+    }
+
+    /**跳转到用户宠物详情页
+     * @param model
+     * @return
+     */
+    @GetMapping("/userpet/{id:\\d+}")
+    public String lookUserpet(@PathVariable Integer id, Model model){
+        Userpet userpet = petsService.findUserPetById(id);
+        if(userpet == null){
+            throw new NotFoundException();
+        }
+        Cliam cliam = petsService.findBymobileAndname(userpet.getPetname(),userpet.getMobile());
+        model.addAttribute("userpet",userpet);
+        model.addAttribute("mobile",shiroUtil.getCurrAcc().getMobile());
+        model.addAttribute("cliam",cliam);
+        return "clientPage/userpet";
     }
 
     /**跳转到宠物领养申请页面
@@ -111,8 +124,8 @@ public class ClientController {
     @GetMapping("/cliam/state")
     public String state(Model model){
         Account account = shiroUtil.getCurrAcc();
-        //根据当前登录账户的电话获取申请记录对象
-        List<Cliam> cliamList = accountService.findCliamBymobile(account.getMobile());
+        //根据当前登录账户的姓名获取申请记录对象
+        List<Cliam> cliamList = accountService.findCliamByAccName(account.getUsername());
         model.addAttribute("cliamList",cliamList);
         return "clientPage/cliamstate";
     }
@@ -235,14 +248,14 @@ public class ClientController {
         return "clientPage/publish";
     }
 
-    /**保存新增的宠物信息
+    /**保存新发布的宠物信息
      * @return
      */
     @PostMapping("/publish")
-    public String savepets(Pets pets,RedirectAttributes redirectAttributes){
+    public String savepets(Userpet userpet,RedirectAttributes redirectAttributes){
         try {
-            petsService.savepets(pets);
-            redirectAttributes.addFlashAttribute("message", "发布流浪宠物成功");
+            petsService.saveUserpets(userpet,shiroUtil.getCurrAcc().getUsername());
+            redirectAttributes.addFlashAttribute("message", "发布宠物成功");
         }catch (ServiceException e){
             redirectAttributes.addFlashAttribute("message",e.getMessage());
         }

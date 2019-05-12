@@ -32,8 +32,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="port-head">
             <h3>宠物详细信息</h3>
-            <c:if test="${pets.mobile == mobile}">
-                <a href="javascript:;" rel="${pets.id}" class="confirm btn btn-sm btn-success pull-right">确认领养</a>
+            <c:if test="${userpet.mobile == mobile}">
+                <a href="javascript:;" rel="${userpet.id}" class="confirm btn btn-sm btn-success pull-right">确认领养</a>
             </c:if>
             <a href="/client/pet" class="btn btn-sm btn-info pull-right">返回</a>
         </div>
@@ -42,32 +42,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <tbody>
                 <tr>
                     <td class="text-muted text-center"><i>宠物名称:</i></td>
-                    <td>${pets.petname}</td>
+                    <td>${userpet.petname}</td>
                     <td colspan="2"></td>
                     <td class="text-muted text-center"><i>地点:</i></td>
-                    <td>${pets.place}</td>
+                    <td>${userpet.place}</td>
                 </tr>
                 <tr>
                     <td class="text-muted text-center"><i>宠物种类:</i></td>
-                    <td>${pets.type}</td>
+                    <td>${userpet.type}</td>
                     <td class="text-muted text-center"><i>发送类型:</i></td>
-                    <td>${pets.sendtype}</td>
+                    <td>${userpet.sendtype}</td>
                     <td class="text-muted text-center"><i>联系电话:</i></td>
-                    <td>${pets.mobile}</td>
+                    <td>${userpet.mobile}</td>
                 </tr>
-                <tr>
-                    <td class="text-muted text-center"><i>发布人:</i></td>
-                    <td>${cliam.cliamName}</td>
-                    <td colspan="2"></td>
-                    <td class="text-muted text-center"><i>领养人:</i></td>
-                    <td>${cliam.username}</td>
-                </tr>
+                <c:if test="${not empty cliam}">
+                    <tr>
+                        <td class="text-muted text-center"><i>发布人:</i></td>
+                        <td>${cliam.cliamName}</td>
+                        <td colspan="2"></td>
+                        <td class="text-muted text-center"><i>领养人:</i></td>
+                        <td>${cliam.username}</td>
+                    </tr>
+                </c:if>
                 <tr>
                     <td class="text-muted text-center"><i>年龄:</i></td>
-                    <td>${pets.age}</td>
+                    <td>${userpet.age}</td>
                     <td colspan="2"></td>
                     <td class="text-muted text-center"><i>创建时间:</i></td>
-                    <td><fmt:formatDate value="${pets.createTime}"  pattern='yyyy年MM月dd日'/></td>
+                    <td><fmt:formatDate value="${userpet.createTime}"  pattern='yyyy年MM月dd日'/></td>
                 </tr>
                 </tbody>
             </table>
@@ -76,7 +78,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <h3>注意事项</h3>
         </div>
         <div class="portfolio-bottom">
-             <textarea  rows=7 cols=75 disabled>${pets.content}</textarea>
+             <textarea  rows=7 cols=75 disabled>${userpet.content}</textarea>
         </div>
     </div>
 </div>

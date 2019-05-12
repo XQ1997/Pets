@@ -7,6 +7,7 @@ import java.util.Date;
  * @author 
  */
 public class Userpet implements Serializable {
+
     private Integer id;
 
     /**
@@ -27,7 +28,7 @@ public class Userpet implements Serializable {
     /**
      * 宠物描述
      */
-    private String ontent;
+    private String content;
 
     /**
      * 发布类型
@@ -103,12 +104,12 @@ public class Userpet implements Serializable {
         this.age = age;
     }
 
-    public String getOntent() {
-        return ontent;
+    public String getContent() {
+        return content;
     }
 
-    public void setOntent(String ontent) {
-        this.ontent = ontent;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getSendtype() {

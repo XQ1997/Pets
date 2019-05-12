@@ -32,8 +32,6 @@ public class PetController {
     private AccountService accountService;
     @Autowired
     private Qiniustore qiniustore;
-    @Autowired
-    private ShiroUtil shiroUtil;
 
     /**跳转到流浪宠物管理首页
      * @return
@@ -130,9 +128,7 @@ public class PetController {
         if(pets == null){
             throw new NotFoundException();
         }
-        Cliam cliam = accountService.findCliamByMobile(pets.getMobile());
         model.addAttribute("pets",pets);
-        model.addAttribute("cliam",cliam);
         return "pet/look";
     }
 }

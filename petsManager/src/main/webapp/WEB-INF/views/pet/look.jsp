@@ -39,73 +39,34 @@
                 <div class="box-body">
                     <table class="table">
                         <tbody>
-                            <c:if test="${pets.sendtype == null}">
-                                <tr>
-                                    <td class="text-muted text-center"><i>流浪宠物名称:</i></td>
-                                    <td>${pets.petname}</td>
-                                    <td class="text-muted text-center"><i>当前状态:</i></td>
-                                    <td>${pets.state}</td>
-                                    <td class="text-muted text-center"><i>救助地点:</i></td>
-                                    <td>${pets.place}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted text-center"><i>宠物种类:</i></td>
-                                    <td>${pets.type}</td>
-                                    <td colspan="2"></td>
-                                    <td class="text-muted text-center"><i>宠物编号:</i></td>
-                                    <td>${pets.num}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted text-center"><i>年龄:</i></td>
-                                    <td>${pets.age}</td>
-                                    <td colspan="2"></td>
-                                    <td class="text-muted text-center"><i>创建时间:</i></td>
-                                    <td><fmt:formatDate value="${pets.createTime}"  pattern='yyyy年MM月dd日'/></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted text-center"><i>宠物描述:</i></td>
-                                    <td>${pets.content}</td>
-                                    <td colspan="2"></td>
-                                    <td colspan="2"></td>
-                                </tr>
-                            </c:if>
-                            <c:if test="${pets.sendtype != null}">
-                                <tr>
-                                    <td class="text-muted text-center"><i>宠物名称:</i></td>
-                                    <td>${pets.petname}</td>
-                                    <td class="text-muted text-center"><i>当前状态:</i></td>
-                                    <td>${pets.state}</td>
-                                    <td class="text-muted text-center"><i>地点:</i></td>
-                                    <td>${pets.place}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted text-center"><i>宠物种类:</i></td>
-                                    <td>${pets.type}</td>
-                                    <td colspan="2"></td>
-                                    <td class="text-muted text-center"><i>发布类型:</i></td>
-                                    <td>${pets.sendtype}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted text-center"><i>年龄:</i></td>
-                                    <td>${pets.age}</td>
-                                    <td colspan="2"></td>
-                                    <td class="text-muted text-center"><i>创建时间:</i></td>
-                                    <td><fmt:formatDate value="${pets.createTime}"  pattern='yyyy年MM月dd日'/></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted text-center"><i>发布人:</i></td>
-                                    <td>${cliam.cliamName}</td>
-                                    <td colspan="2"></td>
-                                    <td class="text-muted text-center"><i>领养人:</i></td>
-                                    <td>${cliam.username}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-muted text-center"><i>联系电话:</i></td>
-                                    <td>${pets.mobile}</td>
-                                    <td class="text-muted text-center"><i>宠物描述:</i></td>
-                                    <td>${pets.content}</td>
-                                </tr>
-                            </c:if>
+                            <tr>
+                                <td class="text-muted text-center"><i>流浪宠物名称:</i></td>
+                                <td>${pets.petname}</td>
+                                <td class="text-muted text-center"><i>当前状态:</i></td>
+                                <td>${pets.state}</td>
+                                <td class="text-muted text-center"><i>救助地点:</i></td>
+                                <td>${pets.place}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted text-center"><i>宠物种类:</i></td>
+                                <td>${pets.type}</td>
+                                <td colspan="2"></td>
+                                <td class="text-muted text-center"><i>宠物编号:</i></td>
+                                <td>${pets.num}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted text-center"><i>年龄:</i></td>
+                                <td>${pets.age}</td>
+                                <td colspan="2"></td>
+                                <td class="text-muted text-center"><i>创建时间:</i></td>
+                                <td><fmt:formatDate value="${pets.createTime}"  pattern='yyyy年MM月dd日'/></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted text-center"><i>宠物描述:</i></td>
+                                <td>${pets.content}</td>
+                                <td colspan="2"></td>
+                                <td colspan="2"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -116,7 +77,7 @@
                 </div>
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-offset-4">
                             <div class="photo">
                                 <img src="http://pqtuic9ww.bkt.clouddn.com/${pets.image}-photo" alt="">
                             </div>

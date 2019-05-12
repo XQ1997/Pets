@@ -31,126 +31,128 @@
         <section class="content">
             <c:if test="${not empty message}">
                 <div class="alert alert-success text-center">${message}</div>
+                <a href="/auditing" class="btn btn-success btn-sm pull-right"><i class="fa fa-backward"></i>返回</a>
             </c:if>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">流浪宠物信息</h3>
-                    <div class="box-tools pull-right">
-                        <a href="/auditing" class="btn btn-success btn-sm"><i class="fa fa-backward"></i>返回</a>
-                        <c:if test="${cliam.state == '已提交'}">
-                            <a href="javascript:;" rel="${pets.id}" acc="${cliam.id}" class="btn btn-danger btn-sm state"><i class="fa fa-ban"></i> 审核通过</a>
-                            <a href="javascript:;" rel="${pets.id}" acc="${cliam.id}" state="true" class="btn btn-danger btn-sm state"><i class="fa fa-ban"></i> 审核不通过</a>
-                        </c:if>
+            <c:forEach items="${cliamList}" var="cliam">
+                <c:if test="${not empty cliam}">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">申请认领信息</h3>
+                            <div class="box-tools pull-right">
+                                <a href="/auditing" class="btn btn-success btn-sm"><i class="fa fa-backward"></i>返回</a>
+                                <c:if test="${cliam.state == '已提交'}">
+                                    <a href="javascript:;" rel="${pets.id}" acc="${cliam.id}" class="btn btn-danger btn-sm state"><i class="glyphicon glyphicon-ok"></i> 审核通过</a>
+                                    <a href="javascript:;" rel="${pets.id}" acc="${cliam.id}" state="true" class="btn btn-danger btn-sm state"><i class="glyphicon glyphicon-remove"></i> 审核不通过</a>
+                                </c:if>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td class="text-muted text-center"><i>用户姓名:</i></td>
+                                    <td>${cliam.username}</td>
+                                    <td class="text-muted text-center"><i>认领宠物名称:</i></td>
+                                    <td>${cliam.petname}</td>
+                                    <td class="text-muted text-center"><i>联系电话:</i></td>
+                                    <td>${cliam.mobile}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted text-center"><i>申请状态:</i></td>
+                                    <td>${cliam.state}</td>
+                                    <td colspan="2"></td>
+                                    <td class="text-muted text-center"><i>申请时间:</i></td>
+                                    <td><fmt:formatDate value="${cliam.createTime}"  pattern='yyyy年MM月dd日'/></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted text-center"><i>申请理由:</i></td>
+                                    <td>${cliam.content}</td>
+                                    <td colspan="2"></td>
+                                    <td class="text-muted text-center"><i>审核人:</i></td>
+                                    <td>${cliam.cliamName}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="box-body">
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td class="text-muted text-center"><i>流浪宠物名称:</i></td>
-                            <td>${pets.petname}</td>
-                            <td class="text-muted text-center"><i>当前状态:</i></td>
-                            <td>${pets.state}</td>
-                            <td class="text-muted text-center"><i>救助地点:</i></td>
-                            <td>${pets.place}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted text-center"><i>年龄:</i></td>
-                            <td>${pets.age}</td>
-                            <td colspan="2"></td>
-                            <td class="text-muted text-center"><i>创建时间:</i></td>
-                            <td><fmt:formatDate value="${pets.createTime}"  pattern='yyyy年MM月dd日'/></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted text-center"><i>宠物描述:</i></td>
-                            <td>${pets.content}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">关联资质</h3>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-offset-4">
-                            <div class="photo">
-                                <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-preview" alt="">
+                </c:if>
+                <c:if test="${not empty account}">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">申请人信息</h3>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td class="text-muted text-center"><i>申请人姓名:</i></td>
+                                    <td>${account.username}</td>
+                                    <td class="text-muted text-center"><i>角色:</i></td>
+                                    <td>${account.role}</td>
+                                    <td class="text-muted text-center"><i>年龄:</i></td>
+                                    <td>${account.age}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted text-center"><i>职业:</i></td>
+                                    <td>${account.job}</td>
+                                    <td class="text-muted text-center"><i>性别:</i></td>
+                                    <td>${account.sex}</td>
+                                    <td class="text-muted text-center"><i>住址:</i></td>
+                                    <td>${account.address}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted text-center"><i>身份证号:</i></td>
+                                    <td>${account.cardnum}</td>
+                                    <td class="text-muted text-center"><i>联系电话:</i></td>
+                                    <td>${account.mobile}</td>
+                                    <td class="text-muted text-center"><i>注册时间:</i></td>
+                                    <td><fmt:formatDate value="${account.createTime}"  pattern='yyyy年MM月dd日'/></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </c:if>
+                <c:if test="${not empty pets}">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">流浪宠物信息</h3>
+                        </div>
+                        <div class="box-body">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td class="text-muted text-center"><i>流浪宠物名称:</i></td>
+                                    <td>${pets.petname}</td>
+                                    <td class="text-muted text-center"><i>当前状态:</i></td>
+                                    <td>${pets.state}</td>
+                                    <td class="text-muted text-center"><i>救助地点:</i></td>
+                                    <td>${pets.place}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted text-center"><i>年龄:</i></td>
+                                    <td>${pets.age}</td>
+                                    <td colspan="2"></td>
+                                    <td class="text-muted text-center"><i>创建时间:</i></td>
+                                    <td><fmt:formatDate value="${pets.createTime}"  pattern='yyyy年MM月dd日'/></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted text-center"><i>宠物描述:</i></td>
+                                    <td>${pets.content}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-offset-4">
+                                    <div class="photo">
+                                        <img src="http://pmupn7ccj.bkt.clouddn.com/${pets.image}-preview" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">申请认领信息</h3>
-                </div>
-                <div class="box-body">
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td class="text-muted text-center"><i>用户姓名:</i></td>
-                            <td>${cliam.username}</td>
-                            <td class="text-muted text-center"><i>认领宠物名称:</i></td>
-                            <td>${cliam.petname}</td>
-                            <td class="text-muted text-center"><i>联系电话:</i></td>
-                            <td>${cliam.mobile}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted text-center"><i>申请状态:</i></td>
-                            <td>${cliam.state}</td>
-                            <td colspan="2"></td>
-                            <td class="text-muted text-center"><i>申请时间:</i></td>
-                            <td><fmt:formatDate value="${cliam.createTime}"  pattern='yyyy年MM月dd日'/></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted text-center"><i>申请理由:</i></td>
-                            <td>${cliam.content}</td>
-                            <td colspan="2"></td>
-                            <td class="text-muted text-center"><i>审核人:</i></td>
-                            <td>${cliam.cliamName}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">申请人信息</h3>
-                </div>
-                <div class="box-body">
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td class="text-muted text-center"><i>申请人姓名:</i></td>
-                            <td>${account.username}</td>
-                            <td class="text-muted text-center"><i>角色:</i></td>
-                            <td>${account.role}</td>
-                            <td class="text-muted text-center"><i>年龄:</i></td>
-                            <td>${account.age}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted text-center"><i>职业:</i></td>
-                            <td>${account.job}</td>
-                            <td class="text-muted text-center"><i>性别:</i></td>
-                            <td>${account.sex}</td>
-                            <td class="text-muted text-center"><i>住址:</i></td>
-                            <td>${account.address}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted text-center"><i>身份证号:</i></td>
-                            <td>${account.cardnum}</td>
-                            <td class="text-muted text-center"><i>联系电话:</i></td>
-                            <td>${account.mobile}</td>
-                            <td class="text-muted text-center"><i>注册时间:</i></td>
-                            <td><fmt:formatDate value="${account.createTime}"  pattern='yyyy年MM月dd日'/></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                </c:if>
+            </c:forEach>
         </section>
     </div>
     <jsp:include page="../include/footer.jsp"/>

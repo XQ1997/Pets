@@ -14,14 +14,12 @@
           </a>
         </li>
         <li class="header">系统功能</li> 
-        <li class="${param.menu == 'pet' ? 'active' : ''}"><a href="/pet"><i class="fa fa-calendar-check-o"></i> <span>流浪宠物管理</span></a></li>
-	        <li class="${param.menu == 'user' ? 'active' : ''}"><a href="/user"><i class="fa fa-calendar-plus-o"></i> <span>用户管理</span></a></li>
-	        <li class="${param.menu == 'cliam' ? 'active' : ''}"><a href="/cliam"><i class="fa fa-circle-o"></i> <span>认领申请管理</span></a></li>
-	        <li class="${param.menu == 'auditing' ? 'active' : ''}"><a href="/auditing"><i class="fa fa-circle-o"></i> <span>宠物认领审核</span></a></li>
-            <li class="${param.menu == 'fodder' ? 'active' : ''}"><a href="/fodder"><i class="fa fa-circle-o"></i> <span>宠物饲料管理</span></a></li>
-            <li class="${param.menu == 'sick' ? 'active' : ''}"><a href="/sick"><i class="fa fa-circle-o"></i> <span>宠物就医管理</span></a></li>
-            <li class="${param.menu == 'money' ? 'active' : ''}"><a href="/mom"><i class="fa fa-circle-o"></i> <span>救助款项</span></a></li>
-            <li class="${param.menu == 'words' ? 'active' : ''}"><a href="/words"><i class="fa fa-circle-o"></i> <span>留言板</span></a></li>
-        </ul>
-    </section>
+        <li class="${param.menu == 'pet' ? 'active' : ''}"><a href="/pet"><i class="fa fa-calendar-check-o"></i> <span>流浪宠物管理</span></a></li><li class="${param.menu == 'user' ? 'active' : ''}"><a href="/user"><i class="fa fa-calendar-plus-o"></i> <span>用户管理</span></a></li>
+      <li class="${param.menu == 'userpet' ? 'active' : ''}"><a href="/userpet"><i class="fa fa-circle-o"></i> <span>客户托管宠物信息管理</span></a></li>
+      <li class="${param.menu == 'cliam' ? 'active' : ''}"><a href="/cliam"><i class="fa fa-circle-o"></i> <span>认领申请管理</span></a></li>
+        <li class="${param.menu == 'auditing' ? 'active' : ''}"><a href="/auditing"><i class="fa fa-circle-o"></i> <span>宠物认领审核</span></a></li>
+        <li class="${param.menu == 'fodder' ? 'active' : ''}"><a href="/fodder"><i class="fa fa-circle-o"></i> <span>宠物饲料管理</span></a></li>
+        <li class="${param.menu == 'words' ? 'active' : ''}"><a href="/words"><i class="fa fa-circle-o"></i> <span>留言板</span></a></li>
+    </ul>
+</section>
   </aside>

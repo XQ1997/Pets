@@ -392,73 +392,73 @@ public class UserpetExample {
             return (Criteria) this;
         }
 
-        public Criteria andOntentIsNull() {
-            addCriterion("ontent is null");
+        public Criteria andContentIsNull() {
+            addCriterion("content is null");
             return (Criteria) this;
         }
 
-        public Criteria andOntentIsNotNull() {
-            addCriterion("ontent is not null");
+        public Criteria andContentIsNotNull() {
+            addCriterion("content is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOntentEqualTo(String value) {
-            addCriterion("ontent =", value, "ontent");
+        public Criteria andContentEqualTo(String value) {
+            addCriterion("content =", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentNotEqualTo(String value) {
-            addCriterion("ontent <>", value, "ontent");
+        public Criteria andContentNotEqualTo(String value) {
+            addCriterion("content <>", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentGreaterThan(String value) {
-            addCriterion("ontent >", value, "ontent");
+        public Criteria andContentGreaterThan(String value) {
+            addCriterion("content >", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentGreaterThanOrEqualTo(String value) {
-            addCriterion("ontent >=", value, "ontent");
+        public Criteria andContentGreaterThanOrEqualTo(String value) {
+            addCriterion("content >=", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentLessThan(String value) {
-            addCriterion("ontent <", value, "ontent");
+        public Criteria andContentLessThan(String value) {
+            addCriterion("content <", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentLessThanOrEqualTo(String value) {
-            addCriterion("ontent <=", value, "ontent");
+        public Criteria andContentLessThanOrEqualTo(String value) {
+            addCriterion("content <=", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentLike(String value) {
-            addCriterion("ontent like", value, "ontent");
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentNotLike(String value) {
-            addCriterion("ontent not like", value, "ontent");
+        public Criteria andContentNotLike(String value) {
+            addCriterion("content not like", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentIn(List<String> values) {
-            addCriterion("ontent in", values, "ontent");
+        public Criteria andContentIn(List<String> values) {
+            addCriterion("content in", values, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentNotIn(List<String> values) {
-            addCriterion("ontent not in", values, "ontent");
+        public Criteria andContentNotIn(List<String> values) {
+            addCriterion("content not in", values, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentBetween(String value1, String value2) {
-            addCriterion("ontent between", value1, value2, "ontent");
+        public Criteria andContentBetween(String value1, String value2) {
+            addCriterion("content between", value1, value2, "content");
             return (Criteria) this;
         }
 
-        public Criteria andOntentNotBetween(String value1, String value2) {
-            addCriterion("ontent not between", value1, value2, "ontent");
+        public Criteria andContentNotBetween(String value1, String value2) {
+            addCriterion("content not between", value1, value2, "content");
             return (Criteria) this;
         }
 

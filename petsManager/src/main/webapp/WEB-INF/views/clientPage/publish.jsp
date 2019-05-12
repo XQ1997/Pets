@@ -53,32 +53,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="col-md-8">
                         <input type="hidden" name="image" id="petphoto">
                         <div class="form-group">
+                            <label class="col-md-3 control-label">宠物学名:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="petLanguageName" class="form-control" autofocus/>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 control-label">宠物名称:</label>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <input type="text" name="petname" class="form-control" autofocus/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">年龄:</label>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <input type="text" name="age" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">详细地址:</label>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <input type="text" name="place" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">联系方式:</label>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <input type="text" name="mobile" class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">发布类型:</label>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <select name="sendtype" class="form-control">
                                     <option value="送养">送养</option>
                                     <option value="托管">托管</option>
@@ -86,25 +92,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">宠物类别:</label>
-                            <div class="col-md-8">
-                                <select name="type" class="form-control">
-                                    <option value="哺乳动物类">哺乳动物类</option>
-                                    <option value="鸟类">鸟类</option>
-                                    <option value="爬行动物类">爬行动物类</option>
-                                    <option value="两栖动物类">两栖动物类</option>
-                                    <option value="鱼类">鱼类</option>
-                                    <option value="昆虫动物类">昆虫动物类</option>
-                                    <option value="植物宠物类">植物宠物类</option>
-                                    <option value="茶宠宠物">茶宠宠物</option>
-                                    <option value="另类宠物">另类宠物</option>
-                                    <option value="其他">其他</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-md-3 control-label">注意事项:</label>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <textarea name="content" rows=7 cols=60></textarea>
                             </div>
                         </div>

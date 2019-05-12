@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**宠物认领审核控制器
@@ -57,23 +58,31 @@ public class AuditingController {
      */
     @GetMapping("/{id:\\d+}")
     public String look(@PathVariable Integer id, Model model){
-        Pets pets = petsService.findById(id);
-        if(pets == null){
-            throw new NotFoundException();
-        }
         try {
-            Cliam cliam = accountService.findCliamByPets(pets.getPetname());
-            Account account = accountService.findByMobile(cliam.getMobile());
-            model.addAttribute("account", account);
-            model.addAttribute("cliam", cliam);
+            Pets pets = petsService.findById(id);
+            if(pets == null){
+                throw new NotFoundException();
+            }
+            List<Cliam> cliamList = accountService.findCliamByPets(pets.getPetname());
+            for(Cliam cliam : cliamList){
+                Account account = accountService.findByMobile(cliam.getMobile());
+                model.addAttribute("account", account);
+                model.addAttribute("cliam", cliam);
+            }
+            model.addAttribute("cliamList",cliamList);
             model.addAttribute("pets", pets);
-
         }catch (ServiceException e){
             model.addAttribute("message",e.getMessage());
         }
         return "auditing/auditing";
     }
 
+    /**审核
+     * @param id
+     * @param cliamId
+     * @param state
+     * @return
+     */
     @GetMapping("/{id:\\d+}/auditing")
     @ResponseBody
     public AjaxResponseData changeState(@PathVariable Integer id, String cliamId,String state){

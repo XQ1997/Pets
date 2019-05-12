@@ -118,13 +118,13 @@ public class AccountService {
         logger.info("{}申请提交成功",cliam);
     }
 
-    /**根据电话查询宠物认领申请记录
-     * @param mobile
+    /**根据领养人姓名查询宠物认领申请记录
+     * @param username 领养人姓名
      * @return
      */
-    public List<Cliam> findCliamBymobile(String mobile) {
+    public List<Cliam> findCliamByAccName(String username) {
         CliamExample cliamExample = new CliamExample();
-        cliamExample.createCriteria().andMobileEqualTo(mobile);
+        cliamExample.createCriteria().andUsernameEqualTo(username);
         List<Cliam> cliamList = cliamMapper.selectByExample(cliamExample);
         List<Cliam> cliams = new ArrayList<>();
         if(cliamList != null  && !cliamList.isEmpty()){
@@ -256,16 +256,15 @@ public class AccountService {
      * @param petname
      * @return
      */
-    public Cliam findCliamByPets(String petname)throws ServiceException {
+    public List<Cliam> findCliamByPets(String petname)throws ServiceException {
         CliamExample cliamExample = new CliamExample();
         cliamExample.createCriteria().andPetnameEqualTo(petname);
         List<Cliam> cliamList = cliamMapper.selectByExample(cliamExample);
         if(cliamList != null && !cliamList.isEmpty()){
-            return cliamList.get(0);
+            return cliamList;
         } else{
             throw new ServiceException("该宠物未被申请认领！");
         }
-
     }
 
     /**保存留言信息
