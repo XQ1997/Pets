@@ -36,32 +36,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <div class="gallery services">
     <div class="container">
-        <div class="port-head">
-            <h3>流浪宠物信息</h3>
-        </div>
-        <div class="portfolio-bottom">
-            <div class="gallery-one two">
-                <ul>
-                    <c:forEach items="${petsList}" var="pets">
-                    <li><a href="/client/pet/${pets.id}">
-                        <img src="http://pqtuic9ww.bkt.clouddn.com/${pets.image}-custphoto" alt="" class="img-responsive zoom-img"/>
-                        </a></li>
-                    </c:forEach>
-                </ul>
+        <div class="row">
+            <div class="port-head">
+                <h3>流浪宠物信息</h3>
+            </div>
+            <div class="portfolio-bottom">
+                <div class="gallery-one two">
+                    <ul>
+                        <c:forEach items="${petsList}" var="pets">
+                            <li><a href="/client/pet/${pets.id}">
+                                <img src="http://pqtuic9ww.bkt.clouddn.com/${pets.image}-custphoto" alt="" class="img-responsive zoom-img"/>
+                            </a></li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="port-head">
-            <h3>用户宠物信息</h3>
-        </div>
-        <div class="portfolio-bottom">
-            <div class="gallery-one two">
-                <ul>
-                    <c:forEach items="${userpetList}" var="userpet">
-                        <li><a href="/client/userpet/${userpet.id}">
-                            <img src="http://pqtuic9ww.bkt.clouddn.com/${userpet.image}-custphoto" alt="" class="img-responsive zoom-img"/>
-                        </a></li>
-                    </c:forEach>
-                </ul>
+        <div class="row">
+            <div class="port-head">
+                <h3>用户宠物信息</h3>
+            </div>
+            <div class="portfolio-bottom">
+                <div class="gallery-one two">
+                    <ul>
+                        <c:forEach items="${userpetList}" var="userpet">
+                            <li><a href="/client/userpet/${userpet.id}">
+                                <img src="http://pqtuic9ww.bkt.clouddn.com/${userpet.image}-custphoto" alt="" class="img-responsive zoom-img"/>
+                            </a></li>
+                        </c:forEach>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

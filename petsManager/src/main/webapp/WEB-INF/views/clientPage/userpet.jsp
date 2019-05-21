@@ -48,10 +48,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <td>${userpet.place}</td>
                 </tr>
                 <tr>
-                    <td class="text-muted text-center"><i>宠物种类:</i></td>
-                    <td>${userpet.type}</td>
                     <td class="text-muted text-center"><i>发送类型:</i></td>
                     <td>${userpet.sendtype}</td>
+                    <td colspan="2"></td>
                     <td class="text-muted text-center"><i>联系电话:</i></td>
                     <td>${userpet.mobile}</td>
                 </tr>

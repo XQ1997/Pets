@@ -18,6 +18,15 @@
         <jsp:param name="menu" value="fodder"/>
     </jsp:include>
     <div class="content-wrapper">
+        <div class="box no-border">
+            <div class="box-body">
+                <form class="form-inline">
+                    <input type="text" name="type" placeholder="饲料名称" class="form-control" value="${param.petname}">
+                    <button class="btn btn-flat"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+
         <section class="content">
             <c:if test="${not empty message}">
                 <div class="alert alert-success text-center">${message}</div>
@@ -39,7 +48,8 @@
                          <thead>
                              <tr>
                                  <th class="text-center">饲料名称</th>
-                                 <th class="text-center">使用数量</th>
+                                 <th class="text-center">库存数量</th>
+                                 <th class="text-center">数量修改</th>
                                  <th class="text-center">#</th>
                              </tr>
                          </thead>
@@ -51,6 +61,9 @@
                                     <td class="text-center">
                                         <a href="javascript:;" rel="${fodder.id}" class="add"><i class="glyphicon glyphicon-plus"></i></a>
                                         <a href="javascript:;" rel="${fodder.id}" class="reduce"><i class="glyphicon glyphicon-minus"></i></a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="javascript:;" rel="${fodder.id}" class="del"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -92,6 +105,26 @@
                 layer.close(index);
                 $.ajax({
                     url:'/fodder/'+id+'/reduce?val='+val,
+                    type:'get',
+                    success:function (result) {
+                        if(result.state == 'success') {
+                            window.history.go(0);
+                        } else {
+                            layer.msg(result.message);
+                        }
+                    },
+                    error:function () {
+                        layer.msg("服务器忙");
+                    }
+                });
+            })
+        });
+        $(".del").click(function () {
+            var id = $(this).attr("rel");
+            layer.confirm("确定要删除该饲料库存吗？",function (index) {
+                layer.close(index);
+                $.ajax({
+                    url:'/fodder/'+id+'/del',
                     type:'get',
                     success:function (result) {
                         if(result.state == 'success') {

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,11 @@ public class FodderController {
      * @return
      */
     @GetMapping
-    public String home(Model model){
-        List<Fodder> fodderList = petsService.findAllFooder();
+    public String home(Model model,@RequestParam(required = false)String type){
+        Map<String,Object> selectMap = new HashMap<>();
+        selectMap.put("type",type);
+
+        List<Fodder> fodderList = petsService.findAllFooder(selectMap);
         model.addAttribute("fodderList",fodderList);
         return "fodder/home";
     }
@@ -74,5 +78,19 @@ public class FodderController {
          }catch (ServiceException e){
                  return AjaxResponseData.error(e.getMessage());
              }
+    }
+	
+	/**删除饲料库存
+     * @return
+     */
+    @GetMapping("/{id:\\d+}/del")
+    @ResponseBody
+    public AjaxResponseData del(@PathVariable Integer id){
+        try{
+            petsService.delFodder(id);
+            return AjaxResponseData.success();
+        }catch (ServiceException e){
+            return AjaxResponseData.error(e.getMessage());
+        }
     }
 }

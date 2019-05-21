@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +69,7 @@ public class PetsService {
         List<Pets> petsList = petsMapper.selectByExample(petsExample);
         return new PageInfo<>(petsList);
     }
-    int i = 1;
+
     /**保存新增的流浪宠物
      * @param pets 流浪宠物信息
      * @throws ServiceException 错误原因通过异常进行抛出
@@ -80,8 +81,7 @@ public class PetsService {
         if(petsList != null && !petsList.isEmpty()){
             throw new ServiceException("该流浪宠物名已存在，请重新命名！");
         }
-        pets.setNum(pets.getType() + i + "号");
-        i++;
+
         pets.setState(Pets.STATE_NO);
         pets.setCreateTime(new Date());
         petsMapper.insertSelective(pets);
@@ -127,6 +127,19 @@ public class PetsService {
 
         petsMapper.deleteByPrimaryKey(id);
         logger.info("{}宠物删除成功",pets);
+    }
+	
+	/**删除饲料库存
+     * @param id
+     * @throws ServiceException
+     */
+    public void delFodder(Integer id)throws ServiceException {
+        Fodder fodder = fodderMapper.selectByPrimaryKey(id); 
+        if(fodder == null){
+            throw new ServiceException("该饲料库存不存在，请检查！");
+        }
+
+        fodderMapper.deleteByPrimaryKey(id); 
     }
 
     /**审核该申请
@@ -191,9 +204,23 @@ public class PetsService {
 
     /**查找所有的饲料使用情况
      * @return
+     * @param selectMap
      */
-    public List<Fodder> findAllFooder() {
-        return fodderMapper.selectByExample(new FodderExample());
+    public List<Fodder> findAllFooder(Map<String, Object> selectMap) {
+        //接收传过来的搜索条件值
+        String type = (String)selectMap.get("type");
+        FodderExample fodderExample = new FodderExample();
+        //Criteria是Example类的内部类----这种形式只限于单表查询
+        FodderExample.Criteria criteria = fodderExample.createCriteria();
+        if(StringUtils.isNotEmpty(type)){
+            criteria.andTypeEqualTo(type);
+        }
+        //设置降序
+        fodderExample.setOrderByClause("id desc");
+
+        List<Fodder> fodderList = fodderMapper.selectByExample(fodderExample);
+
+        return fodderList;
     }
 
     /**保存新增的饲料使用情况
